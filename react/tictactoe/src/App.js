@@ -57,7 +57,7 @@ export function Board({ turn1, squares, onPlay, reset, goBack }) {
     else winnerStatus = "Next player: " + (turn1 ? "X" : "O");
 
     function handleClick(i) {
-        if (calculateWinner(squares || squares[i])) {
+        if (calculateWinner(squares) || squares[i]) {
             return;
         }
         const nextSquares = squares.slice();
