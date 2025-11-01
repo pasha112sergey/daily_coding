@@ -12,7 +12,7 @@
 #define KRST  "\x1b[2J"
 #define KMVBCK "\x1b[1;A"
 
-#define CELL_SIZE 10
+#define CELL_SIZE 50
 #define HEIGHT 800
 #define WIDTH 800
 #define _COLS WIDTH/CELL_SIZE
@@ -28,6 +28,6 @@ void clear_screen();
 void init_grid(int *startxs, int *startsys, int n);
 
 // cleanup
-void quit_and_clean(SDL_Window *window);
+void quit_and_clean(SDL_Window *window, int** grid);
 // handle interrupt signal
 void handle_sigint();
