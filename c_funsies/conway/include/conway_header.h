@@ -25,7 +25,7 @@ void print_grid(int g[_ROWS][_COLS]);
 int count_neigh(int x, int y);
 void update_grid();
 void clear_screen();
-void init_grid();
+void init_grid(int *startxs, int *startsys, int n);
 
 // cleanup
 void quit_and_clean(SDL_Window *window);

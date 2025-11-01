@@ -97,18 +97,12 @@ int count_neigh(int x, int y)
     return ncount;
 }
 
-void init_grid()
+void init_grid(int *startsx, int *startsy, int n)
 {
-    int init_x = _COLS / 2;
-    int init_y = _ROWS / 2;
-
-    grid[init_y][init_x] = 1;
-    grid[init_y][init_x + 2] = 1;
-    grid[init_y - 1][init_x + 1] = 1;
-    grid[init_y + 1][init_x + 1] = 1;
-    grid[init_y + 1][init_x + 3] = 1;
-    grid[init_y + 2][init_x] = 1;
-    grid[init_y][init_x - 2] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        grid[startsy[i]][startsx[i]] = 1;
+    }
 }
 
 void handle_sigint()
@@ -138,13 +132,44 @@ int draw_grid(SDL_Surface *surface)
     return 1;
 }
 
+void update_anim(SDL_Surface *surface)
+{
+    for (int i = 0; i < _ROWS; i++)
+    {
+        for (int j = 0; j < _COLS; j++)
+        {
+            SDL_Rect r = {j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE};
+            if (grid[i][j] == 1)
+            {
+                SDL_FillSurfaceRect(surface, &r, SDL_MapSurfaceRGB(surface, 0, 0, 0));
+            }
+        }
+    }
+    update_grid();
+    SDL_Delay(100);
+}
+
+static int startxs[_ROWS];
+static int startys[_COLS];
+static int count = 0;
+
+void handle_click(int x, int y)
+{
+    startxs[count] = x;
+    startys[count] = y;
+    count++;
+    printf("count updated: %d\n", count);
+}
+
 int main()
 {
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *surface;
 
-    if (!SDL_Init(SDL_INIT_VIDEO)) {
+
+    if (!SDL_Init(SDL_INIT_VIDEO))
+    {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
         return 3;
     }
@@ -163,13 +188,20 @@ int main()
 
         // draw the rectangle
         draw_grid(surface);
+        // update_anim(surface);
         SDL_UpdateWindowSurface(window);
-
         while(SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_QUIT)
+            switch(event.type)
             {
-                quit_and_clean(window);
-            }
+                case SDL_EVENT_QUIT:
+                    quit_and_clean(window);
+                    break;
+                case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                    handle_click(event.motion.x, event.motion.y);
+
+                default:
+                    printf("unhandled event\n");
+                }
         }
     }
 }
