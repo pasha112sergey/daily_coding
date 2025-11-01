@@ -149,17 +149,37 @@ void update_anim(SDL_Surface *surface)
     SDL_Delay(100);
 }
 
-static int startxs[_ROWS];
-static int startys[_COLS];
+static int startxs[_ROWS] = {-1};
+static int startys[_COLS] = {-1};
 static int count = 0;
 
-void handle_click(int x, int y)
+
+void handle_click(int x, int y, SDL_Surface *surface, SDL_Window *window)
 {
-    startxs[count] = x;
-    startys[count] = y;
-    count++;
-    printf("count updated: %d\n", count);
+
+    int row = y / CELL_SIZE;
+    int col = x / CELL_SIZE;
+    if (!grid[row][col])
+        grid[row][col] = 1;
+    else 
+        grid[row][col] = 0;
 }
+
+void draw_initial(SDL_Surface *surface)
+{
+    for (int i = 0; i < _ROWS; i++)
+    {
+        for (int j = 0; j < _COLS; j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                 SDL_Rect rect = {j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE};
+                SDL_FillSurfaceRect(surface, &rect, SDL_MapSurfaceRGB(surface, 0, 0, 0));
+            }
+        }
+    }
+}
+
 
 int main()
 {
@@ -178,6 +198,7 @@ int main()
 
     window = SDL_CreateWindow("Conway’s Game of Life", WIDTH, HEIGHT, 0);
     signal(SIGINT, handle_sigint);
+    int run = 0;
     while (1)
     {
         surface = SDL_GetWindowSurface(window);
@@ -188,7 +209,10 @@ int main()
 
         // draw the rectangle
         draw_grid(surface);
-        // update_anim(surface);
+        draw_initial(surface);
+        
+        if (run)
+            update_anim(surface);
         SDL_UpdateWindowSurface(window);
         while(SDL_PollEvent(&event)) {
             switch(event.type)
@@ -197,10 +221,10 @@ int main()
                     quit_and_clean(window);
                     break;
                 case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                    handle_click(event.motion.x, event.motion.y);
-
-                default:
-                    printf("unhandled event\n");
+                    handle_click(event.motion.x, event.motion.y, surface, window);
+                    break;
+                case SDL_EVENT_KEY_DOWN:
+                    run = 1;
                 }
         }
     }
