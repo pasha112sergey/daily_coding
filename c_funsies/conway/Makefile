@@ -1,5 +1,6 @@
 CC := clang
 SRC := src/conway.c
+HDR := include/*.h
 BIN_DIR := bin
 TARGET := $(BIN_DIR)/conway
 
@@ -16,7 +17,7 @@ all: $(TARGET)
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
-$(TARGET): $(SRC) | $(BIN_DIR)
+$(TARGET): $(SRC) $(HDR) | $(BIN_DIR)  
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
 clean:

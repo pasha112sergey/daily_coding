@@ -12,22 +12,22 @@
 #define KRST  "\x1b[2J"
 #define KMVBCK "\x1b[1;A"
 
-#define CELL_SIZE 50
-#define HEIGHT 800
-#define WIDTH 800
+#define CELL_SIZE 32
+#define HEIGHT 512
+#define WIDTH 512
 #define _COLS WIDTH/CELL_SIZE
 #define _ROWS HEIGHT/CELL_SIZE
 #define RUNS 100
 #define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
-
+#define MAX_SCALING_FACTOR 4
 
 void print_grid(int g[_ROWS][_COLS]);
 int count_neigh(int x, int y);
 void update_grid();
 void clear_screen();
-void init_grid(int *startxs, int *startsys, int n);
+int **init_grid(int rows, int cols);
 
 // cleanup
-void quit_and_clean(SDL_Window *window, int** grid);
+void quit_and_clean(SDL_Window *window, int** init_grid);
 // handle interrupt signal
 void handle_sigint();
