@@ -25,4 +25,4 @@ The code is otherwise pretty straightforward. I should pay attention to efficenc
 
 ## Screenshot:
 
-![alt text](ConwayScreenshot.png)
+![alt text](assets/conwayScreenshot!.png)
