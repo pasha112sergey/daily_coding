@@ -2,47 +2,61 @@
 #include <iostream>
 #include <vector>
 #include <SDL3/SDL.h>
-#include <cstdlib> // for random
+#include <cmath>
+
 using namespace std;
 
-class Vector {
+class FieldVector {
     public:
-        float mag;
-        float x;
-        float y;
-        void setValues(float m, float x, float y);
+    float mag; // floats between 1 and 0
+    float x; // floats between 1 and 0
+    float y;   // floats between 1 and 0
+    void setX(float x)
+    {
+        this->x = x;
+    }
+    void setY(float y)
+    {
+        this->y = y;
+    }
+    void setMag(float mag)
+    {
+        this->mag = mag;
+    }
+    FieldVector(float m, float x, float y) {
+        this->mag = m;
+        this->x = x;
+        this->y = y;
+    }
 };
 
-void Vector :: setValues(float m, float _x, float _y)
-{
-    mag = m;
-    x = _x;
-    y = _y;
-}
+vector<vector<FieldVector>> vectors;
 
-vector<vector<Vector>> vectors (ROWS, vector<Vector>(COLS));
-
-
-void drawVectors(vector<vector<Vector>> lines = vectors, SDL_Renderer *renderer = NULL)
+void drawVectors(vector<vector<FieldVector>> lines = vectors, SDL_Renderer *renderer = NULL)
 {
     for (int i = 0; i < ROWS; i++)
     {
         for (int j = 0; j < COLS; j++)
         {
-            SDL_RenderLine(renderer, j * CELL_SZ, i * CELL_SZ, lines[i][j].x, lines[i][j].y);
+            int vec_x = j*CELL_SZ + CELL_SZ * lines[i][j].x;
+            int vec_y = i*CELL_SZ + CELL_SZ * lines[i][j].y;
+            cout << "vec_x: " << vec_x << endl;
+
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+            SDL_RenderLine(renderer, j * CELL_SZ, i * CELL_SZ, vec_x, vec_y);
         }
     }
 }
 
 void init_vectors()
 {
+    vectors.resize(ROWS);
     for (int i = 0; i < ROWS; i++)
     {
+        vectors[i].reserve(COLS);
         for (int j = 0; j < COLS; j++)
         {
-            Vector v;
-            v.setValues(1, 1, 1);
-            vectors[i].push_back(v);
+            vectors[i].push_back(FieldVector(0.2, 0.5, 1));
         }
     }
 }
@@ -54,40 +68,72 @@ void handle_sigint(int signal)
     exit(0);
 }
 
-void draw_grid(SDL_Surface *surface)
+void draw_grid(SDL_Surface *surface, SDL_Renderer *renderer)
 {
+    SDL_SetRenderDrawColor(renderer, 0, 90, 0, 255);
     for (int i = 0; i < ROWS; i++)
     {
-        SDL_Rect rect = {0, i * CELL_SZ, WIDTH, 1};
-        SDL_FillSurfaceRect(surface, &rect, SDL_MapSurfaceRGB(surface, 0, 100, 0));
+        SDL_RenderLine(renderer, 0, i * CELL_SZ, WIDTH, i*CELL_SZ);
     }
-
     for (int i = 0; i < COLS; i++)
     {
-        SDL_Rect rect = {i * CELL_SZ, 0, 1, HEIGHT};
-        SDL_FillSurfaceRect(surface, &rect, SDL_MapSurfaceRGB(surface, 0, 100, 0));
+        SDL_RenderLine(renderer, i * CELL_SZ, 0, i*CELL_SZ, HEIGHT);
     }
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
 }
 
+void updateVectors(vector<vector<FieldVector>> fvs=vectors, SDL_FRect *charge=NULL)
+{
+    float point_x;
+    float point_y;
+    if (charge)
+    {
+        point_x = charge->x;
+        point_y = charge->y;
+    }
+
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            // distance^2 = (i*CELL_SZ - point_y)^2 + (j*CELL_SZ - point_x)^2
+            float distance = pow(pow(i * CELL_SZ - point_y, 2) + pow(j * CELL_SZ - point_x, 2), 0.5);
+            // cout << "distance is: " << distance << endl;
+            fvs[i][j].setMag((K_CONST * Q_CONST )/ pow(distance, 2));
+            fvs[i][j].setX(fvs[i][j].mag * (j * CELL_SZ - point_x));
+            fvs[i][j].setY(fvs[i][j].mag * (i * CELL_SZ - point_y));
+        }
+    }
+
+}
 
 int main() {
     if(!SDL_Init(SDL_INIT_VIDEO))
         cout << "Error initializing" << endl;
 
+    init_vectors();
     SDL_Window *window;
     SDL_Surface *surface;
     SDL_Event event;
     SDL_Renderer *renderer;
 
-    window = SDL_CreateWindow("Electric Fields Simulation", WIDTH, HEIGHT, 0);
-    renderer = SDL_GetRenderer(window);
+    SDL_FRect point_charge = {CELL_SZ * COLS / 2, CELL_SZ * ROWS / 2, 5, 5};
+
+    SDL_CreateWindowAndRenderer("Electricity!", WIDTH, HEIGHT, 0, &window, &renderer);
     signal(SIGINT, handle_sigint);
+
     while (1)
     {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+        // draw_grid(surface, renderer);
 
-        surface = SDL_GetWindowSurface(window);
-        SDL_FillSurfaceRect(surface, NULL, SDL_MapSurfaceRGB(surface, 0, 0, 0));
-        // draw_grid(surface);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderFillRect(renderer, &point_charge);
+
+        updateVectors(vectors, &point_charge);
         drawVectors(vectors, renderer);
         while (SDL_PollEvent(&event))
         {   
@@ -100,6 +146,7 @@ int main() {
                     break;
             }
         }
-        SDL_UpdateWindowSurface(window); 
+        
+        SDL_RenderPresent(renderer);
     }
 }
