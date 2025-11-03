@@ -35,13 +35,21 @@ class Charge {
     float x;
     float y;
     int charge;
+    float v_x;
+    float v_y;
+    float a_x;
+    float a_y;
 
 public:
-    Charge(float x, float y, int charge)
+    Charge(float x, float y, int charge, float v_x, float v_y, float a_x, float a_y)
     {
         this->x = x;
         this->y = y;
         this->charge = charge;
+        this->v_x = v_x;
+        this->v_y = v_y;
+        this->a_x = a_x;
+        this->a_y = a_y;
     }
 
         void setX(float x)
@@ -73,11 +81,47 @@ public:
         {
             return this->y;
         }
+
+        void updatePosition(FieldVector &field)
+        {
+            this->a_x = field.x / M_CONST;
+            this->a_y = field.y / M_CONST;
+
+
+            this->v_x = this->v_x + this->a_x * TIMESTEP;
+            this->v_y = this->v_y + this->a_y * TIMESTEP;
+
+            this->x = this->x + this->v_x * TIMESTEP;
+            this->y = this->y + this->v_y * TIMESTEP;
+
+
+        }
+
+        void renderCharge(SDL_Renderer *renderer)
+        {
+            SDL_FRect rect = {this->x, this->y, 100, 100};
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+            SDL_RenderFillRect(renderer, &rect);
+        }
 };
 
 vector<vector<FieldVector>> vectors;
 
 vector<Charge> charges;
+
+void setRendererColor(FieldVector v, SDL_Renderer *renderer)
+{
+    // SDL_SetRenderDrawColor(renderer, std::min((float)255, v.mag * 255), 0, 255, 255);
+    if (v.mag < 0)
+    {
+        SDL_SetRenderDrawColor(renderer,  std::min((float)255, std::abs(v.mag) * 255), 0, 0, 255);
+    }
+    else
+    {
+        SDL_SetRenderDrawColor(renderer,  std::min((float)255, std::abs(v.mag) * 255), 0, 0, 255);
+
+    }
+}
 
 void drawVectors(vector<vector<FieldVector>> &lines, SDL_Renderer *renderer)
 {
@@ -88,7 +132,7 @@ void drawVectors(vector<vector<FieldVector>> &lines, SDL_Renderer *renderer)
             int vec_x = (j + lines[i][j].x) * CELL_SZ;
             int vec_y = (i + lines[i][j].y) * CELL_SZ;
 
-            SDL_SetRenderDrawColor(renderer, 255, std::min((float)255, lines[i][j].mag * 255), std::min((float)255, lines[i][j].mag * 255), 255);
+            setRendererColor(lines[i][j], renderer);
             SDL_RenderLine(renderer, j * CELL_SZ, i * CELL_SZ, vec_x, vec_y);
         }
     }
@@ -147,10 +191,11 @@ void updateVectors(vector<vector<FieldVector>> &fvs, vector<Charge> &charges)
                 float point_x = c.getX();
                 float point_y = c.getY();
                 float distance = pow(pow(i * CELL_SZ - point_y, 2) + pow(j * CELL_SZ - point_x, 2), 0.5);
+
                 if (distance > 0.5)
                 {
-                    newMag += ((K_CONST * Q_CONST * c.getCharge()) / pow(distance, 2)) * 2e13;
-                    float mag = ((K_CONST * Q_CONST * c.getCharge()) / pow(distance, 2)) * 2e13;
+                    newMag += ((K_CONST * Q_CONST) / pow(distance, 2)) * 1.5e13;
+                    float mag = ((K_CONST * Q_CONST * c.getCharge()) / pow(distance, 2)) * 1.5e13;
                     newX += mag * (j * CELL_SZ - point_x);
                     newY += mag * (i * CELL_SZ - point_y);
                 }
@@ -181,6 +226,33 @@ void renderCharges(SDL_Renderer * renderer, vector<Charge> &charges)
     }
 }
 
+void updatePointCharge(SDL_Renderer *renderer, Charge charge)
+{
+    float newX = 0;
+    float newY = 0;
+    float newMag = 0;
+    float norm_factor = 0;
+
+    // electric field at x,y = total sum of electric fields from all points
+    for(Charge c : charges)
+    {
+        float point_x = c.getX();
+        float point_y = c.getY();
+        float distance = pow(pow(charge.getY() - point_y, 2) + pow(charge.getX() - point_x, 2), 0.5);
+        if (distance > 0.5)
+        {
+            newMag += ((K_CONST * Q_CONST) / pow(distance, 2)) * 1.5e13;
+            float mag = ((K_CONST * Q_CONST * c.getCharge()) / pow(distance, 2)) * 1.5e13;
+            newX += mag * (charge.getX() - point_x);
+            newY += mag * (charge.getY() - point_y);
+        }
+    }
+    norm_factor = pow(pow(newX, 2) + pow(newY, 2), 0.5);
+    FieldVector field(newMag, newX / norm_factor, newY / norm_factor);
+    charge.updatePosition(field);
+    charge.renderCharge(renderer);
+}
+
 int main() {
     if(!SDL_Init(SDL_INIT_VIDEO))
         cout << "Error initializing" << endl;
@@ -191,13 +263,15 @@ int main() {
     SDL_Event event;
     SDL_Renderer *renderer;
 
-    Charge init_charge((float) (WIDTH / 2), (float) (HEIGHT / 2), 1);
+    Charge init_charge((float) (WIDTH / 2), (float) (HEIGHT / 2), 1, 0, 0, 0, 0);
     charges.push_back(init_charge);
 
     SDL_CreateWindowAndRenderer("Electricity!", WIDTH, HEIGHT, 0, &window, &renderer);
     signal(SIGINT, handle_sigint);
 
     bool mouseClicked = false;
+    bool moving = false;
+    Charge point_charge(0,0,0,0,0,0,0);
     while (1)
     {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -215,6 +289,11 @@ int main() {
             charges[0].setX(x);
             charges[0].setY(y);
         }
+
+        if (moving)
+        {
+            updatePointCharge(renderer, point_charge);
+        }
         while (SDL_PollEvent(&event))
         {
             switch (event.type)
@@ -231,12 +310,27 @@ int main() {
                     mouseClicked = false;
                     break;
                 case SDL_EVENT_KEY_DOWN:
-                    float x;
-                    float y;
-                    SDL_GetMouseState(&x, &y);
+                    if (event.key.scancode == SDL_SCANCODE_SPACE)
+                    {
+                        float x;
+                        float y;
+                        SDL_GetMouseState(&x, &y);
 
-                    Charge c(x, y, -1);
-                    charges.push_back(c);
+                        Charge c(x, y, -1, 0, 0, 0, 0);
+                        charges.push_back(c);
+                    }
+                    else if(event.key.scancode == SDL_SCANCODE_A)
+                    {
+                        cout << "clicked!" << endl;
+                        float x;
+                        float y;
+                        SDL_GetMouseState(&x, &y);
+
+                        point_charge.setX(x);
+                        point_charge.setY(y);
+                        point_charge.setCharge(1);
+                        moving = true;
+                    }
                 }
         }
         
