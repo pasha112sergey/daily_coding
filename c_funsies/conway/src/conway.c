@@ -290,7 +290,6 @@ int main()
     while (1)
     {
         surface = SDL_GetWindowSurface(window);
-        SDL_Rect rect = {10, 10, 50, 50};
 
         // fill in black
         SDL_FillSurfaceRect(surface, NULL, SDL_MapSurfaceRGB(surface, 0, 0, 0));

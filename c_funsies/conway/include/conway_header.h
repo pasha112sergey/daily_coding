@@ -12,7 +12,7 @@
 #define KRST  "\x1b[2J"
 #define KMVBCK "\x1b[1;A"
 
-#define CELL_SIZE 32
+#define CELL_SIZE 16
 #define HEIGHT 512
 #define WIDTH 512
 #define _COLS WIDTH/CELL_SIZE
