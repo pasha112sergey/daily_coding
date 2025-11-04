@@ -32,4 +32,4 @@ Run with `./bin/fields`. Then, you can move the positive charge by dragging the 
 
 ## Screenshot :)
 
-![Screenshot](assets/Demo%20Screenshot.png);
+![Screenshot](assets/Demo%20Screenshot.png)
