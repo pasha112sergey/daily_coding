@@ -10,6 +10,6 @@
 #define RAND_MIN 0
 #define K_CONST 8.99e9
 #define Q_CONST 1.62e-19
-#define M_CONST 1.67e-27
+#define M_CONST 1.67e-26
 
-#define TIMESTEP 1
+#define TIMESTEP 10e-15

@@ -35,22 +35,22 @@ class Charge {
     float x;
     float y;
     int charge;
-    float v_x;
-    float v_y;
-    float a_x;
-    float a_y;
-
-public:
-    Charge(float x, float y, int charge, float v_x, float v_y, float a_x, float a_y)
-    {
-        this->x = x;
-        this->y = y;
-        this->charge = charge;
-        this->v_x = v_x;
-        this->v_y = v_y;
-        this->a_x = a_x;
-        this->a_y = a_y;
-    }
+    
+    public:
+        float v_x;
+        float v_y;
+        float a_x;
+        float a_y;
+        Charge(float x, float y, int charge, float v_x, float v_y, float a_x, float a_y)
+        {
+            this->x = x;
+            this->y = y;
+            this->charge = charge;
+            this->v_x = v_x;
+            this->v_y = v_y;
+            this->a_x = a_x;
+            this->a_y = a_y;
+        }
 
         void setX(float x)
         {
@@ -84,6 +84,8 @@ public:
 
         void updatePosition(FieldVector &field)
         {
+            cout << "this x: " << this->x << " this y: " << this->y << endl;
+
             this->a_x = field.x / M_CONST;
             this->a_y = field.y / M_CONST;
 
@@ -94,12 +96,16 @@ public:
             this->x = this->x + this->v_x * TIMESTEP;
             this->y = this->y + this->v_y * TIMESTEP;
 
+            cout << "this x: " << this->x << " this y: " << this->y << endl;
+
+            cout << endl;
+            cout << endl;
 
         }
 
         void renderCharge(SDL_Renderer *renderer)
         {
-            SDL_FRect rect = {this->x, this->y, 100, 100};
+            SDL_FRect rect = {this->x, this->y, 20, 20};
             SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
             SDL_RenderFillRect(renderer, &rect);
         }
@@ -114,12 +120,11 @@ void setRendererColor(FieldVector v, SDL_Renderer *renderer)
     // SDL_SetRenderDrawColor(renderer, std::min((float)255, v.mag * 255), 0, 255, 255);
     if (v.mag < 0)
     {
-        SDL_SetRenderDrawColor(renderer,  std::min((float)255, std::abs(v.mag) * 255), 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer,  std::min((float)255, std::abs(v.mag) * 255), 0, 255, 255);
     }
     else
     {
         SDL_SetRenderDrawColor(renderer,  std::min((float)255, std::abs(v.mag) * 255), 0, 0, 255);
-
     }
 }
 
@@ -226,7 +231,7 @@ void renderCharges(SDL_Renderer * renderer, vector<Charge> &charges)
     }
 }
 
-void updatePointCharge(SDL_Renderer *renderer, Charge charge)
+FieldVector updatePointCharge(SDL_Renderer *renderer, Charge charge)
 {
     float newX = 0;
     float newY = 0;
@@ -236,21 +241,20 @@ void updatePointCharge(SDL_Renderer *renderer, Charge charge)
     // electric field at x,y = total sum of electric fields from all points
     for(Charge c : charges)
     {
-        float point_x = c.getX();
-        float point_y = c.getY();
-        float distance = pow(pow(charge.getY() - point_y, 2) + pow(charge.getX() - point_x, 2), 0.5);
+        float dx = charge.getX() - c.getX();
+        float dy = charge.getY() - c.getY();
+        float distance = sqrt(pow(dx,2) + pow(dy, 2));
+
         if (distance > 0.5)
         {
-            newMag += ((K_CONST * Q_CONST) / pow(distance, 2)) * 1.5e13;
-            float mag = ((K_CONST * Q_CONST * c.getCharge()) / pow(distance, 2)) * 1.5e13;
-            newX += mag * (charge.getX() - point_x);
-            newY += mag * (charge.getY() - point_y);
+            float mag = ((K_CONST * Q_CONST * c.getCharge()) / (distance * distance)) * 1.5e13;
+            newX += mag * dx / distance;
+            newY += mag * dy / distance;
         }
     }
-    norm_factor = pow(pow(newX, 2) + pow(newY, 2), 0.5);
-    FieldVector field(newMag, newX / norm_factor, newY / norm_factor);
-    charge.updatePosition(field);
-    charge.renderCharge(renderer);
+    
+    FieldVector field(newMag, newX, newY);
+    return field;
 }
 
 int main() {
@@ -292,7 +296,9 @@ int main() {
 
         if (moving)
         {
-            updatePointCharge(renderer, point_charge);
+            FieldVector field = updatePointCharge(renderer, point_charge);
+            point_charge.updatePosition(field);
+            point_charge.renderCharge(renderer);
         }
         while (SDL_PollEvent(&event))
         {
@@ -329,6 +335,11 @@ int main() {
                         point_charge.setX(x);
                         point_charge.setY(y);
                         point_charge.setCharge(1);
+                        point_charge.a_x = 0;
+                        point_charge.a_y = 0;
+                        point_charge.v_x = 0;
+                        point_charge.v_y = 0;
+
                         moving = true;
                     }
                 }
