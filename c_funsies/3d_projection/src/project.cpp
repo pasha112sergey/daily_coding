@@ -2,23 +2,25 @@
 #include <iostream>
 #include "../include/project.hpp"
 #include <vector>
+#include <cmath>
+#include <numbers>
 
-const double PLANE_POINT_Z = 10.0;
+class Point3D;
+class Cube;
+class Camera;
 
 class Point2D {
-    private:
+    public:
         double x;
         double y;
-    public:
         Point2D(double x, double y) : x(x), y(y) {};
 
         void drawPoint(SDL_Renderer *renderer)
         {
-            float w = 5;
-            float h = 5;
+            float w = 1;
+            float h = 1;
             SDL_FRect rect = {(float)this->x, (float)this->y, w, h};
-            // std::cout << "pointer to rect is: " << &rect;
-            SDL_SetRenderDrawColor(renderer, 253, 0, 0, 253);
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
             SDL_RenderFillRect(renderer, &rect);
         }
 
@@ -53,18 +55,34 @@ class Point3D {
         void setY(double y) {this -> y = y;}
         void setX(double x) {this -> x = x;}
 
-        Point2D projectPoint()
+        Point2D projectPoint(double z0)
         {
-            double ratio = PLANE_POINT_Z / this->z;
+            double ratio = 1/(this->z * z0);
 
-            double x_ = this->x * ratio;
-            double y_ = this->y * ratio;
+            double x_ = this->x * ratio + WIDTH/2 - 25;
+            double y_ = this->y * ratio + WIDTH/2 - 25;
 
             Point2D p_(x_, y_);
             return p_;
         }
 };
 
+class Camera
+{
+    private:
+        Point3D camera_pos;
+        int fov;
+
+    public:
+        Camera(int fov) : camera_pos(0, 0, 0), fov(M_PI/180 * fov) {};
+
+        double calculate_z0()
+        {
+            return 1 / (std::tan(this->fov / 2));
+        }
+
+        int getFov() { return this->fov; }
+};
 
 class Cube {
     private:
@@ -103,18 +121,47 @@ class Cube {
 
         // getter
         std::vector<Point3D> &getVertices() { return this->points; }
+
+
+
+        void drawCube(SDL_Renderer *renderer, double z0)
+        {
+            // render all lines
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            std::vector<Point2D> mp;
+
+            for (int i = 0; i < 8; i++)
+            {
+                mp.push_back(points[i].projectPoint(z0));
+                points[i].projectPoint(z0).drawPoint(renderer);
+            }
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+            // top square
+            SDL_RenderLine(renderer, mp[0].x, mp[0].y, mp[1].x, mp[1].y);
+            SDL_RenderLine(renderer, mp[1].x, mp[1].y, mp[2].x, mp[2].y);
+            SDL_RenderLine(renderer, mp[2].x, mp[2].y, mp[3].x, mp[3].y);
+            SDL_RenderLine(renderer, mp[3].x, mp[3].y, mp[0].x, mp[0].y);
+
+            // bottom square 
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+            SDL_RenderLine(renderer, mp[4].x, mp[4].y, mp[5].x, mp[5].y);
+            SDL_RenderLine(renderer, mp[5].x, mp[5].y, mp[6].x, mp[6].y);
+            SDL_RenderLine(renderer, mp[6].x, mp[6].y, mp[7].x, mp[7].y);
+            SDL_RenderLine(renderer, mp[7].x, mp[7].y, mp[4].x, mp[4].y);
+
+            // their connection
+            SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+            SDL_RenderLine(renderer, mp[0].x, mp[0].y, mp[4].x, mp[4].y);
+            SDL_RenderLine(renderer, mp[1].x, mp[1].y, mp[5].x, mp[5].y);
+            SDL_RenderLine(renderer, mp[2].x, mp[2].y, mp[6].x, mp[6].y);
+            SDL_RenderLine(renderer, mp[3].x, mp[3].y, mp[7].x, mp[7].y);
+
+            // SDL_RenderLine(renderer, points[0]);
+        }
 };
 
 
-class Camera
-{
-    private:
-        Point3D camera_pos;
-        double plane_pos_z;
-
-    public:
-        Camera() : camera_pos(0, 0, 0), plane_pos_z(2) {};
-};
 
 int main()
 {
@@ -132,9 +179,10 @@ int main()
     SDL_Event event;
     bool running = true;
 
-    Cube cube(50, WIDTH/2);
-    Camera cam;
+    Cube cube(100, 1);
+    const int FOV = 10;
 
+    Camera cam(120);
 
     // std::cout << a;
     // SDL_Rect rect = {50, 50, 50, 50};
@@ -145,18 +193,21 @@ int main()
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
         std::cout << "------------\n";
-        for (Point3D p3 : cube.getVertices())
-        {
-            Point2D p2 = p3.projectPoint();
-            std::cout << "3d: ";
-            std::cout << p3;
-            std::cout << " 2d: ";
-            std::cout << p2 << std::endl;
-            // drawPoint(renderer);
-        }
+        // for (Point3D p3 : cube.getVertices())
+        // {
+        //     Point2D p2 = p3.projectPoint(cam.calculate_z0());
+        //     std::cout << "3d: ";
+        //     std::cout << p3;
+        //     std::cout << " 2d: ";
+        //     std::cout << p2 << std::endl;
+        //     std::cout << "z0: " << cam.calculate_z0();
+        //     std::cout << "\nfov: " << cam.getFov();
+        //     p2.drawPoint(renderer);
+        // }
+
+        cube.drawCube(renderer, cam.calculate_z0());
         std::cout << "\n------------\n";
 
-        
         // Point2D test(WIDTH/2, HEIGHT/2);
         // test.drawPoint(renderer);
         
