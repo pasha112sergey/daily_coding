@@ -95,15 +95,11 @@ class Cube {
     private:
         std::vector<Point3D> points;
         Point3D startCorner;
+        double w;
 
     public:
-        Cube(float w, Point3D startCorner) : startCorner(startCorner.getX(), startCorner.getY(), startCorner.getZ()) 
+        Cube(float w, Point3D startCorner) : startCorner(startCorner.getX(), startCorner.getY(), startCorner.getZ()), w(w)
         {
-            // define start pos
-            
-        
-            // start_pos = start_pos + ::offset;
-
             // bottom sq (in clockwise order)
             points.push_back(Point3D(startCorner.getX(),         startCorner.getY(),          startCorner.getZ() + offset));
             points.push_back(Point3D(startCorner.getX(),         startCorner.getY() + w,      startCorner.getZ() + offset));
@@ -139,9 +135,11 @@ class Cube {
 
             for (int i = 0; i < 8; i++)
             {
-                mp.push_back(points[i].projectPoint(foc_len));
+                Point2D point = (points[i].projectPoint(foc_len));
+                point.x += WIDTH / 2 ;
+                point.y += HEIGHT / 2 ;
+                mp.push_back(point);
                 // points[i].projectPoint(foc_len).drawPoint(renderer);
-
             }
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
             // top square
@@ -190,8 +188,8 @@ class Cube {
             theta = convertDegToRad(theta);
 
             double rotMatrix[3][3] = {
-                {std::cos(theta), -std::sin(theta), 0},
-                {std::sin(theta), std::cos(theta), 0},
+                {std::cos(theta), std::sin(theta), 0},
+                {-std::sin(theta), std::cos(theta), 0},
                 {0, 0, 1}};
             
             for (Point3D &p : points)
@@ -203,6 +201,10 @@ class Cube {
                 double _y = p.getY() - startCorner.getY();
                 double _z = p.getZ() - startCorner.getZ() - ::offset;
 
+                // double _x = p.getX();
+                // double _y = p.getY();
+                // double _z = p.getZ();
+
                 std::cout << "translate points: x=" << _x << " y=" << _y << " z=" << _z << std::endl;
                 // translate it to z axis -> we must have the axis cut through the middle of the top and bottom faces ideally
                 // however, let's just offset the z axis to that
@@ -210,9 +212,9 @@ class Cube {
                 _y = _y * (rotMatrix[0][1] + rotMatrix[1][1] + rotMatrix[2][1]);
                 _z = _z * (rotMatrix[0][2] + rotMatrix[1][2] + rotMatrix[2][2]);
 
-                _x += startCorner.getX();
-                _y += startCorner.getY();
-                _z += startCorner.getZ() + ::offset;
+                // _x += startCorner.getX();
+                // _y += startCorner.getY();
+                // _z += startCorner.getZ() + ::offset;
 
                 p.setX(_x);
                 p.setY(_y);
@@ -245,8 +247,9 @@ int main()
     double foc_len = cam.getFocLen();
 
     // decide the coordinates relative to foc length
-    Point3D cornerPoint(WIDTH / 2 - 25, 25,  0);
-    Cube cube(50, cornerPoint);
+    const double width = 50;
+    Point3D cornerPoint(-width/2, -width/2, 0);
+    Cube cube(width, cornerPoint);
 
     std::cout << "focal length: " << foc_len;
     cube.print_cube_projection(foc_len);
@@ -257,7 +260,7 @@ int main()
         SDL_RenderClear(renderer);
 
         cube.drawCube(renderer, foc_len);
-        cube.rotateCube(5);
+        cube.rotateCube(0.2);
         // int i = 0;
         // std::cout << "---------\n";
 
