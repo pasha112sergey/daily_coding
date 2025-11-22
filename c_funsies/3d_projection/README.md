@@ -11,7 +11,7 @@ I was exposed to a lot of cool math for this project! I was introduced to perspe
 In my development, I figured it would be useful to represent the cube through an array of 3D points, each of which could then be mapped down to a 2D screen. The main issue, then, was figuring out how to project from 3D to 2D.
 
 Ultimately, I used perspective projection:
-![Screenshot](diagram.png)
+![Screenshot](readme_assets/diagram.png)
 
 Now, this diagram looked like a spaceship to me at first, and I had no idea what was going on at all. However, it is actually quite simple. In order to map 3D points to a 2D screen, we need to know a couple of things:
 
@@ -61,12 +61,12 @@ Now one last thing that I had to figure out was offsetting the projection to the
 
 Rotation is rather simple! We just have to use the following matrices, and mutiply each of our points (3D vector) by it:
 
-![Screenshot](W3hip.jpg)
+![Screenshot](readme_assets/W3hip.jpg)
 
 > Now note that we translated the object out by along the Z axis to be behind our screen, so we must bring it around to origin to use these rotation matrices, and then bring them back to their original spot
 
 Now, on every frame, apply this matrix with a theta parameter, and watch it rotate!!!!
 
-![Screenshot](screenshot.png)
+![Screenshot](readme_assets/screenshot.png)
 
 This was so cool, was super duper fun.
