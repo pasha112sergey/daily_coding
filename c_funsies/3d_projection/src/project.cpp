@@ -16,6 +16,34 @@ inline double convertDegToRad(float deg)
     return M_PI / 180 * deg;
 }
 
+enum RotationType
+{
+    X = 1,
+    Y = 2,
+    Z = 4
+};
+
+std::vector<double> multiplyByMatrix(double x, double y, double z, double matrix[3][3])
+{
+    double _x = matrix[0][0] * x + matrix[0][1] * y + matrix[0][2] * z;
+    double _y = matrix[1][0] * x + matrix[1][1] * y + matrix[1][2] * z;
+    double _z = matrix[2][0] * x + matrix[2][1] * y + matrix[2][2] * z;
+
+    std::vector<double> ans;
+
+    ans.push_back(_x);
+    ans.push_back(_y);
+    ans.push_back(_z);
+
+    return ans;
+}
+// enum class RotationType
+// {
+//     X,
+//     Y,
+//     Z
+// };
+
 class Point2D
 {
 public:
@@ -113,7 +141,6 @@ class Cube {
             points.push_back(Point3D(startCorner.getX() + w,     startCorner.getY(),          startCorner.getZ() + w + offset));
         }
 
-        // overload << for printing
         friend std::ostream &operator<<(std::ostream &strm, const Cube &cube)
         {
             const int vertices = 8;
@@ -124,7 +151,6 @@ class Cube {
             return strm;
         }
 
-        // getter
         std::vector<Point3D> &getVertices() { return this->points; }
 
         void drawCube(SDL_Renderer *renderer, double foc_len)
@@ -165,7 +191,6 @@ class Cube {
             // SDL_RenderLine(renderer, points[0]);
         }
 
-
         void drawVertices(SDL_Renderer *rend, double foc_len)
         {
             for (Point3D p : this->points)
@@ -183,47 +208,70 @@ class Cube {
             }
         }
 
-        void rotateCube(double theta)
+        void rotateCube(double theta, int type)
         {
             theta = convertDegToRad(theta);
 
-            double rotMatrix[3][3] = {
-                {std::cos(theta), std::sin(theta), 0},
-                {-std::sin(theta), std::cos(theta), 0},
-                {0, 0, 1}};
-            
+            double matrixX[3][3] = { 
+                {std::cos(theta), -std::sin(theta), 0},
+                {std::sin(theta), std::cos(theta), 0},
+                {0, 0, 1}
+            };
+
+            double matrixY[3][3] = {
+                {1, 0, 0},
+                {0, std::cos(theta), -std::sin(theta)},
+                {0, std::sin(theta), std::cos(theta)}};
+
+            double matrixZ[3][3] = {
+                {std::cos(theta), 0, std::sin(theta)},
+                {0, 1, 0},
+                {-std::sin(theta), 0, std::cos(theta)}};
+
             for (Point3D &p : points)
             {
                 // first we translate it to the z axis
                 // then, we rotate
                 // then, we bring it back out
-                double _x = p.getX() - startCorner.getX();
-                double _y = p.getY() - startCorner.getY();
-                double _z = p.getZ() - startCorner.getZ() - ::offset;
+                double _x = p.getX() - startCorner.getX() - w/2;
+                double _y = p.getY() - startCorner.getY() - w/2;
+                double _z = p.getZ() - startCorner.getZ() - ::offset - w/2;
 
-                // double _x = p.getX();
-                // double _y = p.getY();
-                // double _z = p.getZ();
+                std::vector<double> rotated;
+                if (type & X)
+                {
+                    rotated = multiplyByMatrix(_x, _y, _z, matrixX);
+                    _x = rotated[0];
+                    _y = rotated[1];
+                    _z = rotated[2];
+                }
+                if (type & Y)
+                {
+                    rotated = multiplyByMatrix(_x, _y, _z, matrixY);
+                    _x = rotated[0];
+                    _y = rotated[1];
+                    _z = rotated[2];
+                }
+                if (type & Z)
+                {
+                    rotated = multiplyByMatrix(_x, _y, _z, matrixZ);
+                    _x = rotated[0];
+                    _y = rotated[1];
+                    _z = rotated[2];
+                }
 
-                std::cout << "translate points: x=" << _x << " y=" << _y << " z=" << _z << std::endl;
-                // translate it to z axis -> we must have the axis cut through the middle of the top and bottom faces ideally
-                // however, let's just offset the z axis to that
-                _x = _x * (rotMatrix[0][0] + rotMatrix[1][0] + rotMatrix[2][0]);
-                _y = _y * (rotMatrix[0][1] + rotMatrix[1][1] + rotMatrix[2][1]);
-                _z = _z * (rotMatrix[0][2] + rotMatrix[1][2] + rotMatrix[2][2]);
 
-                // _x += startCorner.getX();
-                // _y += startCorner.getY();
-                // _z += startCorner.getZ() + ::offset;
+                _x += startCorner.getX() + w / 2;
+                _y += startCorner.getY() + w/2;
+                _z += startCorner.getZ() + ::offset + w/2;
 
                 p.setX(_x);
                 p.setY(_y);
                 p.setZ(_z);
             }
         }
+
 };
-
-
 
 int main()
 {
@@ -260,16 +308,12 @@ int main()
         SDL_RenderClear(renderer);
 
         cube.drawCube(renderer, foc_len);
-        cube.rotateCube(0.2);
-        // int i = 0;
-        // std::cout << "---------\n";
-
-        // cube.drawVertices(renderer, foc_len);
-        // std::cout << "---------\n";
+        int rotationOption = Y | Z;
+        double theta = 0.3;
+        cube.rotateCube(theta, rotationOption);
 
         while (SDL_PollEvent(&event))
         {
-            // SDL_FillSurfaceRect(surface, &rect, 255);
             if (event.type == SDL_EVENT_QUIT)
             {                
                 running = false;
