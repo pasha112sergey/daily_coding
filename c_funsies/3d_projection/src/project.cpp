@@ -308,7 +308,7 @@ int main()
         SDL_RenderClear(renderer);
 
         cube.drawCube(renderer, foc_len);
-        int rotationOption = Y | Z;
+        int rotationOption = Z;
         double theta = 0.3;
         cube.rotateCube(theta, rotationOption);
 
