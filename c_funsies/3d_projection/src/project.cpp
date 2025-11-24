@@ -16,6 +16,11 @@ inline double convertDegToRad(float deg)
     return M_PI / 180 * deg;
 }
 
+inline double convertRadToDeg(double rad)
+{
+    return M_PI / 180 * rad;
+}
+
 enum RotationType
 {
     X = 1,
@@ -310,13 +315,34 @@ int main()
         cube.drawCube(renderer, foc_len);
         int rotationOption = Z;
         double theta = 0.3;
-        cube.rotateCube(theta, rotationOption);
+        // cube.rotateCube(theta, rotationOption);
+
+        float x1, y1, x2, y2;
 
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_EVENT_QUIT)
             {                
                 running = false;
+                break;
+            }
+            if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
+            {
+                SDL_GetMouseState(&x1, &y1);
+                break;
+            }
+            if (event.type = SDL_EVENT_MOUSE_BUTTON_UP)
+            {
+                SDL_GetMouseState(&x2, &y2);
+                double slope = (y2 - y1) / (x2 - x1);
+                double axisSlope = -1 / slope;
+
+                std::cout << y2 - y1 << "/" << x2 - x1 << std::endl;
+
+                double theta = convertRadToDeg(std::tan(axisSlope));
+                cube.rotateCube(theta, Z);
+                cube.rotateCube(3, Y);
+                cube.rotateCube(180 - theta, Z);
                 break;
             }
         }
