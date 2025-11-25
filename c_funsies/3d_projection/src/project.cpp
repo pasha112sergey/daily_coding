@@ -126,7 +126,7 @@ class Camera
 
 class Cube {
     private:
-        std::vector<Point3D> points;
+        std::vector<Point3D> points; 
         Point3D startCorner;
         double w;
 
@@ -312,73 +312,26 @@ int main()
     Point3D cornerPoint(-width / 2, -width / 2, 0);
     Cube cube(width, cornerPoint);
 
-    std::cout << "focal length: " << foc_len;
     cube.print_cube_projection(foc_len);
-    State held = false;
 
     double dragStartX, dragStartY, deltaX, deltaY;
     bool isDragging = false;
     while (running)
     {
+
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
 
         cube.drawCube(renderer, foc_len);
-        int rotationOption = Z;
+
         double theta = 0.05;
-        // cube.rotateCube(theta, rotationOption);
+
         if (isDragging)
         {
             cube.rotateCube(-theta * deltaX, Z);
             cube.rotateCube(theta * deltaY, Y);
-            // double slope = deltaY / deltaX;
-            // if (deltaX < 5 && deltaY < 5)
-            // continue;
-            // std::cout << "deltaX " << deltaX << " deltaY " << deltaY << std::endl;
-            // std::cout << "slope: " << slope << std::endl;
-
-            // double axisSlope = -1 / slope;
-            // std::cout << "axis slope: " << axisSlope << std::endl;
-
-            // double theta = convertRadToDeg(std::atan(slope));
-            // std::cout << "theta: " << theta << std::endl;
-            
-            // if (theta < 0) //negative slope
-            // {
-            //     if (theta > -45) // retate around X
-            //     {
-            // cube.rotateCube(theta, X);
-            // if (theta > 0) 
-            //     cube.rotateCube(-5, Z);
-            // else
-            //     cube.rotateCube(5, Z);
-            // cube.rotateCube(-theta, X);
-            //     }
-            //     else
-            //     {
-            //         cube.rotateCube(-theta, Y);
-            //         cube.rotateCube(3, Z);
-            //         cube.rotateCube(theta, Y);
-            //     }
-            // }
-            // else
-            // {
-            //     if (theta < 45) // retate around X
-            //     {
-            //         cube.rotateCube(theta, X);
-            //         cube.rotateCube(3, Z);
-            //         cube.rotateCube(-theta, X);
-            //     }
-            //     else
-            //     {
-            //         cube.rotateCube(-theta, Y);
-            //         cube.rotateCube(3, Z);
-            //         cube.rotateCube(theta, Y);
-            //     }
-            // }
         }
 
-        double oldDeltaX, oldDeltaY;
         while (SDL_PollEvent(&event))
         {
             switch (event.type) 
@@ -386,29 +339,31 @@ int main()
                 case SDL_EVENT_QUIT:                
                     running = false;
                     break;
+                
                 case SDL_EVENT_MOUSE_BUTTON_DOWN:
                     if (event.button.button == SDL_BUTTON_LEFT) 
-                    {                        
+                    {   
                         dragStartX = event.button.x;
                         dragStartY = event.button.y;
-                        if (std::abs(dragStartX - deltaX) < 0.5 && std::abs(dragStartY - deltaY))
-                        {
-                            isDragging = false;
-                            break;
-                        }
-
                         isDragging = true;
                     }
                     break;
+
                 case SDL_EVENT_MOUSE_BUTTON_UP: 
                     if (event.button.button == SDL_BUTTON_LEFT)
                         isDragging = false;
                     break;
+
                 case SDL_EVENT_MOUSE_MOTION:
-                    if (isDragging) {
+                    if (isDragging) 
+                    {
                         deltaX = event.motion.x - dragStartX;
                         deltaY = event.motion.y - dragStartY;
-                        if (deltaY == 0) {deltaY = 0.1;}
+
+                        if (deltaY == 0)
+                        {
+                            deltaY = 0.1;
+                        }
                         if (deltaX == 0) {deltaX = 0.1;}
                     }
                     break;
@@ -417,16 +372,9 @@ int main()
 
         SDL_RenderPresent(renderer);
     }
-
+    SDL_DestroySurface(surface);
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;
 }
-
-/*
- I would like to create a cube, which is defined by a sidelength -> then, I'd like to create points (8 points with xyz coordinates)
- OOP: Point class -> constructor would have double x,y,z as class fields
- Cube class -> constructor that takes in a sidelength, and would have class fields: sidelength, 8 Point objects
-*/
-
 
