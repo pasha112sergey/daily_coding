@@ -18,7 +18,7 @@ inline double convertDegToRad(float deg)
 
 inline double convertRadToDeg(double rad)
 {
-    return M_PI / 180 * rad;
+    return 180 / M_PI * rad;
 }
 
 enum RotationType
@@ -172,24 +172,26 @@ class Cube {
                 mp.push_back(point);
                 // points[i].projectPoint(foc_len).drawPoint(renderer);
             }
-            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
             // top square
             SDL_RenderLine(renderer, mp[0].x, mp[0].y, mp[1].x, mp[1].y);
             SDL_RenderLine(renderer, mp[1].x, mp[1].y, mp[2].x, mp[2].y);
             SDL_RenderLine(renderer, mp[2].x, mp[2].y, mp[3].x, mp[3].y);
             SDL_RenderLine(renderer, mp[3].x, mp[3].y, mp[0].x, mp[0].y);
 
-            SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
             // bottom square 
             SDL_RenderLine(renderer, mp[4].x, mp[4].y, mp[5].x, mp[5].y);
             SDL_RenderLine(renderer, mp[5].x, mp[5].y, mp[6].x, mp[6].y);
             SDL_RenderLine(renderer, mp[6].x, mp[6].y, mp[7].x, mp[7].y);
             SDL_RenderLine(renderer, mp[7].x, mp[7].y, mp[4].x, mp[4].y);
 
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
             // their connection
             SDL_RenderLine(renderer, mp[0].x, mp[0].y, mp[4].x, mp[4].y);
             SDL_RenderLine(renderer, mp[1].x, mp[1].y, mp[5].x, mp[5].y);
+
+            SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
             SDL_RenderLine(renderer, mp[2].x, mp[2].y, mp[6].x, mp[6].y);
             SDL_RenderLine(renderer, mp[3].x, mp[3].y, mp[7].x, mp[7].y);
 
@@ -242,6 +244,11 @@ class Cube {
                 double _y = p.getY() - startCorner.getY() - w/2;
                 double _z = p.getZ() - startCorner.getZ() - ::offset - w/2;
 
+                double center = _x + _y + _z;
+                center /= 3;
+                std::cout << "x: " << _x << " y: " << _y << " z: " << _z << std::endl;
+                std::cout << "center: " << center << std::endl;
+
                 std::vector<double> rotated;
                 if (type & X)
                 {
@@ -249,6 +256,7 @@ class Cube {
                     _x = rotated[0];
                     _y = rotated[1];
                     _z = rotated[2];
+
                 }
                 if (type & Y)
                 {
@@ -277,7 +285,7 @@ class Cube {
         }
 
 };
-
+typedef bool State;
 int main()
 {
     std::cout << std::unitbuf;
@@ -300,13 +308,16 @@ int main()
     double foc_len = cam.getFocLen();
 
     // decide the coordinates relative to foc length
-    const double width = 50;
-    Point3D cornerPoint(-width/2, -width/2, 0);
+    const double width = 100;
+    Point3D cornerPoint(-width / 2, -width / 2, 0);
     Cube cube(width, cornerPoint);
 
     std::cout << "focal length: " << foc_len;
     cube.print_cube_projection(foc_len);
+    State held = false;
 
+    double dragStartX, dragStartY, deltaX, deltaY;
+    bool isDragging = false;
     while (running)
     {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -314,36 +325,93 @@ int main()
 
         cube.drawCube(renderer, foc_len);
         int rotationOption = Z;
-        double theta = 0.3;
+        double theta = 0.05;
         // cube.rotateCube(theta, rotationOption);
+        if (isDragging)
+        {
+            cube.rotateCube(-theta * deltaX, Z);
+            cube.rotateCube(theta * deltaY, Y);
+            // double slope = deltaY / deltaX;
+            // if (deltaX < 5 && deltaY < 5)
+            // continue;
+            // std::cout << "deltaX " << deltaX << " deltaY " << deltaY << std::endl;
+            // std::cout << "slope: " << slope << std::endl;
 
-        float x1, y1, x2, y2;
+            // double axisSlope = -1 / slope;
+            // std::cout << "axis slope: " << axisSlope << std::endl;
 
+            // double theta = convertRadToDeg(std::atan(slope));
+            // std::cout << "theta: " << theta << std::endl;
+            
+            // if (theta < 0) //negative slope
+            // {
+            //     if (theta > -45) // retate around X
+            //     {
+            // cube.rotateCube(theta, X);
+            // if (theta > 0) 
+            //     cube.rotateCube(-5, Z);
+            // else
+            //     cube.rotateCube(5, Z);
+            // cube.rotateCube(-theta, X);
+            //     }
+            //     else
+            //     {
+            //         cube.rotateCube(-theta, Y);
+            //         cube.rotateCube(3, Z);
+            //         cube.rotateCube(theta, Y);
+            //     }
+            // }
+            // else
+            // {
+            //     if (theta < 45) // retate around X
+            //     {
+            //         cube.rotateCube(theta, X);
+            //         cube.rotateCube(3, Z);
+            //         cube.rotateCube(-theta, X);
+            //     }
+            //     else
+            //     {
+            //         cube.rotateCube(-theta, Y);
+            //         cube.rotateCube(3, Z);
+            //         cube.rotateCube(theta, Y);
+            //     }
+            // }
+        }
+
+        double oldDeltaX, oldDeltaY;
         while (SDL_PollEvent(&event))
         {
-            if (event.type == SDL_EVENT_QUIT)
-            {                
-                running = false;
-                break;
-            }
-            if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
+            switch (event.type) 
             {
-                SDL_GetMouseState(&x1, &y1);
-                break;
-            }
-            if (event.type = SDL_EVENT_MOUSE_BUTTON_UP)
-            {
-                SDL_GetMouseState(&x2, &y2);
-                double slope = (y2 - y1) / (x2 - x1);
-                double axisSlope = -1 / slope;
+                case SDL_EVENT_QUIT:                
+                    running = false;
+                    break;
+                case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                    if (event.button.button == SDL_BUTTON_LEFT) 
+                    {                        
+                        dragStartX = event.button.x;
+                        dragStartY = event.button.y;
+                        if (std::abs(dragStartX - deltaX) < 0.5 && std::abs(dragStartY - deltaY))
+                        {
+                            isDragging = false;
+                            break;
+                        }
 
-                std::cout << y2 - y1 << "/" << x2 - x1 << std::endl;
-
-                double theta = convertRadToDeg(std::tan(axisSlope));
-                cube.rotateCube(theta, Z);
-                cube.rotateCube(3, Y);
-                cube.rotateCube(180 - theta, Z);
-                break;
+                        isDragging = true;
+                    }
+                    break;
+                case SDL_EVENT_MOUSE_BUTTON_UP: 
+                    if (event.button.button == SDL_BUTTON_LEFT)
+                        isDragging = false;
+                    break;
+                case SDL_EVENT_MOUSE_MOTION:
+                    if (isDragging) {
+                        deltaX = event.motion.x - dragStartX;
+                        deltaY = event.motion.y - dragStartY;
+                        if (deltaY == 0) {deltaY = 0.1;}
+                        if (deltaX == 0) {deltaX = 0.1;}
+                    }
+                    break;
             }
         }
 
