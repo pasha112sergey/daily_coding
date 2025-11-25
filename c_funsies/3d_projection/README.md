@@ -33,23 +33,23 @@ Using this, we can figure out or **focal length**. Note that the top ray of the 
 
 Using trig identities and the definition of tangents, we see that:
 
-$`
+$$
 \begin{align}
 tan(\frac{\theta}{2}) = \frac{HEIGHT}{f}\\
 f = \frac{HEIGHT}{tan(\frac{\theta}{2})}
 \end{align}
-`$
+$$
 
 We now figured out the focal length! Awesome, lets now figure out the transformed x' and y' positions. Note that the x and y cases are symmetrical, as it doesn't matter which way we construct the triangles shown in the right part of the image.
 
 Notice, that the triangles on the right side of the image are similar, and the following holds (for both x and y, symmetrically):
 
-$`
+$$
 \begin{align}
 \frac{y}{z} = \frac{y'}{f}\\
 y' =\frac{fy}{z} \rightarrow x'=\frac{fx}{z}
 \end{align}
-`$
+$$
 
 Awesome!! What this semantically means is that if we take the ratio of the focal length to the z distance away from the camera (along our **principal** axis), and mulitply it by our original coordinate, we get its mapped representation!! Let's sanity check:
 
