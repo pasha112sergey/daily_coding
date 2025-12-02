@@ -86,37 +86,3 @@ def main():
    print(ans)
 
 main()
-
-class PieceType(Enum):
-    PAWN   = 1
-    KNIGHT = 2
-    BISHOP = 3
-    ROOK   = 4
-    QUEEN  = 5
-    KING   = 6
-
-# 6 unique types [piecetype][color]
-# 4 bits total to represent a piece uniquely
-
-# 320 
-# 64 * 4 = 256
-
-class PieceColor(Enum):
-    WHITE = 0
-    BLACK = 1
-
-class Piece():
-    def __init__(self, pieceType, pieceColor):
-        self.type = pieceType
-        self.color = pieceColor
-
-class Square():
-    def __init__(self):
-        self.occupied = False
-        self.occupiedby = None 
-
-class Chessboard():
-    def __init__(self):
-        # each element in the list 
-        # list of 8 rows by 8 columns of squares
-        self.board = [[Square()] * 8] * 8 
