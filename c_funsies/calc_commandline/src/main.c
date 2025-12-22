@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/types.h"
 #include <string.h>
-#include "stack.c"
+#include "types.h"
+
+extern void push(Stack *stack, double val);
+extern double pop(Stack *stack);
+extern double peek(Stack *stack);
 
 OPERATION match_operation(char *op)
 {

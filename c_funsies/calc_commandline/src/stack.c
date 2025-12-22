@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "types.h"
+#include <stddef.h>
 
 
 void print_stack(const Stack *stack)
