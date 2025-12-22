@@ -1,4 +1,4 @@
-# Calculator in the commandline!
+# Calculator in the command line!
 
 ## A computer is supposed to compute, so why can I not just type a numerical expression into the terminal and get an answer?
 
