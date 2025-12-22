@@ -2,36 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include "types.h"
+#include <stdbool.h>
+
 
 extern void push(Stack *stack, double val);
 extern double pop(Stack *stack);
 extern double peek(Stack *stack);
 
-OPERATION match_operation(char *op)
-{
-        if(strcmp(op, "+") == 0)
-            return ADD;
-        if(strcmp(op, "-") == 0)
-            return SUBTRACT;
-        if(strcmp(op, "*") == 0)
-            return MULTIPLY;
-        if(strcmp(op, "/") == 0)
-            return DIVIDE;
-        return -1;
-    
-}
-
-double perform_op(double f, OPERATION op, double s)
+double perform_op(double f, char op, double s)
 {
     switch(op)
     {
-        case ADD:
+        case '+':
             return f + s;
-        case SUBTRACT:
+        case '-':
             return f - s;
-        case MULTIPLY:
+        case '*':
             return f * s;
-        case DIVIDE:
+        case '/':
             return f / s;
         default: 
             printf("Unkown operation: %d\n", op);
@@ -39,33 +27,62 @@ double perform_op(double f, OPERATION op, double s)
     }
 }
 
-int main(int argc, char *argv[])
-{   
-    Stack *stack = calloc(1, sizeof(Stack));
-
-    for (int i = 1; i < argc; i++)
+char **evaluate_high_precedence(char **expr, int *len)
+{
+    int i = 0;
+    while (i < *len)
     {
-        OPERATION op;
-
-        if ((op = match_operation(argv[i])) == -1)
+        if (strcmp(expr[i], "*") == 0 || strcmp(expr[i], "/") == 0)
         {
-            double val = strtod(argv[i], NULL);
-            push(stack, val);
-        }
+            double val1 = strtod(expr[i-1], NULL);
+            char op = expr[i][0];
+            double val2 = strtod(expr[i+1], NULL);
+            double ans = perform_op(val1, op, val2);
+            
 
-        else
-        {
-            double second = pop(stack);
-            double first = pop(stack);
-            double result = perform_op(first, op, second);
+            char *ans_str = malloc(256 * sizeof(char));
+            snprintf(ans_str, 256, "%.2f", ans);
+            expr[i-1] = ans_str;
 
-            push(stack, result);
+
+            for (int j = i; j < *len - 2; j++)
+            {
+                expr[j] = expr[j+2];
+                expr[j + 2] = "NULL";
+            }
+
+            *len -= 2;
+            i = 0;
+            continue;
         }
+        i++;
     }
 
-    double ans = peek(stack);
-    free(stack);
-    printf("%.2f\n", ans);
+    return expr;
+}
 
+double evaluate_easy(char **easy, int len)
+{
+    double total = strtod(easy[0], NULL);
+
+    for (int i = 0; i < len; i++)
+    {
+        if (strcmp(easy[i], "+") == 0 || strcmp(easy[i], "-") == 0)
+        {
+            total = perform_op(total, easy[i][0], strtod(easy[i+1], NULL));
+        }
+    }
+    
+    return total;
+}
+
+int main(int argc, char *argv[])
+{   
+    argc--;
+    char **easy = evaluate_high_precedence(&argv[1], &argc);
+
+    double ans = evaluate_easy(easy, argc);
+
+    printf("%.2f\n", ans);
     return EXIT_SUCCESS;
 }
