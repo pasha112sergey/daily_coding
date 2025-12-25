@@ -26,7 +26,7 @@ typedef enum {
 typedef struct
 {
       M_TYPE type;
-      in_addr_t from_ip;
+      struct in_addr from_ip;
       in_port_t from_port;
       size_t len;
 } M_HEADER;
@@ -37,12 +37,8 @@ Connection *parse_broadcast(void *buf)
       M_HEADER header;
       memcpy(&header, buf, sizeof(M_HEADER));
       
-      char ip_addr[256];
-      struct in_addr temp;
-      temp.s_addr = header.from_ip;
-
       // char *str = inet_ntop(AF_INET, &(temp), ip_addr, sizeof(header.from_ip));
-      printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(temp), ntohs(header.from_port), header.len);
+      printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(header.from_ip), ntohs(header.from_port), header.len);
       
       Connection *conn = malloc(sizeof(Connection));
       return NULL;

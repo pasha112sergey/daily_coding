@@ -24,7 +24,7 @@ typedef enum {
 typedef struct
 {
       M_TYPE type;
-      in_addr_t from_ip;
+      struct in_addr from_ip;
       in_port_t from_port;
       size_t len;
 } M_HEADER;
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
       // build message
       M_HEADER header;
       header.type = M_ESTABLISH;
-      // header.from_ip = ;
+      header.from_ip = *my_ip;
       header.from_port = port;
       header.len = 0;
 
