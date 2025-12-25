@@ -30,7 +30,7 @@ typedef struct
 } M_HEADER;
 
 
-in_addr_t get_my_ip()
+struct in_addr *get_my_ip()
 {
       char my_hostname[32];
       if (gethostname(my_hostname, 32) < 0)
@@ -45,7 +45,9 @@ in_addr_t get_my_ip()
       char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr));
       printf("My IP is: %s\n", my_ip);
 
-      return ((struct in_addr *) host_entry->h_addr)->s_addr;
+      struct in_addr res = malloc(sizeof(struct in_addr));
+      *res = *((struct in_addr *) host_entry->h_addr);
+      return res;
 }
 
 int main(int argc, char *argv[])
@@ -75,7 +77,7 @@ int main(int argc, char *argv[])
       sock_addr.sin_addr.s_addr = INADDR_BROADCAST;
       // set up socket
 
-      in_addr_t my_ip = get_my_ip();
+      struct in_addr *my_ip = get_my_ip();
       // build message
       M_HEADER header;
       header.type = M_ESTABLISH;
