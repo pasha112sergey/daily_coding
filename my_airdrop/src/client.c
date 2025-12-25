@@ -45,7 +45,7 @@ struct in_addr *get_my_ip()
       char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr));
       printf("My IP is: %s\n", my_ip);
 
-      struct in_addr res = malloc(sizeof(struct in_addr));
+      struct in_addr *res = malloc(sizeof(struct in_addr));
       *res = *((struct in_addr *) host_entry->h_addr);
       return res;
 }
