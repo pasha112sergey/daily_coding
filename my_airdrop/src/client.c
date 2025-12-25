@@ -3,10 +3,12 @@
 #include <string.h>
 
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
 #include <unistd.h>
+#include <netdb.h>
 
 typedef struct {
       in_addr_t client_addr;
@@ -52,34 +54,35 @@ int main(int argc, char *argv[])
       struct sockaddr_in sock_addr = {0};
 
       sock_addr.sin_family = AF_INET;
-      sock_addr.sin_port = htons(port);
-      sock_addr.sin_addr.s_addr = inet_addr("255.255.255.255");
+      sock_addr.sin_port = port;
+      sock_addr.sin_addr.s_addr = INADDR_BROADCAST;
+      
+      // printf("Debug port: %d\n", my_addr.sin_port);
 
-      
-      // first send broadcast
-      if (connect(discovery_sock, (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
+      char my_hostname[32];
+      if (gethostname(my_hostname, 32) < 0)
       {
-            perror("Client connect failed\n");
+            perror("gethostname error\n");
             exit(EXIT_FAILURE);
       }
+
+      printf("My hostname is: %s\n", my_hostname);
       
-      struct sockaddr_in my_addr;
-      socklen_t my_addr_len;
-      if (getsockname(discovery_sock, (struct sockaddr *) &my_addr, &my_addr_len) < 0)
-      {
-            perror("getsockname error\n");
-            exit(EXIT_FAILURE);
-      }
-      
-      printf("Debug port: %d\n", my_addr.sin_port);
+
+      struct hostent *host_entry = gethostbyname(my_hostname);
+      char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
+      printf("My IP is: %s\n", my_ip);
 
       M_HEADER header;
-      header.type = M_BROADCAST;
-      header.from_ip = (my_addr.sin_addr.s_addr);
-      header.from_port = (my_addr.sin_port);
+      header.type = M_ESTABLISH;
+      // header.from_ip = ;
+      header.from_port = port;
       header.len = 0;
 
-      if (sendto(discovery_sock, &header, sizeof(header), 0, (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
+      // printf("src ip : %s\n", inet_ntoa(my_addr.sin_addr));
+      // printf("sending to: %s, port# = %d\n", inet_ntoa(sock_addr.sin_addr), sock_addr.sin_port);
+
+      if (sendto(discovery_sock, &header, sizeof(header), 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
       {
             perror("Client could not send to server\n");
             exit(EXIT_FAILURE);
