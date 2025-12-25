@@ -4,50 +4,44 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
+#include <stdint.h>
 
 #define MAX_MSG_LEN 1024
+#define MAX_CONNECTIONS 32
+#define PORT 8000
 
-static int PORT = 8000;
+typedef struct {
+      in_addr_t client_addr;
+      uint16_t port;
+} Connection;
 
-int parse_args(int argc, char *argv[])
+typedef enum {
+      M_BROADCAST,
+      M_ESTABLISH,
+      M_SEND,
+} M_TYPE;
+
+typedef struct
 {
-      int opt;
-      int debug = 0;
-      while ((opt = getopt(argc, argv, "hdp:")) != -1)
-      {
-            switch (opt)
-            {
-                  case 'h':
-                        printf("Usage: ./my_airdrop [options] -p [port number]\n");
-                        printf("Options are: \n");
-                        printf("\t-h : Display help menu\n");
-                        printf("\t-d : Debug printout - used for debugging\n");
-                        printf("\t-p : Specify port to connect to (only used for debugging)\n");
-                        break;
-                        return -1;
-                  case 'p':
-                        PORT = atoi(optarg);
-                        printf("Port specified: %d\n", PORT);
-                        break;
-                  default:
-                        printf("Usage: ./my_airdrop [options] -p [port number]\n");
-                        printf("Options are: \n");
-                        printf("\t-h : Display help menu\n");
-                        printf("\t-d : Debug printout - used for debugging\n");
-                        printf("\t-p : Specify port to connect to (only used for debugging)\n");
-                        return 0;
-            }
-      }
-      return 1;
+      M_TYPE type;
+      size_t len;
+} M_HEADER;
+
+Connection *parse_broadcast(void *buf)
+{
+      M_HEADER header;
+      memcpy(&header, buf, sizeof(M_HEADER));
+      printf("Header parsed: MSG_TYPE: %d, len: %ld\n", header.type, header.len);
+      return NULL;
 }
 
 int main(int argc, char *argv[])
 {
-      if (!parse_args(argc, argv))
-      {
-            printf("Failed to parse args. Exiting\n");
-            return EXIT_SUCCESS;
-      }
+      printf("Usage: ./my_airdrop [options] -p [port number]\n");
+      printf("Options are: \n");
+      printf("\t-h : Display help menu\n");
+      printf("\t-d : Debug printout - used for debugging\n");
+      printf("\t-p : Specify port to connect to (only used for debugging)\n");
 
       int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -70,9 +64,10 @@ int main(int argc, char *argv[])
 
       while (1)
       {
-            char buf[MAX_MSG_LEN];
+            uint8_t buf[MAX_MSG_LEN];
             recvfrom(sockfd, buf, MAX_MSG_LEN, 0, NULL, NULL);
-            printf("Recieved message: %s\n", buf);
+            printf("message recieved: %s\n", buf);
+            Connection *conn = parse_broadcast(buf);
       }
 
       return EXIT_SUCCESS;

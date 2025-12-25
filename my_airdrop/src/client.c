@@ -8,6 +8,22 @@
 
 #include <unistd.h>
 
+typedef struct {
+      in_addr_t client_addr;
+      uint16_t port;
+} Connection;
+
+typedef enum {
+      M_BROADCAST,
+      M_ESTABLISH,
+      M_SEND,
+} M_TYPE;
+
+typedef struct
+{
+      M_TYPE type;
+      size_t len;
+} M_HEADER;
 
 int main(int argc, char *argv[])
 {
@@ -36,15 +52,18 @@ int main(int argc, char *argv[])
       sock_addr.sin_port = htons(port);
       sock_addr.sin_addr.s_addr = inet_addr("255.255.255.255");
 
+      
       // first send broadcast
       if (connect(discovery_sock, (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
       {
             perror("Client connect failed\n");
             exit(EXIT_FAILURE);
       }
+      
+      
+      M_HEADER header = {M_ESTABLISH, 0};
 
-      char *buf = "Hello!\n";
-      if (sendto(discovery_sock, buf, 8, 0,  (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
+      if (sendto(discovery_sock, &header, sizeof(header), 0,  (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
       {
             perror("Client could not send to server\n");
             exit(EXIT_FAILURE);
