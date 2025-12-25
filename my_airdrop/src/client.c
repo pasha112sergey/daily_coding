@@ -22,8 +22,11 @@ typedef enum {
 typedef struct
 {
       M_TYPE type;
+      in_addr_t from_ip;
+      in_port_t from_port;
       size_t len;
 } M_HEADER;
+
 
 int main(int argc, char *argv[])
 {
@@ -60,10 +63,23 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
       }
       
+      struct sockaddr_in my_addr;
+      socklen_t my_addr_len;
+      if (getsockname(discovery_sock, (struct sockaddr *) &my_addr, &my_addr_len) < 0)
+      {
+            perror("getsockname error\n");
+            exit(EXIT_FAILURE);
+      }
       
-      M_HEADER header = {M_ESTABLISH, 0};
+      printf("Debug port: %d\n", my_addr.sin_port);
 
-      if (sendto(discovery_sock, &header, sizeof(header), 0,  (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
+      M_HEADER header;
+      header.type = M_BROADCAST;
+      header.from_ip = (my_addr.sin_addr.s_addr);
+      header.from_port = (my_addr.sin_port);
+      header.len = 0;
+
+      if (sendto(discovery_sock, &header, sizeof(header), 0, (struct sockaddr *) &sock_addr, sizeof(sock_addr)) < 0)
       {
             perror("Client could not send to server\n");
             exit(EXIT_FAILURE);
