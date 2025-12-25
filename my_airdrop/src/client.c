@@ -30,6 +30,24 @@ typedef struct
 } M_HEADER;
 
 
+in_addr_t get_my_ip()
+{
+      char my_hostname[32];
+      if (gethostname(my_hostname, 32) < 0)
+      {
+            perror("gethostname error\n");
+            exit(EXIT_FAILURE);
+      }
+
+      printf("My hostname is: %s\n", my_hostname);
+
+      struct hostent *host_entry = gethostbyname(my_hostname);
+      char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr));
+      printf("My IP is: %s\n", my_ip);
+
+      return ((struct in_addr *) host_entry->h_addr)->s_addr;
+}
+
 int main(int argc, char *argv[])
 {
       int port = atoi(argv[1]);
@@ -52,35 +70,18 @@ int main(int argc, char *argv[])
       }
 
       struct sockaddr_in sock_addr = {0};
-
       sock_addr.sin_family = AF_INET;
       sock_addr.sin_port = port;
       sock_addr.sin_addr.s_addr = INADDR_BROADCAST;
-      
-      // printf("Debug port: %d\n", my_addr.sin_port);
+      // set up socket
 
-      char my_hostname[32];
-      if (gethostname(my_hostname, 32) < 0)
-      {
-            perror("gethostname error\n");
-            exit(EXIT_FAILURE);
-      }
-
-      printf("My hostname is: %s\n", my_hostname);
-      
-
-      struct hostent *host_entry = gethostbyname(my_hostname);
-      char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
-      printf("My IP is: %s\n", my_ip);
-
+      in_addr_t my_ip = get_my_ip();
+      // build message
       M_HEADER header;
       header.type = M_ESTABLISH;
       // header.from_ip = ;
       header.from_port = port;
       header.len = 0;
-
-      // printf("src ip : %s\n", inet_ntoa(my_addr.sin_addr));
-      // printf("sending to: %s, port# = %d\n", inet_ntoa(sock_addr.sin_addr), sock_addr.sin_port);
 
       if (sendto(discovery_sock, &header, sizeof(header), 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
       {
