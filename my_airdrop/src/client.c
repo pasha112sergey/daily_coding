@@ -60,7 +60,7 @@ void send_packet(int sockfd, struct sockaddr_in sock_addr, M_TYPE type, size_t l
       {
             memcpy(&buf[sizeof(M_HEADER)], payload, len);
       }
-      printf("Sending buf: \n");
+
       for (int i = 0; i < sizeof(M_HEADER) + len; i++)
       {
             printf("%x", buf[i]);

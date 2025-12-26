@@ -1,5 +1,4 @@
 make:
-	gcc src/main.c -o bin/airdrop
+	gcc src/main.c util/helpers.c -o bin/airdrop
+	
 
-client:
-	gcc src/client.c -o bin/client

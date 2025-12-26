@@ -1,44 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdint.h>
+#include "../include/helpers.h"
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-
-
-#define MAX_MSG_LEN 1024
-#define MAX_CONNECTIONS 32
-#define DISCOVERY_PORT 8000
-
+Connection *parse_broadcast(void *buf);
 struct in_addr *get_my_ip();
-
-typedef struct {
-      struct in_addr client_addr;
-      uint16_t client_port;
-      int socket;
-} Connection;
-
-typedef enum {
-      M_BROADCAST,
-      M_IDENTIFY,
-      M_SEND,
-      M_ACK,
-      M_NACK,
-} M_TYPE;
-
-typedef struct
-{
-      M_TYPE type;
-      struct in_addr from_ip;
-      in_port_t from_port;
-      size_t len;
-} M_HEADER;
-
+void send_packet(int bsock, struct sockaddr_in addr, M_TYPE type, size_t len, void *payload);
 
 Connection *parse_broadcast(void *buf)
 {
@@ -76,11 +40,8 @@ struct in_addr *get_my_ip()
             exit(EXIT_FAILURE);
       }
 
-      printf("My hostname is: %s\n", my_hostname);
-
       struct hostent *host_entry = gethostbyname(my_hostname);
       char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr));
-      printf("My IP is: %s\n", my_ip);
 
       struct in_addr *res = malloc(sizeof(struct in_addr));
       *res = *((struct in_addr *) host_entry->h_addr);
@@ -96,6 +57,7 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
       header.from_ip = *my_ip;
       header.from_port = htons(DISCOVERY_PORT);
       header.len = htonl(len);
+      free(my_ip);
       
       uint8_t buf[sizeof(M_HEADER) + len];
 
@@ -106,45 +68,10 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
             memcpy(&buf[sizeof(M_HEADER)], payload, len);
       }
 
-      printf("Sending buf: \n");
-      for (int i = 0; i < sizeof(M_HEADER) + len; i++)
-      {
-            printf("%x", buf[i]);
-      }
-
-      free(my_ip);
-
       if (sendto(bsock, buf, sizeof(M_HEADER) + len, 0, (const struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
       {
             perror("Client could not send to server\n");
             exit(EXIT_FAILURE);
-      }
-}
-
-M_TYPE parse_mtype(uint8_t *buf)
-{
-      M_HEADER header;
-      memcpy(&header, buf, sizeof(M_HEADER));
-
-      return header.type;
-}
-
-char *mtype_to_s(M_TYPE m)
-{
-      switch (m)
-      {
-            case M_ACK:
-                  return "ACK";
-            case M_BROADCAST:
-                  return "BROADCAST";
-            case M_IDENTIFY:
-                  return "IDENTIFY";
-            case M_SEND:
-                  return "SEND";
-            case M_NACK:
-                  return "NACK";
-            default:
-                  return "UNKNOWN";
       }
 }
 
