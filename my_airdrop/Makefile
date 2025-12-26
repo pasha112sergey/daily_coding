@@ -1,4 +1,4 @@
 make:
-	gcc src/main.c util/helpers.c -o bin/airdrop
+	gcc -I include src/main.c util/helpers.c -o bin/airdrop
 	
 

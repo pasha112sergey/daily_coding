@@ -1,4 +1,4 @@
-#include "../include/helpers.h"
+#include "helpers.h"
 
 Connection *parse_broadcast(void *buf);
 struct in_addr *get_my_ip();
@@ -41,10 +41,10 @@ struct in_addr *get_my_ip()
       }
 
       struct hostent *host_entry = gethostbyname(my_hostname);
-      char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr));
+      char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
 
       struct in_addr *res = malloc(sizeof(struct in_addr));
-      *res = *((struct in_addr *) host_entry->h_addr);
+      *res = *((struct in_addr *) host_entry->h_addr_list[0]);
       return res;
 }
 
