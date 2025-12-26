@@ -128,10 +128,9 @@ int main(int argc, char *argv[])
             uint8_t buf[MAX_MSG_LEN];
             recv(bsock, buf, MAX_MSG_LEN, 0);
 
-            M_TYPE rcvd = parse_mtype(buf);
-            printf("Message of type %s recieved \n", mtype_to_s(rcvd));
-
-            switch (rcvd)
+            printf("Message of type %s recieved \n", mtype_to_s(parse_mtype(buf)));
+            
+            switch (parse_mtype(buf))
             {    
                   case M_BROADCAST:
                         printf("Broadcast message recieved: %s\n", buf);
@@ -140,18 +139,18 @@ int main(int argc, char *argv[])
                         if ((conn = parse_broadcast(buf)) == NULL)
                               continue;
 
-                        struct sockaddr_in send_addr; 
-                        memset(&send_addr, 0, sizeof(send_addr));
-
+                        struct sockaddr_in send_addr = {0};
                         send_addr.sin_family = AF_INET;
                         send_addr.sin_addr = conn->client_addr;
                         send_addr.sin_port = conn->client_port;
 
                         send_packet(bsock, send_addr, M_IDENTIFY, 0, NULL);
                         break;
+
                   case M_ACK:
                         printf("ack\n");
                         break;
+                        
                   default:
                         break;
             }
