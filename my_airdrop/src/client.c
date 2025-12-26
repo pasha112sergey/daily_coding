@@ -10,6 +10,10 @@
 #include <unistd.h>
 #include <netdb.h>
 
+
+
+in_port_t port = 7999;
+
 typedef struct {
       in_addr_t client_addr;
       uint16_t port;
@@ -21,6 +25,9 @@ typedef enum {
       M_SEND,
 } M_TYPE;
 
+/*
+Length refers to the length of the payload
+*/
 typedef struct
 {
       M_TYPE type;
@@ -29,6 +36,37 @@ typedef struct
       size_t len;
 } M_HEADER;
 
+struct in_addr *get_my_ip();
+void send_packet(int sockfd, struct sockaddr_in sockaddr, M_TYPE type, size_t len, void *payload);
+
+/*
+      Send_packet assumes everything is sent to it in host order
+*/
+void send_packet(int sockfd, struct sockaddr_in sock_addr, M_TYPE type, size_t len, void *payload)
+{
+      struct in_addr *my_ip = get_my_ip();
+      
+      M_HEADER header;
+      header.type = type;
+      header.from_ip = *my_ip;
+      header.from_port = htons(port);
+      header.len = htonl(len);
+      
+      uint8_t buf[sizeof(M_HEADER) + len];
+
+      memcpy(buf, &header, sizeof(M_HEADER));
+
+      if (payload != NULL)
+      {
+            memcpy(&buf[sizeof(M_HEADER)], payload, len);
+      }
+
+      if (sendto(sockfd, buf, sizeof(M_HEADER) + len, 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
+      {
+            perror("Client could not send to server\n");
+            exit(EXIT_FAILURE);
+      }
+}
 
 struct in_addr *get_my_ip()
 {
@@ -52,7 +90,6 @@ struct in_addr *get_my_ip()
 
 int main(int argc, char *argv[])
 {
-      int port = atoi(argv[1]);
       printf("Attempting to bind to port %d\n", port);
 
       int discovery_sock = socket(AF_INET, SOCK_DGRAM, 0);
@@ -77,19 +114,8 @@ int main(int argc, char *argv[])
       sock_addr.sin_addr.s_addr = INADDR_BROADCAST;
       // set up socket
 
-      struct in_addr *my_ip = get_my_ip();
-      // build message
-      M_HEADER header;
-      header.type = M_ESTABLISH;
-      header.from_ip = *my_ip;
-      header.from_port = port;
-      header.len = 0;
-
-      if (sendto(discovery_sock, &header, sizeof(header), 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
-      {
-            perror("Client could not send to server\n");
-            exit(EXIT_FAILURE);
-      }
+      send_packet(discovery_sock, sock_addr, M_BROADCAST, 0, NULL);
+      printf("Broadcast packet sent!\n");
 
       // now wait to hear back
       while (1)
