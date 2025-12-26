@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <netdb.h>
 
-
+#define PROTOCOL_PORT 8000
 
 in_port_t port = 7999;
 
@@ -60,8 +60,13 @@ void send_packet(int sockfd, struct sockaddr_in sock_addr, M_TYPE type, size_t l
       {
             memcpy(&buf[sizeof(M_HEADER)], payload, len);
       }
+      printf("Sending buf: \n");
+      for (int i = 0; i < sizeof(M_HEADER) + len; i++)
+      {
+            printf("%x", buf[i]);
+      }
 
-      if (sendto(sockfd, buf, sizeof(M_HEADER) + len, 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
+      if (sendto(sockfd, buf, sizeof(M_HEADER) + len, 0, (const struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
       {
             perror("Client could not send to server\n");
             exit(EXIT_FAILURE);
@@ -110,7 +115,7 @@ int main(int argc, char *argv[])
 
       struct sockaddr_in sock_addr = {0};
       sock_addr.sin_family = AF_INET;
-      sock_addr.sin_port = port;
+      sock_addr.sin_port = htons(PROTOCOL_PORT);
       sock_addr.sin_addr.s_addr = INADDR_BROADCAST;
       // set up socket
 
