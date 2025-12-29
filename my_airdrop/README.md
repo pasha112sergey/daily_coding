@@ -60,6 +60,7 @@ The **OSIFS** protocol will have the following types of messages:
 | `M_NACK` | Lets the sender of the data know that the file has **not** been delivered or interpreted correctly. Also sent when the receiver declines | The **OSIFS** `FileID` of the incorrect file and the reason for rejection. | Whoever received the incorrect data | Whoever sent the incorrect data |
 
 ##### Notes on the table above
+
 >1. New means that the device can be a first-time user (just downloaded the protocol), or that it could be toggling on the protocol after having used it before, thus becoming newly discoverable.
 
 >2. Everyone on the LAN truly does mean *everyone*: the discovery packet is broadcasted via **UDP** to the **IP** Address `255.255.255.255`, meaning that every machine receives it.
@@ -96,7 +97,7 @@ However, a traditional, simple commandline program poses a couple of challenges 
 
 This must be done seamlessly, but I still want to be able to call this from the commandline. Likewise, I want to learn how to make a cool TUI, so I shall pick a library that allows me to do that.
 
-After doing some minimal online, it seems like the `ncurses` library is optimal for TUI programming with **C**. So, I'll try to use it, but as the project progresses I might change my implementation, so stay tuned for updates.
+After doing some minimal research online, it seems like the `ncurses` library is optimal for TUI programming with **C**. So, I'll try to use it, but as the project progresses I might change my implementation, so stay tuned for updates.
 
 > ***Note:** The presentation will be the last step in the project, as the first priority is to build the MVP to demonstrate file transferring functionality, and its viability as a useful service.*
 
