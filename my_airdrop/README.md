@@ -47,25 +47,22 @@ So, why don't we try to emulate features of AirDrop, bypassing the clunky, insec
 
 > ***Note:** AirDrop also benefits from a lack of constraint on file size. I would like to replicate this to the best of my ability. Solutions like background file splitting and reconstruction for large files can be conceived, but currently it would do more harm than good. My top priority at this point is to build the MVP as fast as possible to prove a concept. I shall do so by setting a large `MAX_PAYLOAD` size of **~100 MB** (1e+8 bytes), which should be more than enough for common data like photos and files.*
 
-## OSIFS Protocol Definition
+## **OSIFS** Protocol Definition
 
-The OSIFS protocol will have the following types of messages:
+The **OSIFS** protocol will have the following types of messages:
 
 | Type | Purpose | Contains | Sender | Recipient |  
 | :--- | :------ | :------- | :----- | :-------- |
 | `M_BROADCAST` | Initial packet that is sent to the entire LAN to notify every device on the LAN that a new device is connected to OSFIS | Contains the IP address of the new device that joined, and its PORT number | New ==^1^== device on the network | Everyone ==^2^== on the LAN |
 | `M_IDENTIFY` | Upon receiving the `M_BROADCAST` message, every other device that uses the **OSIFS** protocol will send an Identifying message to let the new device know its identifying information like its IP and PORT | Contains IP address of the device that received the `M_BROADCAST` packet. | Recipient of the `M_BROADCAST` packet | Sender of the `M_BROADCAST` packet |
-| `M_SEND` | Sends the actual file via TCP ==^3^== | File, its metadata, and its OSIFS FileID ==^4^== | Whoever has the data | Desired recipient of the data |
-| `M_ACK` | Lets the sender of the data know that the file has been delivered and interpreted successfully | The OSIFS FileID | Whoever received the data | Whoever sent the data originally |
-| `M_NACK` | Lets the sender of the data know that the file has **not** been delivered or interpreted correctly. Also sent when the receiver declines | The OSIFS FileID of the incorrect file and the reason for rejection. | Whoever received the incorrect data | Whoever sent the incorrect data |
+| `M_SEND` | Sends the actual file via TCP ==^3^== | File, its metadata, and its **OSIFS** `FileID` ==^4^== | Whoever has the data | Desired recipient of the data |
+| `M_ACK` | Lets the sender of the data know that the file has been delivered and interpreted successfully | The **OSIFS** `FileID` | Whoever received the data | Whoever sent the data originally |
+| `M_NACK` | Lets the sender of the data know that the file has **not** been delivered or interpreted correctly. Also sent when the receiver declines | The **OSIFS** `FileID` of the incorrect file and the reason for rejection. | Whoever received the incorrect data | Whoever sent the incorrect data |
 
-> ==1.== New means that the device can be a first-time user (just downloaded the protocol), or that it could be toggling on the protocol after having used it before, thus becoming newly discoverable.
-
-> ==2.== Everyone on the LAN truly does mean *everyone*: the discovery packet is broadcasted via **UDP** to the IP Address 255.255.255.255, meaning that every machine receives it.
-
-> ==3.== The discovery process happens over UDP because it must be broadcast and is therefore connectionless, while the actual transfer and connection established must be reliable, hence we use TCP
-
-> ==4.== OSIFS FileID is a non-negative number that can be used to identify which file has been properly sent and received. It is more efficient than using filenames to identify data
+>1. New means that the device can be a first-time user (just downloaded the protocol), or that it could be toggling on the protocol after having used it before, thus becoming newly discoverable.
+>2. Everyone on the LAN truly does mean *everyone*: the discovery packet is broadcasted via **UDP** to the **IP** Address `255.255.255.255`, meaning that every machine receives it.
+>3. The discovery process happens over **UDP** because it must be broadcast and is therefore connectionless, while the actual transfer and connection established must be reliable, hence we use **TCP**
+>4. **OSIFS** `FileID` is a non-negative number that can be used to identify which file has been properly sent and received. It is more efficient than using filenames to identify data
 
 ## In depth plan of implementation
 
@@ -99,6 +96,10 @@ After doing some minimal online, it seems like the `ncurses` library is optimal 
 
 > ***Note:** The presentation will be the last step in the project, as the first priority is to build the MVP to demonstrate file transferring functionality, and its viability as a useful service.*
 
+## Future Updates
+
+I outlined the project above. As I continue to work on it, I will update this document with implementation details that I find useful, cool, or interesting. Likewise, I plan to use this document as a general outline and plan for the project, which will help me stay on track. Stay tuned!
+
 [^1]: Although they are called Sender and Receiver, both will be performing some function pertaining to sending and receiving packets. The distinction lies in whether the user *sending* a file vs *receiving* a file
 
-[^2]: The receiver manages 2 "OSIFS well-known" ports : the `UDP` broadcast port (8000), and the `TCP` listening port (8001)
+[^2]: The receiver manages 2 "**OSIFS** well-known" ports : the `UDP` broadcast port (8000), and the `TCP` listening port (8001)
