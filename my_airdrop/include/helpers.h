@@ -13,7 +13,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#define MAX_MSG_LEN 1024
+#define MAX_MSG_LEN 1e+8
 #define MAX_CONNECTIONS 32
 #define DISCOVERY_PORT 8000
 
