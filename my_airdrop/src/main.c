@@ -15,7 +15,7 @@ Connection *parse_broadcast(void *buf)
 
       if (header.from_ip.s_addr == my_ip->s_addr)
       {
-            printf("Recieved my own broadcast!\n");
+            printf("Received my own broadcast!\n");
             free(my_ip);
             return NULL;
       }
@@ -55,7 +55,7 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
       M_HEADER header;
       header.type = type;
       header.from_ip = *my_ip;
-      header.from_port = htons(DISCOVERY_PORT);
+      header.from_port = htons(UDP_PORT);
       header.len = htonl(len);
       free(my_ip);
       
@@ -85,11 +85,12 @@ int main(int argc, char *argv[])
 
       // Socket setup
       // bsock stands for broadcast socket - it is used to
-      // send and recieve all broadcast packets
+      // send and receive all broadcast packets
 
-      int bsock = socket(AF_INET, SOCK_DGRAM, 0);
+      // Set up UDP socket
+      int udp_sock = socket(AF_INET, SOCK_DGRAM, 0);
 
-      if (bsock == -1)
+      if (udp_sock == -1)
       {
             perror("Socket error\n");
             exit(EXIT_FAILURE);
@@ -97,10 +98,10 @@ int main(int argc, char *argv[])
 
       struct sockaddr_in sockaddr = {0};
       sockaddr.sin_family = AF_INET;
-      sockaddr.sin_port = htons(DISCOVERY_PORT);
+      sockaddr.sin_port = htons(UDP_PORT);
       sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-      if (bind(bsock, (struct sockaddr *) &sockaddr, sizeof(sockaddr)) < 0)
+      if (bind(udp_sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr)) < 0)
       {
             perror("Socket bind failed\n");
             exit(EXIT_FAILURE);
@@ -108,7 +109,7 @@ int main(int argc, char *argv[])
       
       int broadcastEnable = 1;
 
-      if (setsockopt(bsock, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable)) < 0)
+      if (setsockopt(udp_sock, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable)) < 0)
       {
             perror("Could not set sock option\n");
             exit(EXIT_FAILURE);
@@ -117,23 +118,58 @@ int main(int argc, char *argv[])
       struct sockaddr_in baddr = {0};
       baddr.sin_family = AF_INET;
       baddr.sin_addr.s_addr = INADDR_BROADCAST;
-      baddr.sin_port = htons(DISCOVERY_PORT);
+      baddr.sin_port = htons(UDP_PORT);
+      // UDP socket set up
+
+      // Set up TCP socket
+      int tcp_sock = socket(AF_INET, SOCK_STREAM, 0);
+      if (tcp_sock == -1)
+      {
+            perror("TCP Socket error\n");
+            exit(EXIT_FAILURE);
+      }
+
+      struct sockaddr_in tcp_addr = {0};
+      tcp_addr.sin_family = AF_INET;
+      tcp_addr.sin_port = htons(TCP_PORT);
+      tcp_addr.sin_addr.s_addr = INADDR_ANY;
+      if (bind(tcp_sock, (struct sockaddr *) &tcp_addr, sizeof(tcp_addr)) < 0)
+      {
+            perror("TCP bind error\n");
+            exit(EXIT_FAILURE);
+      }
+
+      if (listen(tcp_sock, MAX_CONNECTIONS) < 0)
+      {
+            perror("TCP Listen Failed\n");
+            exit(EXIT_FAILURE);
+      }
+      // TCP socket set up
 
       // send broadcast packet
-      send_packet(bsock, baddr, M_BROADCAST, 0, NULL);
+      send_packet(udp_sock, baddr, M_BROADCAST, 0, NULL);
 
-      // Await broadcast notificiation
+      // start Sender Thread
+      int args[2] = {tcp_sock, udp_sock};
+      pthread_t sender;
+      if (pthread_create(&sender, NULL, sender_function, args) < 0)
+      {
+            perror("Sender thread failed\n");
+            exit(EXIT_FAILURE);
+      }
+
+      // Await broadcast notification
       while(1)
       {
             uint8_t buf[MAX_MSG_LEN];
-            recv(bsock, buf, MAX_MSG_LEN, 0);
+            recv(udp_sock, buf, MAX_MSG_LEN, 0);
 
-            printf("Message of type %s recieved \n", mtype_to_s(parse_mtype(buf)));
+            printf("Message of type %s received \n", mtype_to_s(parse_mtype(buf)));
             
             switch (parse_mtype(buf))
             {    
                   case M_BROADCAST:
-                        printf("Broadcast message recieved: %s\n", buf);
+                        printf("Broadcast message received: %s\n", buf);
                         Connection *conn;
                         
                         if ((conn = parse_broadcast(buf)) == NULL)
@@ -144,13 +180,13 @@ int main(int argc, char *argv[])
                         send_addr.sin_addr = conn->client_addr;
                         send_addr.sin_port = conn->client_port;
 
-                        send_packet(bsock, send_addr, M_IDENTIFY, 0, NULL);
+                        send_packet(udp_sock, send_addr, M_IDENTIFY, 0, NULL);
                         break;
 
                   case M_ACK:
                         printf("ack\n");
                         break;
-                        
+                        =
                   default:
                         break;
             }

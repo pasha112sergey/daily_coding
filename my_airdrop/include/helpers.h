@@ -12,10 +12,12 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <pthread.h>
 
-#define MAX_MSG_LEN 1e+8
+#define MAX_MSG_LEN 1<<10
 #define MAX_CONNECTIONS 32
-#define DISCOVERY_PORT 8000
+#define UDP_PORT 8000
+#define TCP_PORT 8001
 
 typedef struct {
       struct in_addr client_addr;
