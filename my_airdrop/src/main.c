@@ -11,6 +11,9 @@ int available_hosts = 0;
 pthread_mutex_t mux = PTHREAD_MUTEX_INITIALIZER;
 void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mtype, size_t len, void *payload);
 
+int udp_sock;
+int tcp_sock;
+
 static time_t start_time;
 
 int connection_exists(M_HEADER header)
@@ -161,7 +164,7 @@ int main(int argc, char *argv[])
       // send and receive all broadcast packets
 
       // Set up UDP socket
-      int udp_sock = socket(AF_INET, SOCK_DGRAM, 0);
+      udp_sock = socket(AF_INET, SOCK_DGRAM, 0);
 
       if (udp_sock == -1)
       {
@@ -208,7 +211,7 @@ int main(int argc, char *argv[])
       // UDP socket set up
 
       // Set up TCP socket
-      int tcp_sock = socket(AF_INET, SOCK_STREAM, 0);
+      tcp_sock = socket(AF_INET, SOCK_STREAM, 0);
       if (tcp_sock == -1)
       {
             perror("TCP Socket error\n");

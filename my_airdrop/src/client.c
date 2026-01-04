@@ -28,7 +28,15 @@ void print_hosts()
 
 void graceful_shutdown(int code)
 {
-      
+      struct sockaddr_in baddr = {0};
+      baddr.sin_family = AF_INET;
+      baddr.sin_addr.s_addr = INADDR_BROADCAST;
+      baddr.sin_port = htons(UDP_PORT);
+
+      send_packet(udp_sock, baddr, M_LEAVING, 0, NULL);
+      close(udp_sock);
+      close(tcp_sock);
+      exit(code);
 }
 
 void *sender_function(void *vargs)

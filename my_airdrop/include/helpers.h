@@ -75,4 +75,8 @@ extern pthread_mutex_t mux;
 
 extern sig_atomic_t connection_status_change;
 
+extern int udp_sock;
+
+extern int tcp_sock;
+
 #endif
