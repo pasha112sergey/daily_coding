@@ -1,8 +1,5 @@
 #include "helpers.h"
 
-Connection *parse_broadcast(void *buf);
-struct in_addr *get_my_ip();
-void send_packet(int bsock, struct sockaddr_in addr, M_TYPE type, size_t len, void *payload);
 
 Connection *parse_broadcast(void *buf)
 {
@@ -48,6 +45,18 @@ struct in_addr *get_my_ip()
       return res;
 }
 
+char *get_my_hostname()
+{
+      char *my_hostname = calloc(MAX_HOSTNAME_LEN, sizeof(char));
+      if (gethostname(my_hostname, MAX_HOSTNAME_LEN) < 0)
+      {
+            perror("gethostname error\n");
+            exit(EXIT_FAILURE);
+      }
+
+      return my_hostname;
+}
+
 void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t len, void *payload)
 {
       struct in_addr *my_ip = get_my_ip();
@@ -55,6 +64,8 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
       M_HEADER header;
       header.type = type;
       header.from_ip = *my_ip;
+      strncpy(header.hostname, get_my_hostname(), MAX_HOSTNAME_LEN);
+      header.name_len = htonl(strlen(header.hostname));
       header.from_port = htons(UDP_PORT);
       header.len = htonl(len);
       free(my_ip);
@@ -83,6 +94,14 @@ int main(int argc, char *argv[])
       printf("\t-d : Debug printout - used for debugging\n");
       printf("\t-p : Specify port to connect to (only used for debugging)\n");
 
+      pthread_mutex_init(&mux, NULL);
+      available_hosts = 0;
+      for (int i = 0; i < MAX_CONNECTIONS; ++i)
+      {
+            hosts[i].fd = 0;
+            hosts[i].hostname = NULL;
+            hosts[i].ip_addr.s_addr = 0;
+      }
       // Socket setup
       // bsock stands for broadcast socket - it is used to
       // send and receive all broadcast packets
@@ -150,9 +169,9 @@ int main(int argc, char *argv[])
       send_packet(udp_sock, baddr, M_BROADCAST, 0, NULL);
 
       // start Sender Thread
-      int args[2] = {tcp_sock, udp_sock};
+      
       pthread_t sender;
-      if (pthread_create(&sender, NULL, sender_function, args) < 0)
+      if (pthread_create(&sender, NULL, sender_function, NULL) < 0)
       {
             perror("Sender thread failed\n");
             exit(EXIT_FAILURE);
@@ -181,12 +200,21 @@ int main(int argc, char *argv[])
                         send_addr.sin_port = conn->client_port;
 
                         send_packet(udp_sock, send_addr, M_IDENTIFY, 0, NULL);
+
+                        pthread_mutex_lock(&mux);
+
+                        hosts[available_hosts].fd = -1;
+                        hosts[available_hosts].hostname = conn->client_name;
+                        hosts[available_hosts].ip_addr = conn->client_addr;
+
+                        available_hosts++;
+                        pthread_mutex_unlock(&mux);
                         break;
 
                   case M_ACK:
                         printf("ack\n");
                         break;
-                        =
+                        
                   default:
                         break;
             }
