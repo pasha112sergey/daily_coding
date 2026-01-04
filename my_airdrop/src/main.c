@@ -16,7 +16,7 @@ int tcp_sock;
 
 static time_t start_time;
 
-int connection_exists(M_HEADER header)
+Destination *connection_exists(M_HEADER header)
 {
       pthread_mutex_lock(&mux);
       for (int i = 0; i < MAX_CONNECTIONS; i++)
@@ -26,15 +26,15 @@ int connection_exists(M_HEADER header)
 
                   pthread_mutex_unlock(&mux);
                   // printf("Connection already exists");
-                  return 1;
+                  return &hosts[i];
             }
       }
       pthread_mutex_unlock(&mux);
-      return 0;
+      return NULL;
 }
 
 
-void parse_identifying_message(void *buf)
+Destination *parse_identifying_message(void *buf)
 {
       M_HEADER header;
       memcpy(&header, buf, sizeof(M_HEADER));
@@ -43,18 +43,20 @@ void parse_identifying_message(void *buf)
       
       struct in_addr *my_ip = get_my_ip();
 
-      if (header.from_ip.s_addr == my_ip->s_addr || connection_exists(header))
+      Destination *host = connection_exists(header);
+      if (header.from_ip.s_addr == my_ip->s_addr || host != NULL || header.type == M_LEAVING)
       {
             // printf("Ignoring!\n");
             free(my_ip);
-            return;
+            return host;
       }
 
       pthread_mutex_lock(&mux);
 
+      Destination *ret = &hosts[available_hosts];
       strncpy(hosts[available_hosts].hostname, header.hostname, MAX_HOSTNAME_LEN);
 
-      hosts[available_hosts].fd = -1;
+      hosts[available_hosts].fd = NEW_HOST;
       hosts[available_hosts].host_port = header.from_port;
       hosts[available_hosts].ip_addr.s_addr = header.from_ip.s_addr;
 
@@ -62,9 +64,11 @@ void parse_identifying_message(void *buf)
 
       pthread_mutex_unlock(&mux);
 
-      raise(NEW_CONNECTION);
 
+      raise(NEW_CONNECTION);
       free(my_ip);
+
+      return ret;
 }
 
 struct in_addr *get_my_ip()
@@ -142,6 +146,16 @@ void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mty
       time(&start_time);
 }
 
+void remove_host(Destination *host)
+{
+      pthread_mutex_lock(&mux);
+      memset(host, 0, sizeof(host)); 
+      host->fd = EMPTY_HOST;
+      available_hosts--;
+      pthread_mutex_unlock(&mux);
+      raise(DISCONNECT);
+}
+
 int main(int argc, char *argv[])
 {
       // printf("Usage: ./my_airdrop [options] -p [port number]\n");
@@ -159,6 +173,11 @@ int main(int argc, char *argv[])
       pthread_mutex_init(&mux, NULL);
       available_hosts = 0;
       connection_status_change = -1;
+
+      for (int i = 0; i < MAX_CONNECTIONS; i++)
+      {
+            hosts[i].fd = EMPTY_HOST;
+      }
       // Socket setup
       // bsock stands for broadcast socket - it is used to
       // send and receive all broadcast packets
@@ -260,15 +279,12 @@ int main(int argc, char *argv[])
                   continue;
             }
          
+            Destination *host = parse_identifying_message(buf);
             switch (parse_mtype(buf))
             {    
-                  case M_BROADCAST:
-                        // printf("Broadcast message received: %s\n", buf);
-                        parse_identifying_message(buf);
-
-                  case M_IDENTIFY:
-                        parse_identifying_message(buf);
-
+                  case M_LEAVING:
+                        remove_host(host);
+                        
                   case M_ACK:
                         // printf("ack\n");
                         break;

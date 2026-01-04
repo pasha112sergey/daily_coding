@@ -33,6 +33,11 @@ typedef struct
       struct in_addr ip_addr;
 } Destination;
 
+enum {
+      EMPTY_HOST,
+      NEW_HOST,
+};
+
 typedef enum {
       M_BROADCAST,
       M_IDENTIFY,
@@ -55,7 +60,7 @@ char *mtype_to_s(M_TYPE m);
 
 M_TYPE parse_mtype(uint8_t *buf);
 
-void parse_identifying_message(void *buf);
+Destination *parse_identifying_message(void *buf);
 
 struct in_addr *get_my_ip();
 
@@ -78,5 +83,7 @@ extern sig_atomic_t connection_status_change;
 extern int udp_sock;
 
 extern int tcp_sock;
+
+void graceful_shutdown(int code);
 
 #endif

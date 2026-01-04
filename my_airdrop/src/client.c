@@ -15,28 +15,22 @@ void print_hosts()
       }
       else if (connection_status_change == DISCONNECT)
       {
-            printf("Old connection\n");
+            printf("Disconnected! \n");
       }
 
+      uint8_t empty_host[sizeof(Destination)] = {0};
+      
       pthread_mutex_lock(&mux);
-      for(int i = 0; i < available_hosts; i++)
+      printf("Available hosts %d\n", available_hosts);
+
+      for(int i = 0; i < MAX_CONNECTIONS; i++)
       {
-            printf("%d) %s\n", i+1, hosts[i].hostname);
+            if (hosts[i].fd != EMPTY_HOST)
+            {
+                  printf("%d) %s\n", i+1, hosts[i].hostname);
+            }
       }
       pthread_mutex_unlock(&mux);
-}
-
-void graceful_shutdown(int code)
-{
-      struct sockaddr_in baddr = {0};
-      baddr.sin_family = AF_INET;
-      baddr.sin_addr.s_addr = INADDR_BROADCAST;
-      baddr.sin_port = htons(UDP_PORT);
-
-      send_packet(udp_sock, baddr, M_LEAVING, 0, NULL);
-      close(udp_sock);
-      close(tcp_sock);
-      exit(code);
 }
 
 void *sender_function(void *vargs)
