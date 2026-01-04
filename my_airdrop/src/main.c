@@ -23,9 +23,11 @@ Connection *parse_broadcast(void *buf)
       Connection *conn = malloc(sizeof(Connection));
       conn->client_addr = header.from_ip;
       conn->client_port = header.from_port;
-      conn->client_name_len = ntohl(header.name_len);
-      strncpy(conn->client_name, header.hostname, conn->client_name_len);
 
+      memset(conn->client_name, '\0', MAX_HOSTNAME_LEN);
+      printf("Memsetted conn->client_name=%s\n", conn->client_name);
+      strncpy(conn->client_name, header.hostname, MAX_HOSTNAME_LEN);
+      printf("Received client name: %s\n", conn->client_name);
       free(my_ip);
 
       return conn;
@@ -65,12 +67,13 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
 {
       struct in_addr *my_ip = get_my_ip();
       
-      M_HEADER header;
+      M_HEADER header = {0};
       header.type = type;
       header.from_ip = *my_ip;
+
       char *my_name = get_my_hostname();
       strncpy(header.hostname, my_name, strlen(my_name));
-      header.name_len = htons((short) strlen(my_name));
+
       header.from_port = htons(UDP_PORT);
       header.len = htonl(len);
       free(my_ip);
@@ -209,8 +212,7 @@ int main(int argc, char *argv[])
                         pthread_mutex_lock(&mux);
 
                         hosts[available_hosts].fd = -1;
-                        // memset(hosts[available_hosts].hostname, 0, MAX_HOSTNAME_LEN);
-                        hosts[available_hosts].hostname = conn->client_name;
+                        strncpy(hosts[available_hosts].hostname, conn->client_name, MAX_HOSTNAME_LEN);
                         hosts[available_hosts].ip_addr = conn->client_addr;
 
                         available_hosts++;

@@ -38,7 +38,6 @@ typedef struct {
       struct in_addr client_addr;
       uint16_t client_port;
       char client_name[MAX_HOSTNAME_LEN];
-      int client_name_len;
       int socket;
 } Connection;
 
@@ -56,7 +55,6 @@ typedef struct
       struct in_addr from_ip;
       in_port_t from_port;
       char hostname[MAX_HOSTNAME_LEN];
-      short name_len;
       size_t len;
 } M_HEADER;
 

@@ -22,8 +22,6 @@ void *sender_function(void *vargs)
 
       // signal(SIGINT, SIG_IGN);
 
-
-
       while (1)
       {
             printf("Usage: \n");

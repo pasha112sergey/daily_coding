@@ -1,4 +1,6 @@
 make: 	
+	rm -rf bin
+	mkdir bin
 	gcc -c -I include src/client.c -o bin/client.o
 	gcc -c -I include src/main.c -o bin/main.o
 	gcc -c -I include util/helpers.c -o bin/helpers.o
