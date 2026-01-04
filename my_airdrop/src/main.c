@@ -23,7 +23,8 @@ Connection *parse_broadcast(void *buf)
       Connection *conn = malloc(sizeof(Connection));
       conn->client_addr = header.from_ip;
       conn->client_port = header.from_port;
-
+      conn->client_name_len = ntohl(header.name_len);
+      strncpy(conn->client_name, header.hostname, conn->client_name_len);
 
       free(my_ip);
 

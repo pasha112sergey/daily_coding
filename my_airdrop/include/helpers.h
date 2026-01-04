@@ -37,7 +37,8 @@ extern pthread_mutex_t mux;
 typedef struct {
       struct in_addr client_addr;
       uint16_t client_port;
-      char *client_name;
+      char client_name[MAX_HOSTNAME_LEN];
+      int client_name_len;
       int socket;
 } Connection;
 
