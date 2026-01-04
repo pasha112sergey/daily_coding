@@ -56,7 +56,7 @@ typedef struct
       struct in_addr from_ip;
       in_port_t from_port;
       char hostname[MAX_HOSTNAME_LEN];
-      size_t name_len;
+      short name_len;
       size_t len;
 } M_HEADER;
 

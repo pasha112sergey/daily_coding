@@ -70,7 +70,7 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
       header.from_ip = *my_ip;
       char *my_name = get_my_hostname();
       strncpy(header.hostname, my_name, strlen(my_name));
-      header.name_len = htonl(strlen(my_name));
+      header.name_len = htons((short) strlen(my_name));
       header.from_port = htons(UDP_PORT);
       header.len = htonl(len);
       free(my_ip);
@@ -209,6 +209,7 @@ int main(int argc, char *argv[])
                         pthread_mutex_lock(&mux);
 
                         hosts[available_hosts].fd = -1;
+                        memset(hosts[available_hosts].hostname, 0, MAX_HOSTNAME_LEN);
                         hosts[available_hosts].hostname = conn->client_name;
                         hosts[available_hosts].ip_addr = conn->client_addr;
 
