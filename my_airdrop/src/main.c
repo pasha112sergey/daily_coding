@@ -57,7 +57,7 @@ char *get_my_hostname()
             perror("gethostname error\n");
             exit(EXIT_FAILURE);
       }
-
+      printf("My hostname is: %s\n", my_hostname);
       return my_hostname;
 }
 
