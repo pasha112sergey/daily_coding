@@ -7,6 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <signal.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -21,6 +22,9 @@
 #define TCP_PORT 8001
 #define MAX_HOSTNAME_LEN 32
 
+#define NEW_CONNECTION SIGUSR1
+#define DISCONNECT SIGUSR2
+
 typedef struct 
 {
       int fd;
@@ -29,16 +33,11 @@ typedef struct
       struct in_addr ip_addr;
 } Destination;
 
-extern Destination hosts[MAX_CONNECTIONS];
-
-extern int available_hosts;
-
-extern pthread_mutex_t mux; 
-
 typedef enum {
       M_BROADCAST,
       M_IDENTIFY,
       M_SEND,
+      M_LEAVING,
       M_ACK,
       M_NACK,
 } M_TYPE;
@@ -56,12 +55,24 @@ char *mtype_to_s(M_TYPE m);
 
 M_TYPE parse_mtype(uint8_t *buf);
 
-void parse_broadcast(void *buf);
+void parse_identifying_message(void *buf);
 
 struct in_addr *get_my_ip();
 
 void send_packet(int bsock, struct sockaddr_in addr, M_TYPE type, size_t len, void *payload);
 
 void *sender_function(void *vargs);
+
+void signal_handler(int sig);
+
+void print_hosts();
+
+extern Destination hosts[MAX_CONNECTIONS];
+
+extern int available_hosts;
+
+extern pthread_mutex_t mux; 
+
+extern sig_atomic_t connection_status_change;
 
 #endif

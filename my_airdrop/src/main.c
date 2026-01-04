@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <signal.h>
 
 #define REBROADCAST_DELAY 3
 
@@ -30,7 +31,7 @@ int connection_exists(M_HEADER header)
 }
 
 
-void parse_broadcast(void *buf)
+void parse_identifying_message(void *buf)
 {
       M_HEADER header;
       memcpy(&header, buf, sizeof(M_HEADER));
@@ -58,9 +59,10 @@ void parse_broadcast(void *buf)
 
       pthread_mutex_unlock(&mux);
 
+      raise(NEW_CONNECTION);
+
       free(my_ip);
 }
-
 
 struct in_addr *get_my_ip()
 {
@@ -139,14 +141,21 @@ void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mty
 
 int main(int argc, char *argv[])
 {
-      printf("Usage: ./my_airdrop [options] -p [port number]\n");
-      printf("Options are: \n");
-      printf("\t-h : Display help menu\n");
-      printf("\t-d : Debug printout - used for debugging\n");
-      printf("\t-p : Specify port to connect to (only used for debugging)\n");
+      // printf("Usage: ./my_airdrop [options] -p [port number]\n");
+      // printf("Options are: \n");
+      // printf("\t-h : Display help menu\n");
+      // printf("\t-d : Debug printout - used for debugging\n");
+      // printf("\t-p : Specify port to connect to (only used for debugging)\n");
+
+      // printf("sig == NEW_CONNECTION ? %d, sig == DISCONNECT ? %d \n", sig == NEW_CONNECTION, sig == DISCONNECT);
+      printf("SIGUSR1 = %d, SIGUSR2 = %d, SIG NEW_CONNECTION = %d, SIG DISCONNECT = %d\n", SIGUSR1, SIGUSR2, NEW_CONNECTION, DISCONNECT);
+
+      signal(SIGUSR1, signal_handler);
+      signal(SIGUSR2, signal_handler);
 
       pthread_mutex_init(&mux, NULL);
       available_hosts = 0;
+      connection_status_change = -1;
       // Socket setup
       // bsock stands for broadcast socket - it is used to
       // send and receive all broadcast packets
@@ -247,14 +256,15 @@ int main(int argc, char *argv[])
                   recurring_broadcast(udp_sock, baddr, M_BROADCAST, 0, NULL);
                   continue;
             }
-
-            // printf("Message of type %s received \n", mtype_to_s(parse_mtype(buf)));
-            
+         
             switch (parse_mtype(buf))
             {    
                   case M_BROADCAST:
                         // printf("Broadcast message received: %s\n", buf);
-                        parse_broadcast(buf);
+                        parse_identifying_message(buf);
+
+                  case M_IDENTIFY:
+                        parse_identifying_message(buf);
 
                   case M_ACK:
                         // printf("ack\n");

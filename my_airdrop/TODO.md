@@ -4,6 +4,8 @@
 
 - [ ] Add functionality to remove hosts (on exit)
 - [ ] Add signaling/semaphore functionality that automatically prints the hosts when new host information becomes available instead of manual 'L' input
+- [ ] Add reception of identity packets
+- [ ] Clean up code and update it to best practices
 
 ## Necessary features (next section of the project)
 
