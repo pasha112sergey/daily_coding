@@ -2,7 +2,7 @@
 
 ## Immediate next steps
 
-- [ ] Add functionality to remove hosts (exit)
+- [ ] Add functionality to remove hosts (on exit)
 - [ ] Add signaling/semaphore functionality that automatically prints the hosts when new host information becomes available instead of manual 'L' input
 
 ## Necessary features (next section of the project)
