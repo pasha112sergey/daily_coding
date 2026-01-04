@@ -25,6 +25,7 @@ typedef struct
 {
       int fd;
       char hostname[MAX_HOSTNAME_LEN];
+      in_port_t host_port;
       struct in_addr ip_addr;
 } Destination;
 
@@ -33,13 +34,6 @@ extern Destination hosts[MAX_CONNECTIONS];
 extern int available_hosts;
 
 extern pthread_mutex_t mux; 
-
-typedef struct {
-      struct in_addr client_addr;
-      uint16_t client_port;
-      char client_name[MAX_HOSTNAME_LEN];
-      int socket;
-} Connection;
 
 typedef enum {
       M_BROADCAST,
@@ -62,7 +56,7 @@ char *mtype_to_s(M_TYPE m);
 
 M_TYPE parse_mtype(uint8_t *buf);
 
-Connection *parse_broadcast(void *buf);
+void parse_broadcast(void *buf);
 
 struct in_addr *get_my_ip();
 

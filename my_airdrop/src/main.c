@@ -12,7 +12,25 @@ void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mty
 
 static time_t start_time;
 
-Connection *parse_broadcast(void *buf)
+int connection_exists(M_HEADER header)
+{
+      pthread_mutex_lock(&mux);
+      for (int i = 0; i < MAX_CONNECTIONS; i++)
+      {
+            if(strcmp(header.hostname, hosts[i].hostname) == 0)
+            {
+
+                  pthread_mutex_unlock(&mux);
+                  printf("Connection already exists");
+                  return 1;
+            }
+      }
+      pthread_mutex_unlock(&mux);
+      return 0;
+}
+
+
+void parse_broadcast(void *buf)
 {
       M_HEADER header;
       memcpy(&header, buf, sizeof(M_HEADER));
@@ -21,24 +39,26 @@ Connection *parse_broadcast(void *buf)
       
       struct in_addr *my_ip = get_my_ip();
 
-      if (header.from_ip.s_addr == my_ip->s_addr)
+      if (header.from_ip.s_addr == my_ip->s_addr || connection_exists(header))
       {
-            printf("Received my own broadcast!\n");
+            printf("Ignoring!\n");
             free(my_ip);
-            return NULL;
+            return;
       }
 
-      Connection *conn = malloc(sizeof(Connection));
-      conn->client_addr = header.from_ip;
-      conn->client_port = header.from_port;
+      pthread_mutex_lock(&mux);
 
-      memset(conn->client_name, '\0', MAX_HOSTNAME_LEN);
-      printf("Memsetted conn->client_name=%s\n", conn->client_name);
-      strncpy(conn->client_name, header.hostname, MAX_HOSTNAME_LEN);
-      printf("Received client name: %s\n", conn->client_name);
+      strncpy(hosts[available_hosts].hostname, header.hostname, MAX_HOSTNAME_LEN);
+
+      hosts[available_hosts].fd = -1;
+      hosts[available_hosts].host_port = header.from_port;
+      hosts[available_hosts].ip_addr.s_addr = header.from_ip.s_addr;
+
+      available_hosts++;
+
+      pthread_mutex_unlock(&mux);
+
       free(my_ip);
-
-      return conn;
 }
 
 
@@ -234,29 +254,7 @@ int main(int argc, char *argv[])
             {    
                   case M_BROADCAST:
                         printf("Broadcast message received: %s\n", buf);
-                        Connection *conn;
-                        
-                        if ((conn = parse_broadcast(buf)) == NULL)
-                              continue;
-
-                        struct sockaddr_in send_addr = {0};
-                        send_addr.sin_family = AF_INET;
-                        send_addr.sin_addr = conn->client_addr;
-                        send_addr.sin_port = conn->client_port;
-
-                        send_packet(udp_sock, send_addr, M_IDENTIFY, 0, NULL);
-
-                        pthread_mutex_lock(&mux);
-
-                        hosts[available_hosts].fd = -1;
-
-                        strncpy(hosts[available_hosts].hostname, conn->client_name, MAX_HOSTNAME_LEN);
-
-                        hosts[available_hosts].ip_addr = conn->client_addr;
-
-                        available_hosts++;
-                        pthread_mutex_unlock(&mux);
-                        break;
+                        parse_broadcast(buf);
 
                   case M_ACK:
                         printf("ack\n");
