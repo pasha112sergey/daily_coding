@@ -1,5 +1,6 @@
 #ifndef HELPERS_H
-#define HELPERS_H
+
+#define HELPERS_H 0
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +20,7 @@
 #define UDP_PORT 8000
 #define TCP_PORT 8001
 #define MAX_HOSTNAME_LEN 32
+
 typedef struct 
 {
       int fd;
@@ -26,10 +28,11 @@ typedef struct
       struct in_addr ip_addr;
 } Destination;
 
-Destination hosts[MAX_CONNECTIONS];
+extern Destination hosts[MAX_CONNECTIONS];
 
-int available_hosts;
-pthread_mutex_t mux; 
+extern int available_hosts;
+
+extern pthread_mutex_t mux; 
 
 typedef struct {
       struct in_addr client_addr;

@@ -1,5 +1,8 @@
 #include "helpers.h"
 
+Destination hosts[MAX_CONNECTIONS] = {0};
+int available_hosts = 0;
+pthread_mutex_t mux = PTHREAD_MUTEX_INITIALIZER;
 
 Connection *parse_broadcast(void *buf)
 {

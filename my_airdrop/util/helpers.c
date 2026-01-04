@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include "helpers.h"
-#include <stdint.h>
 
 char *mtype_to_s(M_TYPE m)
 {
