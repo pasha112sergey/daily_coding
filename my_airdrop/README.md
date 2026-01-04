@@ -53,8 +53,9 @@ The **OSIFS** protocol will have the following types of messages:
 
 | Type | Purpose | Contains | Sender | Recipient |  
 | :--- | :------ | :------- | :----- | :-------- |
-| `M_BROADCAST` | Initial packet that is sent to the entire LAN to notify every device on the LAN that a new device is connected to OSFIS | Contains the IP address of the new device that joined, and its PORT number | New device on the network | Everyone ==^2^== on the LAN |
+| `M_BROADCAST` | Initial packet that is sent to the entire LAN to notify every device on the LAN that a new device is connected to OSIFS | Contains the IP address of the new device that joined, and its PORT number | New device on the network | Everyone ==^2^== on the LAN |
 | `M_IDENTIFY` | Upon receiving the `M_BROADCAST` message, every other device that uses the **OSIFS** protocol will send an Identifying message to let the new device know its identifying information like its IP and PORT | Contains IP address of the device that received the `M_BROADCAST` packet. | Recipient of the `M_BROADCAST` packet | Sender of the `M_BROADCAST` packet |
+| `M_LEAVING` | Sent when a device wants to stop being discovered - either through ending the daemon or via going into undiscoverable mode | Device that wishes to leave **OSIFS** | Everyone who is on the network |
 | `M_SEND` | Sends the actual file via TCP ==^3^== | File, its metadata, and its **OSIFS** `FileID` ==^4^== | Whoever has the data | Desired recipient of the data |
 | `M_ACK` | Lets the sender of the data know that the file has been delivered and interpreted successfully | The **OSIFS** `FileID` | Whoever received the data | Whoever sent the data originally |
 | `M_NACK` | Lets the sender of the data know that the file has **not** been delivered or interpreted correctly. Also sent when the receiver declines | The **OSIFS** `FileID` of the incorrect file and the reason for rejection. | Whoever received the incorrect data | Whoever sent the incorrect data |
