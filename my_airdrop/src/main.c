@@ -68,8 +68,9 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
       M_HEADER header;
       header.type = type;
       header.from_ip = *my_ip;
-      strncpy(header.hostname, get_my_hostname(), MAX_HOSTNAME_LEN);
-      header.name_len = htonl(strlen(header.hostname));
+      char *my_name = get_my_hostname();
+      strncpy(header.hostname, my_name, strlen(my_name));
+      header.name_len = htonl(strlen(my_name));
       header.from_port = htons(UDP_PORT);
       header.len = htonl(len);
       free(my_ip);
