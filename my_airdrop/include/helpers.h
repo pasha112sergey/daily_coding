@@ -24,7 +24,7 @@
 typedef struct 
 {
       int fd;
-      char *hostname;
+      char hostname[MAX_HOSTNAME_LEN];
       struct in_addr ip_addr;
 } Destination;
 

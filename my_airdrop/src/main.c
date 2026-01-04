@@ -1,8 +1,16 @@
 #include "helpers.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+
+#define REBROADCAST_DELAY 3
 
 Destination hosts[MAX_CONNECTIONS] = {0};
 int available_hosts = 0;
 pthread_mutex_t mux = PTHREAD_MUTEX_INITIALIZER;
+void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mtype, size_t len, void *payload);
+
+static time_t start_time;
 
 Connection *parse_broadcast(void *buf)
 {
@@ -94,6 +102,21 @@ void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t le
       }
 }
 
+void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mtype, size_t len, void *payload)
+{
+      time_t end_time = time(NULL);
+      // printf("difftime = %f\n", difftime(end_time, start_time));
+
+      if (difftime(end_time, start_time) <= REBROADCAST_DELAY)
+      {
+            return;
+      }
+
+      printf("Sending broadcast again\n");
+      send_packet(sock, broadcast_addr, M_BROADCAST, 0, NULL);
+      time(&start_time);
+}
+
 int main(int argc, char *argv[])
 {
       printf("Usage: ./my_airdrop [options] -p [port number]\n");
@@ -104,12 +127,6 @@ int main(int argc, char *argv[])
 
       pthread_mutex_init(&mux, NULL);
       available_hosts = 0;
-      for (int i = 0; i < MAX_CONNECTIONS; ++i)
-      {
-            hosts[i].fd = 0;
-            hosts[i].hostname = NULL;
-            hosts[i].ip_addr.s_addr = 0;
-      }
       // Socket setup
       // bsock stands for broadcast socket - it is used to
       // send and receive all broadcast packets
@@ -141,6 +158,19 @@ int main(int argc, char *argv[])
             perror("Could not set sock option\n");
             exit(EXIT_FAILURE);
       }
+
+      int flags = fcntl(udp_sock, F_GETFL, 0);
+      if (flags == -1)
+      {
+            perror("fcntl failed\n");
+            exit(EXIT_FAILURE);
+      }
+
+      if (fcntl(udp_sock, F_SETFL, flags | O_NONBLOCK) < 0)
+      {
+            perror("fcntl failed, udp_sock failed\n");
+            exit(EXIT_FAILURE);
+      }     
 
       struct sockaddr_in baddr = {0};
       baddr.sin_family = AF_INET;
@@ -174,8 +204,9 @@ int main(int argc, char *argv[])
       // TCP socket set up
 
       // send broadcast packet
+      printf("Sending first broadcast packet\n");
       send_packet(udp_sock, baddr, M_BROADCAST, 0, NULL);
-
+      time(&start_time);
       // start Sender Thread
       
       pthread_t sender;
@@ -185,11 +216,17 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
       }
 
+
       // Await broadcast notification
       while(1)
       {
             uint8_t buf[MAX_MSG_LEN];
-            recv(udp_sock, buf, MAX_MSG_LEN, 0);
+      
+            if (recv(udp_sock, buf, MAX_MSG_LEN, 0) < 0 && (errno == EAGAIN || errno == EWOULDBLOCK))
+            {
+                  recurring_broadcast(udp_sock, baddr, M_BROADCAST, 0, NULL);
+                  continue;
+            }
 
             printf("Message of type %s received \n", mtype_to_s(parse_mtype(buf)));
             
@@ -212,7 +249,9 @@ int main(int argc, char *argv[])
                         pthread_mutex_lock(&mux);
 
                         hosts[available_hosts].fd = -1;
+
                         strncpy(hosts[available_hosts].hostname, conn->client_name, MAX_HOSTNAME_LEN);
+
                         hosts[available_hosts].ip_addr = conn->client_addr;
 
                         available_hosts++;

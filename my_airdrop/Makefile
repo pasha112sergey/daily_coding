@@ -6,3 +6,5 @@ make:
 	gcc -c -I include util/helpers.c -o bin/helpers.o
 	gcc bin/client.o bin/main.o bin/helpers.o -o bin/airdrop
 
+debug:
+	valgrind ./bin/airdrop
