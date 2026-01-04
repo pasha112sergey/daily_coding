@@ -21,7 +21,7 @@ int connection_exists(M_HEADER header)
             {
 
                   pthread_mutex_unlock(&mux);
-                  printf("Connection already exists");
+                  // printf("Connection already exists");
                   return 1;
             }
       }
@@ -35,13 +35,13 @@ void parse_broadcast(void *buf)
       M_HEADER header;
       memcpy(&header, buf, sizeof(M_HEADER));
       
-      printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(header.from_ip), ntohs(header.from_port), header.len);
+      // printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(header.from_ip), ntohs(header.from_port), header.len);
       
       struct in_addr *my_ip = get_my_ip();
 
       if (header.from_ip.s_addr == my_ip->s_addr || connection_exists(header))
       {
-            printf("Ignoring!\n");
+            // printf("Ignoring!\n");
             free(my_ip);
             return;
       }
@@ -87,7 +87,7 @@ char *get_my_hostname()
             perror("gethostname error\n");
             exit(EXIT_FAILURE);
       }
-      printf("My hostname is: %s\n", my_hostname);
+      // printf("My hostname is: %s\n", my_hostname);
       return my_hostname;
 }
 
@@ -132,7 +132,7 @@ void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mty
             return;
       }
 
-      printf("Sending broadcast again\n");
+      // printf("Sending broadcast again\n");
       send_packet(sock, broadcast_addr, M_BROADCAST, 0, NULL);
       time(&start_time);
 }
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
       // TCP socket set up
 
       // send broadcast packet
-      printf("Sending first broadcast packet\n");
+      // printf("Sending first broadcast packet\n");
       send_packet(udp_sock, baddr, M_BROADCAST, 0, NULL);
       time(&start_time);
       // start Sender Thread
@@ -248,16 +248,16 @@ int main(int argc, char *argv[])
                   continue;
             }
 
-            printf("Message of type %s received \n", mtype_to_s(parse_mtype(buf)));
+            // printf("Message of type %s received \n", mtype_to_s(parse_mtype(buf)));
             
             switch (parse_mtype(buf))
             {    
                   case M_BROADCAST:
-                        printf("Broadcast message received: %s\n", buf);
+                        // printf("Broadcast message received: %s\n", buf);
                         parse_broadcast(buf);
 
                   case M_ACK:
-                        printf("ack\n");
+                        // printf("ack\n");
                         break;
                         
                   default:
