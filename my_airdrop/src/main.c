@@ -209,7 +209,7 @@ int main(int argc, char *argv[])
                         pthread_mutex_lock(&mux);
 
                         hosts[available_hosts].fd = -1;
-                        memset(hosts[available_hosts].hostname, 0, MAX_HOSTNAME_LEN);
+                        // memset(hosts[available_hosts].hostname, 0, MAX_HOSTNAME_LEN);
                         hosts[available_hosts].hostname = conn->client_name;
                         hosts[available_hosts].ip_addr = conn->client_addr;
 
