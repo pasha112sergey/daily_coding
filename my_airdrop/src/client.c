@@ -5,52 +5,74 @@
 #include <errno.h>
 #include <locale.h>
 #include "ncurses.h"
+#include <time.h>
 
 #define MAX_INPUT 256
 
+static int length, cols, rows;
+
 void print_hosts()
 {
-      if (connection_status_change == NEW_CONNECTION)
-      {
-            printw("New Connection\n");
-      }
-      else if (connection_status_change == DISCONNECT)
-      {
-            printw("Disconnected! \n");
-      }
-
       uint8_t empty_host[sizeof(Destination)] = {0};
       
       pthread_mutex_lock(&mux);
-      printw("Available hosts %d\n", available_hosts);
+
+      mvprintw(1, cols / 10, "Available Hosts %d", available_hosts);
 
       for(int i = 0; i < MAX_CONNECTIONS; i++)
       {
             if (hosts[i].fd != EMPTY_HOST)
             {
-                  printw("%d) %s\n", i+1, hosts[i].hostname);
+                  mvprintw(3 + i, cols / 10, "%d) %s\n", i+1, hosts[i].hostname);
             }
       }
       pthread_mutex_unlock(&mux);
+
       refresh();
 }
 
-void print_heading(WINDOW *win)
+// solution to loading animation is to make the 
+// second line of the terminal only managed by the animation thread
+void *animation(void *arg)
 {
-      int length, cols, rows;
-      getmaxyx(win, rows, cols);
-      char text[] = "Operating System-Independent File Sharing - OSIFS";
+      curs_set(0);
+      int x_pos = cols / 2;
+      int y_pos = rows / 2; 
 
+      char frames[] = {'/', '-', '\\', '|'};
+      int num_chars = 4;
+
+      mvprintw(1, cols / 2 - strlen("Searching"), "Searching");
+      refresh();
+      for (int frame = 0; frame >= 0; frame++)
+      {
+            mvaddch(1, cols / 2 - strlen("  Searching"), frames[frame % num_chars]);
+
+            refresh();
+            usleep(150000);
+      }
+}
+
+void print_loading()
+{
+      pthread_t tid;
+      pthread_create(&tid, NULL, animation, NULL);
+}
+
+void print_heading()
+{
+      char text[] = "Operating System-Independent File Sharing - OSIFS\n";
+      print_loading();
       int center_x = (cols - strlen(text)) / 2;
       mvprintw(0, center_x, "%s", text);
       refresh();
-
 }
 
 void *sender_function(void *vargs)
 {
       setlocale(LC_ALL, "");
 
+      
       WINDOW *window = initscr();
       if (has_colors() == FALSE)
       { 
@@ -58,17 +80,26 @@ void *sender_function(void *vargs)
             printf("No colors supported\n");
             graceful_shutdown(EXIT_FAILURE);
       }
-
+      
       start_color();
       cbreak();
       noecho();
       intrflush(stdscr, FALSE);
       keypad(stdscr, TRUE);
+      
+      getmaxyx(window, rows, cols);
 
-      init_pair(1, COLOR_RED, COLOR_BLACK);
-      attron(COLOR_PAIR(1));
-      print_heading(window);      
-      getch();
+      print_heading();  
+
+      while (1)
+      {
+            if (connection_status_change != -1)
+            {
+                  print_hosts();
+                  connection_status_change = -1;
+            }
+      }
+
       endwin();
 
 

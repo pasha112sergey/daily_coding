@@ -86,4 +86,9 @@ extern int tcp_sock;
 
 void graceful_shutdown(int code);
 
+enum {
+      BLUE_BLACK,
+      WHITE_BLACK,
+};
+
 #endif
