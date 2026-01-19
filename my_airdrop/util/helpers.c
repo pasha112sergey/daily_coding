@@ -1,5 +1,6 @@
 #include "helpers.h"
 #include <signal.h>
+#include <ncurses.h>
 
 sig_atomic_t connection_status_change;
 
@@ -53,6 +54,7 @@ void graceful_shutdown(int code)
       baddr.sin_addr.s_addr = INADDR_BROADCAST;
       baddr.sin_port = htons(UDP_PORT);
 
+      endwin();
       send_packet(udp_sock, baddr, M_LEAVING, 0, NULL);
       close(udp_sock);
       close(tcp_sock);

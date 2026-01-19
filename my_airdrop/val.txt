@@ -1,0 +1,2 @@
+SIGUSR1 = 10, SIGUSR2 = 12, SIG NEW_CONNECTION = 10, SIG DISCONNECT = 12
+[?1049h[22;0;0t[1;18r(B[m[4l[?7h[39;49m[?1h=[39;49m[37m[40m[H[2J[1;50HOperating System-Independent File Sharing - OSIFS[2d[39;49m[37m[40m[H[2J[1;50HOperating System-Independent File Sharing - OSIFS[2;15HAvailable Hosts 1[4;15H1) Sergeys-Air.lan[5d

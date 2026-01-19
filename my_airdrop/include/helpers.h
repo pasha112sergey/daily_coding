@@ -70,7 +70,7 @@ void *sender_function(void *vargs);
 
 void signal_handler(int sig);
 
-void print_hosts();
+
 
 extern Destination hosts[MAX_CONNECTIONS];
 
