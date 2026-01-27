@@ -141,7 +141,7 @@ void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mty
             return;
       }
 
-      // printf("Sending broadcast again\n");
+      printf("Sending broadcast again\n");
       send_packet(sock, broadcast_addr, M_BROADCAST, 0, NULL);
       time(&start_time);
 }
@@ -164,6 +164,7 @@ int main(int argc, char *argv[])
       // printf("\t-d : Debug printout - used for debugging\n");
       // printf("\t-p : Specify port to connect to (only used for debugging)\n");
 
+      printf("My IP address: %s\n", inet_ntoa(*((struct in_addr *)get_my_ip())));
       // printf("sig == NEW_CONNECTION ? %d, sig == DISCONNECT ? %d \n", sig == NEW_CONNECTION, sig == DISCONNECT);
       printf("SIGUSR1 = %d, SIGUSR2 = %d, SIG NEW_CONNECTION = %d, SIG DISCONNECT = %d\n", SIGUSR1, SIGUSR2, NEW_CONNECTION, DISCONNECT);
 
