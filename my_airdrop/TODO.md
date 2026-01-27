@@ -9,7 +9,6 @@
 - [x] Add signaling/semaphore functionality that automatically prints the hosts when new host information becomes available instead of manual 'L' input
 - [x] Add reception of identity packets
 
-
 ## Necessary features (next section of the project)
 
 - [ ] Add functionality to select files

@@ -62,7 +62,7 @@ M_TYPE parse_mtype(uint8_t *buf);
 
 Destination *parse_identifying_message(void *buf);
 
-struct in_addr *get_my_ip();
+struct sockaddr_in *get_my_ip();
 
 void send_packet(int bsock, struct sockaddr_in addr, M_TYPE type, size_t len, void *payload);
 

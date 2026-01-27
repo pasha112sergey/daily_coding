@@ -41,13 +41,14 @@ Destination *parse_identifying_message(void *buf)
       
       // printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(header.from_ip), ntohs(header.from_port), header.len);
       
-      struct in_addr *my_ip = get_my_ip();
+      struct sockaddr_in *ip = get_my_ip();
+      struct in_addr my_ip  = ip->sin_addr;
 
       Destination *host = connection_exists(header);
-      if (header.from_ip.s_addr == my_ip->s_addr || host != NULL || header.type == M_LEAVING)
+      if (header.from_ip.s_addr == my_ip.s_addr || host != NULL || header.type == M_LEAVING)
       {
             // printf("Ignoring!\n");
-            free(my_ip);
+            free(ip);
             return host;
       }
 
@@ -66,26 +67,52 @@ Destination *parse_identifying_message(void *buf)
 
 
       raise(NEW_CONNECTION);
-      free(my_ip);
+      free(ip);
 
       return ret;
 }
 
-struct in_addr *get_my_ip()
+struct sockaddr_in *get_my_ip()
 {
-      char my_hostname[32];
-      if (gethostname(my_hostname, 32) < 0)
+      // char my_hostname[32];
+      // if (gethostname(my_hostname, 32) < 0)
+      // {
+      //       perror("gethostname error\n");
+      //       exit(EXIT_FAILURE);
+      // }
+
+      // struct hostent *host_entry = gethostbyname(my_hostname);
+      // char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
+
+      // struct in_addr *res = malloc(sizeof(struct in_addr));
+      // *res = *((struct in_addr *) host_entry->h_addr_list[0]);
+      // return res;
+
+      int dummy_sock = socket(AF_INET, SOCK_DGRAM, 0);
+      struct sockaddr_in wk_addr = {0};
+      inet_pton(AF_INET, "8.8.8.8", &wk_addr.sin_addr);
+      wk_addr.sin_family = AF_INET;
+      wk_addr.sin_port = 8080;
+
+      if (connect(dummy_sock, (struct sockaddr *)(&wk_addr), sizeof(wk_addr)) < 0)
       {
-            perror("gethostname error\n");
+            perror("Error connecting to well known port 8.8.8.8\n");
             exit(EXIT_FAILURE);
       }
 
-      struct hostent *host_entry = gethostbyname(my_hostname);
-      char *my_ip = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
+      printf("Connected to 8.8.8.8 successfully\n");
 
-      struct in_addr *res = malloc(sizeof(struct in_addr));
-      *res = *((struct in_addr *) host_entry->h_addr_list[0]);
-      return res;
+      struct sockaddr_in *my_ip = calloc(1, sizeof(struct sockaddr_in));
+      socklen_t namelen = sizeof(struct sockaddr_in);
+      if (getsockname(dummy_sock, (struct sockaddr *)my_ip, &namelen) < 0)
+      {
+            perror("getsockname failure\n");
+            exit(EXIT_FAILURE);
+      }
+
+      printf("My IP is: %s\n", inet_ntoa(my_ip->sin_addr));
+      
+      return my_ip;
 }
 
 char *get_my_hostname()
@@ -102,18 +129,18 @@ char *get_my_hostname()
 
 void send_packet(int bsock, struct sockaddr_in sock_addr, M_TYPE type, size_t len, void *payload)
 {
-      struct in_addr *my_ip = get_my_ip();
-      
+      struct sockaddr_in *ip = get_my_ip();
+      struct in_addr my_ip = ip->sin_addr;
       M_HEADER header = {0};
       header.type = type;
-      header.from_ip = *my_ip;
+      header.from_ip = my_ip;
 
       char *my_name = get_my_hostname();
       strncpy(header.hostname, my_name, strlen(my_name));
 
       header.from_port = htons(UDP_PORT);
       header.len = htonl(len);
-      free(my_ip);
+      free(ip);
       
       uint8_t buf[sizeof(M_HEADER) + len];
 
