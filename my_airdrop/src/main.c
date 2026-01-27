@@ -39,7 +39,7 @@ Destination *parse_identifying_message(void *buf)
       M_HEADER header;
       memcpy(&header, buf, sizeof(M_HEADER));
       
-      // printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(header.from_ip), ntohs(header.from_port), header.len);
+      printf("Header parsed: MSG_TYPE: %d, IP FROM: %s, PORT FROM: %d, len: %ld\n", header.type, inet_ntoa(header.from_ip), ntohs(header.from_port), header.len);
       
       struct sockaddr_in *ip = get_my_ip();
       struct in_addr my_ip  = ip->sin_addr;
@@ -57,6 +57,7 @@ Destination *parse_identifying_message(void *buf)
       Destination *ret = &hosts[available_hosts];
       strncpy(hosts[available_hosts].hostname, header.hostname, MAX_HOSTNAME_LEN);
 
+      printf("Found hostname %s\n", hosts[available_hosts].hostname);
       hosts[available_hosts].fd = NEW_HOST;
       hosts[available_hosts].host_port = header.from_port;
       hosts[available_hosts].ip_addr.s_addr = header.from_ip.s_addr;
@@ -100,8 +101,6 @@ struct sockaddr_in *get_my_ip()
             exit(EXIT_FAILURE);
       }
 
-      printf("Connected to 8.8.8.8 successfully\n");
-
       struct sockaddr_in *my_ip = calloc(1, sizeof(struct sockaddr_in));
       socklen_t namelen = sizeof(struct sockaddr_in);
       if (getsockname(dummy_sock, (struct sockaddr *)my_ip, &namelen) < 0)
@@ -110,7 +109,7 @@ struct sockaddr_in *get_my_ip()
             exit(EXIT_FAILURE);
       }
 
-      printf("My IP is: %s\n", inet_ntoa(my_ip->sin_addr));
+      // printf("My IP is: %s\n", inet_ntoa(my_ip->sin_addr));
       
       return my_ip;
 }
@@ -168,7 +167,7 @@ void recurring_broadcast(int sock, struct sockaddr_in broadcast_addr, M_TYPE mty
             return;
       }
 
-      printf("Sending broadcast again\n");
+      // printf("Sending broadcast again\n");
       send_packet(sock, broadcast_addr, M_BROADCAST, 0, NULL);
       time(&start_time);
 }
@@ -191,9 +190,9 @@ int main(int argc, char *argv[])
       // printf("\t-d : Debug printout - used for debugging\n");
       // printf("\t-p : Specify port to connect to (only used for debugging)\n");
 
-      printf("My IP address: %s\n", inet_ntoa(*((struct in_addr *)get_my_ip())));
+      printf("My IP address: %s\n", inet_ntoa(get_my_ip()->sin_addr));
       // printf("sig == NEW_CONNECTION ? %d, sig == DISCONNECT ? %d \n", sig == NEW_CONNECTION, sig == DISCONNECT);
-      printf("SIGUSR1 = %d, SIGUSR2 = %d, SIG NEW_CONNECTION = %d, SIG DISCONNECT = %d\n", SIGUSR1, SIGUSR2, NEW_CONNECTION, DISCONNECT);
+      // printf("SIGUSR1 = %d, SIGUSR2 = %d, SIG NEW_CONNECTION = %d, SIG DISCONNECT = %d\n", SIGUSR1, SIGUSR2, NEW_CONNECTION, DISCONNECT);
 
       signal(SIGUSR1, signal_handler);
       signal(SIGUSR2, signal_handler);

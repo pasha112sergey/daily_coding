@@ -5,6 +5,7 @@
 - [ ] Troubleshoot self-IP reporting
 - [ ] Refactor to C++
 - [ ] Clean up code and update it to best practices
+- [ ] Test broadcasting on subnet instead of 255.255.255.255 find the subnet you are on and mask .255 to broadcast properly
 - [x] Add functionality to remove hosts (on exit)
 - [x] Add signaling/semaphore functionality that automatically prints the hosts when new host information becomes available instead of manual 'L' input
 - [x] Add reception of identity packets
