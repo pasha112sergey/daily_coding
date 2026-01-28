@@ -1,5 +1,6 @@
 #include "helpers.h"
 #include <unistd.h>
+#include <ifaddrs.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <signal.h>
@@ -73,6 +74,34 @@ Destination *parse_identifying_message(void *buf)
       return ret;
 }
 
+struct in_addr *get_subnet()
+{
+      struct ifaddrs *ifap, *ifa;
+      struct sockaddr_in *sa;
+      char *addr;
+
+      if (getifaddrs(&ifap) == -1)
+      {
+            perror("getifaddrs");
+            exit(EXIT_FAILURE);
+      }
+
+      for (ifa = ifap; ifa != NULL; ifa = ifa->ifa_next)
+      {
+            if (ifa->ifa_netmask == NULL || ifa->ifa_addr->sa_family != AF_INET)
+                  continue;  
+
+            sa = (struct sockaddr_in *) ifa->ifa_netmask;
+            addr = inet_ntoa(sa->sin_addr);
+            printf("Interface: %s\t Subnet Mask:%s\n", ifa->ifa_name, addr);
+      }
+
+      struct in_addr *ret = calloc(1, sizeof(struct in_addr));
+      *ret = sa->sin_addr;
+      return ret;
+      
+}
+
 struct sockaddr_in *get_my_ip()
 {
       // char my_hostname[32];
@@ -109,8 +138,8 @@ struct sockaddr_in *get_my_ip()
             exit(EXIT_FAILURE);
       }
 
-      // printf("My IP is: %s\n", inet_ntoa(my_ip->sin_addr));
-      
+      printf("My IP is: %s\n", inet_ntoa(my_ip->sin_addr));    
+
       return my_ip;
 }
 
@@ -221,7 +250,8 @@ int main(int argc, char *argv[])
       struct sockaddr_in sockaddr = {0};
       sockaddr.sin_family = AF_INET;
       sockaddr.sin_port = htons(UDP_PORT);
-      sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+      sockaddr.sin_addr.s_addr = htonl(inet_addr("255.255.255.255"));
 
       if (bind(udp_sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr)) < 0)
       {

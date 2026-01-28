@@ -9,3 +9,11 @@ make:
 
 debug:
 	valgrind ./bin/airdrop
+
+clean: 
+	rm -rf bin
+	mkdir bin
+
+blue:
+	g++ -I include src/bluetooth.cpp -lsimpleble -o bin/bluetooth $(shell pkg-config --cflags --libs dbus-1)
+	sudo ./bin/bluetooth
