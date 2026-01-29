@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <format>
+#include <string>
 #include <memory>
 #include <cstdlib>
 #include <unistd.h>
@@ -37,19 +38,18 @@ class Linux_BTHandler : public BTHandler {
             void broadcast(string message)
             {
                   cout << "[Linux] Configuring blueZ" << endl;
-                  string adp_name = this->get_adapter().identifier();
 
-                  cout << "adapter name: " << adp_name << endl;
-                  string cmd1 = format("hciconfig hci0 name 'OSIFS_{}'", this->deviceName);
- 
+                  string cmd1 = format("hciconfig hci0 name '{}'", this->deviceName);
+                  system(cmd1.c_str());
                   cout << "cmd: " << cmd1 << endl;
 
-                  system(cmd1.c_str());
+                  
 
                   string cmd3 = "hciconfig hci0 leadv 0";
                   system(cmd3.c_str());
 
-                  cout << "Linux broadcasting as 'OSIFS_{}" << endl;
+
+                  cout << "Linux broadcasting as '" << this->deviceName << "'" << endl;
 
                   while(true) {}
             }
@@ -60,7 +60,12 @@ class Linux_BTHandler : public BTHandler {
                   if (gethostname(hostname, HOST_NAME_MAX) == 0)
                   {
                         cout << "Hostname: " << hostname << endl;
-
+                        this->deviceName = format("OSIFS_{}", string(hostname));
+                  }
+                  else
+                  {
+                        perror("gethostname");
+                        EXIT_FAILURE;
                   }
             }
 };
