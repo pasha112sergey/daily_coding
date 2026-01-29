@@ -10,6 +10,7 @@ using namespace std;
 
 #ifdef OS_LINUX
 
+#pragma message("Linux is defined")
 
 void broadcast(string hostname)
 {

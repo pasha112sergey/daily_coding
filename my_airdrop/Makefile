@@ -15,7 +15,5 @@ clean:
 	mkdir bin
 
 blue:
-	g++ -c -I include src/discovery.cpp -o bin/bluetooth.o
-	g++ -c -I include linux/ldiscover.cpp -o bin/ldiscover.o
-	g++ -I include bin/bluetooth.o bin/ldiscover.o -o bin/bluetooth
+	g++ -std=c++20 -I include src/discovery.cpp -o bin/bluetooth -lsimpleble $(shell pkg-config --cflags --libs dbus-1) 
 	sudo ./bin/bluetooth
