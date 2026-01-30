@@ -31,3 +31,7 @@ blueM:
 	-framework IOBluetooth
 
 	sudo ./bin/bluetooth
+
+blueL:
+	gcc -I include src/discovery.c -o bin/discovery -lbluetooth -lgatt
+	./bin/discovery

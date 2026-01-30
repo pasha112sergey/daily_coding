@@ -14,9 +14,9 @@
 using namespace std;
 using namespace SimpleBLE;
 
-class BTHandler {
+class GATT_Server {
       public:
-            virtual ~BTHandler() = default;
+            virtual ~GATT_Server() = default;
 
             Adapter get_adapter()
             {
@@ -29,15 +29,15 @@ class BTHandler {
                   return Adapter::get_adapters()[0];
             };
             
-            virtual void broadcast(string message) = 0;
+            virtual void start_server(string message) = 0;
 };
 
-class Linux_BTHandler : public BTHandler {
+class Linux_GATT_Server : public GATT_Server {
       private:
             string deviceName;
 
       public:
-            void broadcast(string message)
+            void start_server(string message)
             {
                   cout << "[Linux] Configuring blueZ" << endl;
 
@@ -61,7 +61,7 @@ class Linux_BTHandler : public BTHandler {
                   while(true) {}
             }
 
-            Linux_BTHandler()
+            Linux_GATT_Server()
             {
                   char hostname[HOST_NAME_MAX];
                   if (gethostname(hostname, HOST_NAME_MAX) == 0)
@@ -81,28 +81,7 @@ class Linux_BTHandler : public BTHandler {
 
 int main()
 {
-      // unique_ptr<BTHandler> bt_handler = make_unique<Linux_BTHandler>();
-
-
-      // bt_handler->broadcast("Hello World");
-
-      Adapter adp = Adapter::get_adapters()[0];
-
-      adp.scan_start();
-
-      while(true)
-      {
-            cout << "Starting..." << endl;
-
-            sleep(3);
-
-            vector<Peripheral> ps = adp.scan_get_results();
-
-            for (Peripheral p : ps)
-            {
-                  cout << "Found!!" << p.identifier() << endl;
-            }
-      }
+      
 
       return 0;
 }
