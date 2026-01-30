@@ -41,17 +41,22 @@ class Linux_BTHandler : public BTHandler {
             {
                   cout << "[Linux] Configuring blueZ" << endl;
 
-                  string cmd1 = format("hciconfig hci0 name '{}'", this->deviceName);
-                  system(cmd1.c_str());
-                  cout << "cmd: " << cmd1 << endl;
-
+                  string cmds[] = {
+                        "sudo btmgmt -i hci0 power on",
+                        "sudo btmgmt -i hci0 le on",
+                        "sudo btmgmt -i hci0 connectable on",
+                        "sudo btmgmt -i hci0 advertising on",
+                        "sudo btmgmt -i hci0 add-adv -c -s 1 -n 'OSIFS_framework-sergey'"
+                  };
                   
-
-                  string cmd3 = "hciconfig hci0 leadv 0";
-                  system(cmd3.c_str());
-
+                  for (const string cmd : cmds)
+                  {
+                        system(cmd.c_str());
+                  }
 
                   cout << "Linux broadcasting as '" << this->deviceName << "'" << endl;
+                  Adapter adp = Adapter::get_adapters()[0];
+                  cout << "Address " << adp.address() << endl;
 
                   while(true) {}
             }
