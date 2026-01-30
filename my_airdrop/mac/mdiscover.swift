@@ -1,5 +1,7 @@
 import CoreBluetooth
 
+let OSIFS_UUID : String = "4c9375eb-db5b-4146-96a6-30b96df27987"
+
 class BluetoothViewModel: NSObject, ObservableObject {
     private var centralManager: CBCentralManager?
     private var peripherals: [CBPeripheral] = []
@@ -27,15 +29,15 @@ extension BluetoothViewModel: CBCentralManagerDelegate {
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
     {
-        if !peripherals.contains(peripheral)
+        if !peripherals.contains(peripheral) && peripheral.identifier.uuidString == OSIFS_UUID
         {
             self.peripherals.append(peripheral)
             self.peripheralNames.append(peripheral.name ?? "unnamed device")
             print("Discovered: \(peripheral.name ?? "unnamed device"), UUID: \(peripheral.identifier.uuidString)")
         }
     }
-}
 
+}
 
 
 let scanner = BluetoothViewModel()

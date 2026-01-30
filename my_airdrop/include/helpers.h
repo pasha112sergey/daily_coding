@@ -16,6 +16,9 @@
 #include <netdb.h>
 #include <pthread.h>
 
+
+#define OSIFS_UUID "4c9375eb-db5b-4146-96a6-30b96df27987"
+
 #define MAX_MSG_LEN 1<<10
 #define MAX_CONNECTIONS 32
 #define UDP_PORT 8000
