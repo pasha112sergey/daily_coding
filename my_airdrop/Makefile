@@ -18,3 +18,17 @@ blue:
 	g++ -std=c++20 -I include src/discovery.cpp -o bin/bluetooth -lsimpleble $(shell pkg-config --cflags --libs dbus-1) 
 	sudo hciconfig hci0 reset
 	sudo ./bin/bluetooth
+
+blueM:
+	g++ -std=c++20 \
+	-I include \
+	-I /usr/local/include \
+	src/discovery.cpp \
+	-o bin/bluetooth \
+	-lsimpleble \
+	-framework CoreBluetooth \
+	-framework Foundation \
+	-framework IOKit \
+	-framework IOBluetooth
+
+	sudo ./bin/bluetooth

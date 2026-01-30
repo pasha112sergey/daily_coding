@@ -9,6 +9,8 @@
 
 #include <simpleble/SimpleBLE.h>
 
+#define HOST_NAME_MAX 64
+
 using namespace std;
 using namespace SimpleBLE;
 
@@ -71,10 +73,31 @@ class Linux_BTHandler : public BTHandler {
 };
 
 
+
 int main()
 {
-      unique_ptr<BTHandler> bt_handler = make_unique<Linux_BTHandler>();
+      // unique_ptr<BTHandler> bt_handler = make_unique<Linux_BTHandler>();
 
-      bt_handler->broadcast("Hello World");
+
+      // bt_handler->broadcast("Hello World");
+
+      Adapter adp = Adapter::get_adapters()[0];
+
+      adp.scan_start();
+
+      while(true)
+      {
+            cout << "Starting..." << endl;
+
+            sleep(3);
+
+            vector<Peripheral> ps = adp.scan_get_results();
+
+            for (Peripheral p : ps)
+            {
+                  cout << "Found!!" << p.identifier() << endl;
+            }
+      }
+
       return 0;
 }
