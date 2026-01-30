@@ -19,6 +19,10 @@ class Linux_BTHandler : public BTHandler {
                   system("hciconfig hci0 leadv 0");
                   cout << "Linux broadcasting as 'OSIFS_" << deviceName + "'" << endl;
             }
-}
 
-#endif
+            void stop_advertising()
+            {
+                  system("hciconfig hci0 reset");
+                  cout << "Linux reset hci0" << endl;
+            }
+};
