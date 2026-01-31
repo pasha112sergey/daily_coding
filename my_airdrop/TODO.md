@@ -3,6 +3,7 @@
 ## Immediate next steps
 
 - [ ] Troubleshoot self-IP reporting
+- [ ] Figure out dBUs library
 - [ ] Refactor to C++
 - [ ] Separate discovery functionality to different OS's
 - [ ] Clean up code and update it to best practices
@@ -19,3 +20,9 @@
 - [ ] Documentation
 - [ ] TUI creation
 - [ ] Functionality to modify your discoverability
+
+## Leads for BLE
+
+- [ ] DBus library and python for linux - currently not getting picked up by macOs
+- [ ] gobbledegook library
+- [ ] own low-level blueZ implementation
