@@ -32,6 +32,14 @@ blueM:
 
 	sudo ./bin/bluetooth
 
+
+
 blueL:
-	gcc -I include src/discovery.c -o bin/discovery -lbluetooth -lgatt
-	./bin/discovery
+	g++ -std=c++17 \
+	-I include \
+	-I gobbledegook/include \
+	src/discovery.cpp gobbledegook/src/libggk.a \
+	-o bin/discovery \
+	$(shell pkg-config --cflags --libs dbus-1 glib-2.0 gobject-2.0 gio-2.0) \
+	-lpthread 
+	sudo ./bin/discovery

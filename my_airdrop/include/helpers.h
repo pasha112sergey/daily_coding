@@ -17,7 +17,9 @@
 #include <pthread.h>
 
 
-#define OSIFS_UUID "4c9375eb-db5b-4146-96a6-30b96df27987"
+#define GATT_SERVICE_UUID "4c9375eb-db5b-4146-96a6-30b96df27987"
+#define GATT_GET_IP_UUID "5d32d36d-da93-4a93-bd6c-8b5fc513017d"
+
 
 #define MAX_MSG_LEN 1<<10
 #define MAX_CONNECTIONS 32
