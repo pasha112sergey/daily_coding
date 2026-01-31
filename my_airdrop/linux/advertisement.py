@@ -23,13 +23,15 @@ class OSFIS_Service(Service):
       
       
 
+
 async def main():
       discoveryService = Service()
       bus = await get_message_bus()
 
-      await my_service.register(bus)
+      await discoveryService.register(bus)
 
       await bus.wait_for_disconnect()
+
 
 if __name__ == "__main__":
       asyncio.run(main())
