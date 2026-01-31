@@ -13,17 +13,24 @@
 
 
 #define HOST_NAME_MAX 64
-
+#define MAX_ASYNC_INIT_TIMEOUT_MS 30 * 1000
 
 using namespace std;
 
+string ip = "255.255.255.255'";
 
 const void *dataGetter(const char *pName)
 {
-      static std::string my_string = "Hello World!";
-      if (std::string(pName) == "custom")
+      if (nullptr == pName)
       {
-            return my_string.c_str();
+            cout << "NULL name sent to server data getter " << endl;
+            return nullptr;
+      }
+
+      if (string(pName) == "ip")
+      {
+            cout << "Returning ip" << endl;
+            return ip.c_str();
       }
 
       return nullptr;
@@ -32,4 +39,22 @@ const void *dataGetter(const char *pName)
 int main()
 {
       cout << "Hello World" << endl;
+
+      if (!ggkStart("Test", "test", "test", dataGetter, nullptr, MAX_ASYNC_INIT_TIMEOUT_MS))
+      {
+            cout << "Failed to start" << endl;
+            return -1;     
+      }
+
+      while (ggkGetServerRunState() < EStopping)
+      {
+            continue;
+      }
+
+      if (!ggkWait())
+      {
+            return -1;
+      }
+
+      return ggkGetServerHealth() == EOk ? 0 : 1;
 }

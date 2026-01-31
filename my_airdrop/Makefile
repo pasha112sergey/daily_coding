@@ -42,4 +42,4 @@ blueL:
 	-o bin/discovery \
 	$(shell pkg-config --cflags --libs dbus-1 glib-2.0 gobject-2.0 gio-2.0) \
 	-lpthread 
-	sudo ./bin/discovery
+# 	sudo ./bin/discovery
