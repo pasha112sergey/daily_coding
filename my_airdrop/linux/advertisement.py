@@ -1,6 +1,6 @@
 import bluetooth_constants
 import bluetooth_exceptions
-
+import bluetooth_gatt
 import dbus
 import dbus.exceptions
 import dbus.service
@@ -13,6 +13,7 @@ sys.path.insert(0, '.')
 bus = None
 adapter_path = None
 adv_mgr_interface = None
+connected = 0
 
 def get_hostname():
       bus = dbus.SystemBus()
@@ -21,6 +22,8 @@ def get_hostname():
       print(hostname)
       return hostname
 
+class IP_Characteristic(bluetooth_gatt.Characteristic):
+      
 
 class Advertisement(dbus.service.Object):
       PATH_BASE = '/org/bluez/ldsg/advertisement'
@@ -90,26 +93,63 @@ class Advertisement(dbus.service.Object):
 def register_ad_cb():
       print('Advertisement registered')
 
+def unregister_ad_cb():
+      print("Advertisement unregistered")
+
 def register_ad_error_cb(e):
       print("Error: failed to register advertisement " + str(e))
+      mainloop.quit()
+
+def unregister_ad_error_cb(e):
+      print('Error: failed to unregister advertisement: ' + str(e))
       mainloop.quit()
 
 def start_advertising():
       global adv
       global adv_mgr_interface
+      try:
+            print('Registering advertisement: ', adv.get_path())
+            adv_mgr_interface.RegisterAdvertisement(adv.get_path(), {}, reply_handler = register_ad_cb, error_handler=register_ad_error_cb)
+      except bluetooth_exceptions.FailedException:
+            print("Error re-registering the advertisement")
 
-      print('Registering advertisement: ', adv.get_path())
+def stop_advertising():
+      global adv
+      global adv_mgr_interface
+      print('Unregistering advertisement: ', adv.get_path())
+      adv_mgr_interface.UnregisterAdvertisement(adv.get_path(), reply_handler=unregister_ad_cb, error_handler=unregister_ad_error_cb)
 
-      adv_mgr_interface.RegisterAdvertisement(adv.get_path(), {}, reply_handler = register_ad_cb, error_handler=register_ad_error_cb)
+
+def set_connected_status(status):
+      global connected
+      if (status == 1):
+            print("connected")
+            connected = 1
+            stop_advertising()
+      else:
+            print("disconnected")
+            connected = 0
+            start_advertising()
+
+def properties_changed(interface, changed, invalidated, path):
+      if (interface == bluetooth_constants.DEVICE_INTERFACE):
+            if ("Connected" in changed):
+                  set_connected_status(changed['Connected'])
+
+def interfaces_added(path, interfaces):
+      if bluetooth_constants.DEVICE_INTERFACE in interfaces:
+            properties = interfaces[bluetooth_constants.DEVICE_INTERFACE]
+            if ("Connected" in properties):
+                  set_connected_status(properties["Connected"])
 
 dbus.mainloop.glib.DBusGMainLoop(set_as_default = True)
-
 bus = dbus.SystemBus()
 
+bus.add_signal_receiver(properties_changed, dbus_interface= bluetooth_constants.DBUS_PROPERTIES, signal_name = "PropertiesChanged", path_keyword ="path")
+bus.add_signal_receiver(interfaces_added, dbus_interface=bluetooth_constants.DBUS_OM_IFACE, signal_name = "InterfacesAdded")
+
 adapter_path = "/org/bluez/hci0" 
-
 print(adapter_path)
-
 
 adv_mgr_interface = dbus.Interface(bus.get_object(bluetooth_constants.BLUEZ_SERVICE_NAME, adapter_path), bluetooth_constants.ADVERTISING_MANAGER_INTERFACE)
 adv = Advertisement(bus, 0, 'peripheral')
@@ -117,4 +157,3 @@ start_advertising()
 
 mainloop = GLib.MainLoop()
 mainloop.run()
-
