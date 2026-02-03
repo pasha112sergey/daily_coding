@@ -50,4 +50,115 @@ class Service(dbus.service.Object):
       def get_characteristics(self):
             return self.characteristics
 
-class Characteristic(dbus.service.Object)
+class Characteristic(dbus.service.Object):
+      """
+      Implement org.bluez.GattCharacteristic1 Interface
+      """
+
+      def __init__(self, bus, index, uuid, flags, service):
+            self.path = service.path + "/char" + str(index)
+            self.bus = bus
+            self.uuid = uuid
+            self.service = service
+            self.flags = flags
+            self.descriptors = []
+            dbus.service.Object.__init__(self, bus, self.path)
+
+      def get_properties(self):
+            return {
+                  bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE : {
+                        'Service': self.service.get_path(),
+                        'UUID': self.uuid,
+                        'Flags': self.flags,
+                        'Descriptors': dbus.Array(self.get_descriptor_paths(), signature='o')
+                  }
+            }
+
+      def get_descriptor_paths(self):
+            res = []
+            for d in self.descriptors:
+                  res.append(d.get_path())
+            return res
+
+      def get_path(self):
+            return dbus.ObjectPath(self.path)
+      
+      def add_descriptor(self, d):
+            self.descriptors.append(d)
+      
+      def get_descriptors(self):
+            return self.descriptors
+
+      @dbus.service.method(bluetooth_constants.DBUS_PROPERTIES, in_signature='s', out_signature='a{sv}')
+      def GetAll(self, interface):
+            if interface != bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE:
+                  raise bluetooth_exceptions.InvalidArgsException()
+
+            return self.get_properties()[bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE]
+
+      @dbus.service.method(bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE, in_signature='a{sv}', out_signature='ay')
+      def ReadValue(self, options):
+            print("Default readvalue called, returning error")
+            raise bluetooth_exceptions.NotSupportedException()
+
+      @dbus.service.method(bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE, in_signature='aya{sv}')
+      def WriteValue(self, value, options):
+            print('Default WriteValue called, returning error')
+            raise bluetooth_exceptions.NotSupportedException()
+
+      @dbus.service.method(bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE)
+      def StartNotify(self):
+            print('Default StartNotify called, returning error')
+            raise bluetooth_exceptions.NotSupportedException()
+
+      @dbus.service.method(bluetooth_constants.GATT_CHARACTERISTIC_INTERFACE)
+      def StopNotify(self):
+            print('Default StopNotify called, returning error')
+            raise bluetooth_exceptions.NotSupportedException()
+
+      @dbus.service.signal(bluetooth_constants.DBUS_PROPERTIES,
+                              signature='sa{sv}as')
+      def PropertiesChanged(self, interface, changed, invalidated):
+            pass
+
+class Descriptor(dbus.service.Object):
+      """
+      org.bluez.GattDescriptor1 interface implementation
+      """
+
+      def __init__(self, bus, index, uuid, flags, characteristic):
+            self.path = characteristic.path + '/desc' + index
+            self.bus = bus
+            self.uuid = uuid
+            self.flags = flags
+            self.characteristic = characteristic
+            dbus.service.Object.__init__(self, bus, self.path)
+      
+      def get_properties(self):
+            return {
+                  bluetooth_constants.GATT_DESCRIPTOR_INTERFACE : {
+                        'Characteristic': self.characteristic.get_path(),
+                        'UUID': self.uuid,
+                        'Flags': self.flags,
+                  }
+            }
+
+      def get_path(self):
+            return dbus.ObjectPath(self.path)
+      
+      @dbus.service.method(bluetooth_constants.DBUS_PROPERTIES, in_signature ='s', out_signature='a{sv}')
+      def GetAll(self, interface):
+            if interface != bluetooth_constants.GATT_DESCRIPTOR_INTERFACE:
+                  raise bluetooth_exceptions.InvalidArgsException()
+
+            return self.get_properties()[bluetooth_constants.GATT_DESCRIPTOR_INTERFACE]
+
+      @dbus.service.method(bluetooth_constants.GATT_DESCRIPTOR_INTERFACE, in_signature='a{sv}', out_signature='ay')
+      def ReadValue(self, options):
+            print("Default readvalue called, returning error")
+            raise bluetooth_exceptions.NotSupportedException()
+
+      @dbus.service.method(bluetooth_constants.GATT_DESCRIPTOR_INTERFACE, in_signature = "aya{sv}")
+      def WriteValue(self, options):
+            print("Default writevalue, returning error")
+            raise bluetooth_exceptions.NotAuthorizedException()
