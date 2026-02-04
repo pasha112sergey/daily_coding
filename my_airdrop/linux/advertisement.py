@@ -1,6 +1,6 @@
 import bluetooth_constants
 import bluetooth_exceptions
-import bluetooth_gatt
+# import bluetooth_gatt
 import dbus
 import dbus.exceptions
 import dbus.service
@@ -22,7 +22,7 @@ def get_hostname():
       print(hostname)
       return hostname
 
-class IP_Characteristic(bluetooth_gatt.Characteristic):
+# class IP_Characteristic(bluetooth_gatt.Characteristic):
       
 
 class Advertisement(dbus.service.Object):
@@ -32,7 +32,7 @@ class Advertisement(dbus.service.Object):
             self.path = self.PATH_BASE + str(index)
             self.bus = bus
             self.ad_type = advertising_type
-            self.service_uuids = None
+            self.service_uuids = ['4c9375eb-db5b-4146-96a6-30b96df27987']
             self.manufacturer_data = None
             self.solicit_uuids = None
             self.service_data = None
