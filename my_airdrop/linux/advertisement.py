@@ -1,11 +1,13 @@
 import bluetooth_constants
 import bluetooth_exceptions
-# import bluetooth_gatt
+import ipaddress
 import dbus
 import dbus.exceptions
 import dbus.service
 import dbus.mainloop.glib
 import sys
+import uuid
+import socket
 from gi.repository import GLib
 
 sys.path.insert(0, '.')
@@ -14,6 +16,8 @@ bus = None
 adapter_path = None
 adv_mgr_interface = None
 connected = 0
+OSIFS_UUID = "4c9375eb-db5b-4146-96a6-30b900000000"
+
 
 def get_hostname():
       bus = dbus.SystemBus()
@@ -22,8 +26,19 @@ def get_hostname():
       print(hostname)
       return hostname
 
-# class IP_Characteristic(bluetooth_gatt.Characteristic):
-      
+def get_ip():
+      hostname = socket.gethostname()
+      local_ip = socket.gethostbyname(hostname)
+      return local_ip
+
+def create_service_uuid():
+      i = int(OSIFS_UUID.replace("-", ""), 16)
+      ip = int(ipaddress.ip_address(get_ip()))
+      id = hex(ip | i)
+      res = uuid.UUID(id[2:])
+      return res.__str__()
+
+
 
 class Advertisement(dbus.service.Object):
       PATH_BASE = '/org/bluez/ldsg/advertisement'
@@ -32,7 +47,8 @@ class Advertisement(dbus.service.Object):
             self.path = self.PATH_BASE + str(index)
             self.bus = bus
             self.ad_type = advertising_type
-            self.service_uuids = ['4c9375eb-db5b-4146-96a6-30b96df27987']
+            self.service_uuids = [create_service_uuid()]
+            print("Created uuid: ", create_service_uuid())
             self.manufacturer_data = None
             self.solicit_uuids = None
             self.service_data = None
