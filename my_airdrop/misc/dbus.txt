@@ -1,0 +1,4949 @@
+signal time=1770164056.674481 sender=org.freedesktop.DBus -> destination=:1.309 serial=2 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string ":1.309"
+signal time=1770164056.674664 sender=org.freedesktop.DBus -> destination=:1.309 serial=4 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameLost
+   string ":1.309"
+method call time=1770164056.681227 sender=:1.172 -> destination=org.freedesktop.DBus serial=557 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string ":1.309"
+error time=1770164056.681298 sender=org.freedesktop.DBus -> destination=:1.172 error_name=org.freedesktop.DBus.Error.NameHasNoOwner reply_serial=557
+   string "Could not get PID of name ':1.309': no such name"
+method call time=1770164057.027594 sender=:1.101 -> destination=org.freedesktop.DBus serial=29 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=StartServiceByName
+   string "org.freedesktop.UPower"
+   uint32 0
+method return time=1770164057.027740 sender=org.freedesktop.DBus -> destination=:1.101 serial=24 reply_serial=29
+   uint32 2
+method call time=1770164057.027988 sender=:1.101 -> destination=org.freedesktop.DBus serial=30 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.freedesktop.UPower"
+method return time=1770164057.028038 sender=org.freedesktop.DBus -> destination=:1.101 serial=25 reply_serial=30
+   string ":1.50"
+method call time=1770164057.028423 sender=:1.101 -> destination=:1.50 serial=31 path=/org/freedesktop/UPower; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.freedesktop.UPower"
+method return time=1770164057.029154 sender=:1.50 -> destination=:1.101 serial=2162 reply_serial=31
+   array [
+      dict entry(
+         string "DaemonVersion"
+         variant             string "1.90.3"
+      )
+      dict entry(
+         string "OnBattery"
+         variant             boolean true
+      )
+      dict entry(
+         string "LidIsClosed"
+         variant             boolean false
+      )
+      dict entry(
+         string "LidIsPresent"
+         variant             boolean true
+      )
+   ]
+method call time=1770164057.029910 sender=:1.101 -> destination=org.freedesktop.DBus serial=32 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=StartServiceByName
+   string "org.freedesktop.UPower"
+   uint32 0
+method return time=1770164057.030011 sender=org.freedesktop.DBus -> destination=:1.101 serial=26 reply_serial=32
+   uint32 2
+method call time=1770164057.030455 sender=:1.101 -> destination=org.freedesktop.DBus serial=33 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.freedesktop.UPower"
+method return time=1770164057.030522 sender=org.freedesktop.DBus -> destination=:1.101 serial=27 reply_serial=33
+   string ":1.50"
+method call time=1770164057.030820 sender=:1.101 -> destination=:1.50 serial=34 path=/org/freedesktop/UPower/devices/DisplayDevice; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.freedesktop.UPower.Device"
+method return time=1770164057.031534 sender=:1.50 -> destination=:1.101 serial=2163 reply_serial=34
+   array [
+      dict entry(
+         string "NativePath"
+         variant             string ""
+      )
+      dict entry(
+         string "Vendor"
+         variant             string ""
+      )
+      dict entry(
+         string "Model"
+         variant             string ""
+      )
+      dict entry(
+         string "Serial"
+         variant             string ""
+      )
+      dict entry(
+         string "UpdateTime"
+         variant             uint64 1770164035
+      )
+      dict entry(
+         string "Type"
+         variant             uint32 2
+      )
+      dict entry(
+         string "PowerSupply"
+         variant             boolean true
+      )
+      dict entry(
+         string "HasHistory"
+         variant             boolean false
+      )
+      dict entry(
+         string "HasStatistics"
+         variant             boolean false
+      )
+      dict entry(
+         string "Online"
+         variant             boolean false
+      )
+      dict entry(
+         string "Energy"
+         variant             double 38.5607
+      )
+      dict entry(
+         string "EnergyEmpty"
+         variant             double 0
+      )
+      dict entry(
+         string "EnergyFull"
+         variant             double 62.6011
+      )
+      dict entry(
+         string "EnergyFullDesign"
+         variant             double 0
+      )
+      dict entry(
+         string "EnergyRate"
+         variant             double 10.48
+      )
+      dict entry(
+         string "Voltage"
+         variant             double 0
+      )
+      dict entry(
+         string "ChargeCycles"
+         variant             int32 0
+      )
+      dict entry(
+         string "Luminosity"
+         variant             double 0
+      )
+      dict entry(
+         string "TimeToEmpty"
+         variant             int64 13246
+      )
+      dict entry(
+         string "TimeToFull"
+         variant             int64 0
+      )
+      dict entry(
+         string "Percentage"
+         variant             double 61
+      )
+      dict entry(
+         string "Temperature"
+         variant             double 0
+      )
+      dict entry(
+         string "IsPresent"
+         variant             boolean true
+      )
+      dict entry(
+         string "State"
+         variant             uint32 2
+      )
+      dict entry(
+         string "IsRechargeable"
+         variant             boolean false
+      )
+      dict entry(
+         string "Capacity"
+         variant             double 0
+      )
+      dict entry(
+         string "Technology"
+         variant             uint32 0
+      )
+      dict entry(
+         string "WarningLevel"
+         variant             uint32 1
+      )
+      dict entry(
+         string "BatteryLevel"
+         variant             uint32 1
+      )
+      dict entry(
+         string "IconName"
+         variant             string "battery-full-symbolic"
+      )
+   ]
+method call time=1770164057.684259 sender=:1.283 -> destination=org.freedesktop.DBus serial=110 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=ListNames
+method return time=1770164057.684384 sender=org.freedesktop.DBus -> destination=:1.283 serial=156 reply_serial=110
+   array [
+      string "org.freedesktop.DBus"
+      string ":1.7"
+      string ":1.107"
+      string "org.freedesktop.timesync1"
+      string ":1.8"
+      string ":1.108"
+      string ":1.9"
+      string "org.freedesktop.systemd1"
+      string "org.freedesktop.ModemManager1"
+      string "org.freedesktop.NetworkManager"
+      string "org.freedesktop.oom1"
+      string "net.hadess.PowerProfiles"
+      string "org.freedesktop.resolve1"
+      string "org.freedesktop.RealtimeKit1"
+      string "org.freedesktop.Accounts"
+      string ":1.80"
+      string ":1.81"
+      string ":1.82"
+      string ":1.60"
+      string "net.hadess.SensorProxy"
+      string ":1.61"
+      string ":1.62"
+      string ":1.40"
+      string ":1.85"
+      string ":1.172"
+      string ":1.86"
+      string ":1.64"
+      string "org.freedesktop.PolicyKit1"
+      string ":1.87"
+      string "org.bluez"
+      string ":1.89"
+      string ":1.23"
+      string ":1.68"
+      string "net.hadess.SwitcherooControl"
+      string ":1.24"
+      string ":1.133"
+      string ":1.25"
+      string ":1.26"
+      string "com.redhat.NewPrinterNotification"
+      string ":1.136"
+      string "org.freedesktop.bolt"
+      string "org.gnome.RemoteDesktop"
+      string "com.redhat.PrinterDriversInstaller"
+      string ":1.139"
+      string "org.gnome.DisplayManager"
+      string "org.freedesktop.Avahi"
+      string "org.freedesktop.UDisks2"
+      string ":1.90"
+      string "fi.w1.wpa_supplicant1"
+      string "org.freedesktop.fwupd"
+      string ":1.92"
+      string "org.freedesktop.login1"
+      string ":1.93"
+      string ":1.94"
+      string ":1.50"
+      string "org.freedesktop.ColorManager"
+      string ":1.95"
+      string ":1.73"
+      string ":1.96"
+      string ":1.74"
+      string ":1.97"
+      string ":1.75"
+      string ":1.283"
+      string ":1.140"
+      string ":1.98"
+      string ":1.76"
+      string ":1.10"
+      string ":1.141"
+      string ":1.77"
+      string ":1.11"
+      string ":1.142"
+      string ":1.78"
+      string "org.freedesktop.UPower"
+      string ":1.12"
+      string ":1.143"
+      string ":1.79"
+      string ":1.0"
+      string ":1.13"
+      string "org.freedesktop.UPower.PowerProfiles"
+      string ":1.166"
+      string ":1.100"
+      string ":1.36"
+      string ":1.1"
+      string ":1.14"
+      string ":1.101"
+      string ":1.2"
+      string ":1.15"
+      string ":1.102"
+      string ":1.3"
+      string ":1.103"
+      string ":1.4"
+      string ":1.17"
+      string ":1.225"
+      string ":1.104"
+      string ":1.5"
+      string ":1.18"
+      string ":1.6"
+      string ":1.19"
+   ]
+method call time=1770164057.686071 sender=:1.283 -> destination=org.freedesktop.DBus serial=111 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=ListActivatableNames
+method return time=1770164057.686090 sender=org.freedesktop.DBus -> destination=:1.283 serial=157 reply_serial=111
+   array [
+      string "org.freedesktop.DBus"
+      string "org.freedesktop.GeoClue2"
+      string "org.freedesktop.fwupd"
+      string "org.freedesktop.login1"
+      string "org.freedesktop.timesync1"
+      string "com.ubuntu.LanguageSelector"
+      string "com.hp.hplip"
+      string "org.freedesktop.ColorManager"
+      string "com.ubuntu.SoftwareProperties"
+      string "org.freedesktop.systemd1"
+      string "org.freedesktop.Avahi"
+      string "org.freedesktop.PolicyKit1"
+      string "org.freedesktop.thermald"
+      string "org.freedesktop.hostname1"
+      string "org.freedesktop.ModemManager1"
+      string "org.bluez"
+      string "io.netplan.Netplan"
+      string "org.freedesktop.nm_priv_helper"
+      string "org.debian.apt"
+      string "net.reactivated.Fprint"
+      string "org.freedesktop.PackageKit"
+      string "org.freedesktop.UPower"
+      string "org.freedesktop.UDisks2"
+      string "org.freedesktop.UPower.PowerProfiles"
+      string "org.freedesktop.network1"
+      string "org.freedesktop.oom1"
+      string "net.hadess.PowerProfiles"
+      string "com.canonical.UbuntuAdvantage"
+      string "org.freedesktop.bolt"
+      string "org.freedesktop.resolve1"
+      string "org.freedesktop.RealtimeKit1"
+      string "org.gnome.RemoteDesktop"
+      string "org.freedesktop.Accounts"
+      string "org.freedesktop.timedate1"
+      string "com.ubuntu.WhoopsiePreferences"
+      string "fi.w1.wpa_supplicant1"
+      string "org.opensuse.CupsPkHelper.Mechanism"
+      string "org.freedesktop.locale1"
+      string "org.freedesktop.nm_dispatcher"
+   ]
+signal time=1770164059.922592 sender=:1.3 -> destination=:1.82 serial=7347 path=/net/hadess/SensorProxy/Compass; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "net.hadess.SensorProxy.Compass"
+   array [
+   ]
+   array [
+   ]
+signal time=1770164059.922821 sender=:1.3 -> destination=:1.100 serial=7348 path=/net/hadess/SensorProxy; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "net.hadess.SensorProxy"
+   array [
+      dict entry(
+         string "LightLevelUnit"
+         variant             string "lux"
+      )
+      dict entry(
+         string "LightLevel"
+         variant             double 27
+      )
+   ]
+   array [
+   ]
+method call time=1770164059.923487 sender=:1.100 -> destination=:1.11 serial=4014 path=/org/freedesktop/login1/session/auto; interface=org.freedesktop.login1.Session; member=SetBrightness
+   string "backlight"
+   string "amdgpu_bl1"
+   uint32 245
+method call time=1770164059.923828 sender=:1.11 -> destination=org.freedesktop.DBus serial=8103 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string ":1.100"
+method return time=1770164059.923900 sender=org.freedesktop.DBus -> destination=:1.11 serial=7604 reply_serial=8103
+   uint32 3131
+method call time=1770164059.924314 sender=:1.11 -> destination=org.freedesktop.DBus serial=8104 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixUser
+   string ":1.100"
+method return time=1770164059.924393 sender=org.freedesktop.DBus -> destination=:1.11 serial=7605 reply_serial=8104
+   uint32 1000
+signal time=1770164059.936411 sender=:1.4 -> destination=(null destination) serial=35956 path=/org/freedesktop/systemd1/unit/systemd_2dbacklight_40backlight_3aamdgpu_5fbl1_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "none"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770072916841918
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 4883134
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 1770072917732765
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 5773981
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 1309
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 1
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164059.938157 sender=:1.4 -> destination=(null destination) serial=35957 path=/org/freedesktop/systemd1/unit/systemd_2dbacklight_40backlight_3aamdgpu_5fbl1_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "exited"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072917733301
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 5774517
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916842235
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4883451
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072917733301
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 5774517
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072916829677
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 4870893
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072916829684
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 4870899
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               63 cc 67 50 91 ce 42 f4 9c 92 28 f9 ba 4c 4c c5
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164059.939935 sender=:1.4 -> destination=(null destination) serial=35958 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Device"
+   array [
+      dict entry(
+         string "SysFSPath"
+         variant             string "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/drm/card1/card1-eDP-1/amdgpu_bl1"
+      )
+   ]
+   array [
+   ]
+signal time=1770164059.940096 sender=:1.4 -> destination=(null destination) serial=35959 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "plugged"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               f6 56 eb 0f 2c b8 45 58 9b 43 13 88 92 a6 36 66
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164059.941782 sender=:1.4 -> destination=(null destination) serial=35960 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobNew
+   uint32 17701
+   object path "/org/freedesktop/systemd1/job/17701"
+   string "sys-devices-pci0000:00-0000:00:08.1-0000:c1:00.0-drm-card1-card1\x2deDP\x2d1-amdgpu_bl1.device"
+signal time=1770164059.941862 sender=:1.4 -> destination=(null destination) serial=35961 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobRemoved
+   uint32 17701
+   object path "/org/freedesktop/systemd1/job/17701"
+   string "sys-devices-pci0000:00-0000:00:08.1-0000:c1:00.0-drm-card1-card1\x2deDP\x2d1-amdgpu_bl1.device"
+   string "done"
+signal time=1770164059.941951 sender=:1.4 -> destination=(null destination) serial=35962 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Device"
+   array [
+      dict entry(
+         string "SysFSPath"
+         variant             string "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/drm/card1/card1-eDP-1/amdgpu_bl1"
+      )
+   ]
+   array [
+   ]
+signal time=1770164059.942152 sender=:1.4 -> destination=(null destination) serial=35963 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "plugged"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               f6 56 eb 0f 2c b8 45 58 9b 43 13 88 92 a6 36 66
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.325062 sender=:1.3 -> destination=:1.82 serial=7349 path=/net/hadess/SensorProxy/Compass; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "net.hadess.SensorProxy.Compass"
+   array [
+   ]
+   array [
+   ]
+signal time=1770164061.325254 sender=:1.3 -> destination=:1.100 serial=7350 path=/net/hadess/SensorProxy; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "net.hadess.SensorProxy"
+   array [
+      dict entry(
+         string "LightLevelUnit"
+         variant             string "lux"
+      )
+      dict entry(
+         string "LightLevel"
+         variant             double 26
+      )
+   ]
+   array [
+   ]
+method call time=1770164061.325921 sender=:1.100 -> destination=:1.11 serial=4015 path=/org/freedesktop/login1/session/auto; interface=org.freedesktop.login1.Session; member=SetBrightness
+   string "backlight"
+   string "amdgpu_bl1"
+   uint32 240
+method call time=1770164061.326407 sender=:1.11 -> destination=org.freedesktop.DBus serial=8105 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string ":1.100"
+method return time=1770164061.326461 sender=org.freedesktop.DBus -> destination=:1.11 serial=7606 reply_serial=8105
+   uint32 3131
+method call time=1770164061.326932 sender=:1.11 -> destination=org.freedesktop.DBus serial=8106 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixUser
+   string ":1.100"
+method return time=1770164061.326995 sender=org.freedesktop.DBus -> destination=:1.11 serial=7607 reply_serial=8106
+   uint32 1000
+signal time=1770164061.332967 sender=:1.4 -> destination=(null destination) serial=35964 path=/org/freedesktop/systemd1/unit/systemd_2dbacklight_40backlight_3aamdgpu_5fbl1_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "none"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770072916841918
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 4883134
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 1770072917732765
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 5773981
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 1309
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 1
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164061.334820 sender=:1.4 -> destination=(null destination) serial=35965 path=/org/freedesktop/systemd1/unit/systemd_2dbacklight_40backlight_3aamdgpu_5fbl1_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "exited"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072917733301
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 5774517
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916842235
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4883451
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072917733301
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 5774517
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072916829677
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 4870893
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072916829684
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 4870899
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               63 cc 67 50 91 ce 42 f4 9c 92 28 f9 ba 4c 4c c5
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.336571 sender=:1.4 -> destination=(null destination) serial=35966 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Device"
+   array [
+      dict entry(
+         string "SysFSPath"
+         variant             string "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/drm/card1/card1-eDP-1/amdgpu_bl1"
+      )
+   ]
+   array [
+   ]
+signal time=1770164061.336738 sender=:1.4 -> destination=(null destination) serial=35967 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "plugged"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               f6 56 eb 0f 2c b8 45 58 9b 43 13 88 92 a6 36 66
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.338463 sender=:1.4 -> destination=(null destination) serial=35968 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobNew
+   uint32 17702
+   object path "/org/freedesktop/systemd1/job/17702"
+   string "sys-devices-pci0000:00-0000:00:08.1-0000:c1:00.0-drm-card1-card1\x2deDP\x2d1-amdgpu_bl1.device"
+signal time=1770164061.338532 sender=:1.4 -> destination=(null destination) serial=35969 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobRemoved
+   uint32 17702
+   object path "/org/freedesktop/systemd1/job/17702"
+   string "sys-devices-pci0000:00-0000:00:08.1-0000:c1:00.0-drm-card1-card1\x2deDP\x2d1-amdgpu_bl1.device"
+   string "done"
+signal time=1770164061.338626 sender=:1.4 -> destination=(null destination) serial=35970 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Device"
+   array [
+      dict entry(
+         string "SysFSPath"
+         variant             string "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/drm/card1/card1-eDP-1/amdgpu_bl1"
+      )
+   ]
+   array [
+   ]
+signal time=1770164061.338826 sender=:1.4 -> destination=(null destination) serial=35971 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "plugged"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               f6 56 eb 0f 2c b8 45 58 9b 43 13 88 92 a6 36 66
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+method call time=1770164061.567313 sender=:1.310 -> destination=org.freedesktop.DBus serial=1 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=Hello
+method return time=1770164061.567433 sender=org.freedesktop.DBus -> destination=:1.310 serial=1 reply_serial=1
+   string ":1.310"
+signal time=1770164061.567484 sender=org.freedesktop.DBus -> destination=(null destination) serial=158 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string ":1.310"
+   string ""
+   string ":1.310"
+signal time=1770164061.567655 sender=org.freedesktop.DBus -> destination=:1.310 serial=2 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string ":1.310"
+method call time=1770164061.567735 sender=:1.310 -> destination=org.freedesktop.DBus serial=2 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.bluez"
+method return time=1770164061.567771 sender=org.freedesktop.DBus -> destination=:1.310 serial=3 reply_serial=2
+   string ":1.7"
+method call time=1770164061.568082 sender=:1.310 -> destination=:1.7 serial=3 path=/org/bluez/hci0; interface=org.freedesktop.DBus.Introspectable; member=Introspect
+method call time=1770164061.568158 sender=:1.310 -> destination=org.freedesktop.DBus serial=4 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged'"
+method return time=1770164061.568194 sender=org.freedesktop.DBus -> destination=:1.310 serial=4 reply_serial=4
+method return time=1770164061.568531 sender=:1.7 -> destination=:1.310 serial=1249 reply_serial=3
+   string "<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="org.freedesktop.DBus.Introspectable"><method name="Introspect"><arg name="xml" type="s" direction="out"/>
+</method></interface><interface name="org.bluez.Adapter1"><method name="StartDiscovery"></method><method name="SetDiscoveryFilter"><arg name="properties" type="a{sv}" direction="in"/>
+</method><method name="StopDiscovery"></method><method name="RemoveDevice"><arg name="device" type="o" direction="in"/>
+</method><method name="GetDiscoveryFilters"><arg name="filters" type="as" direction="out"/>
+</method><method name="ConnectDevice"><arg name="properties" type="a{sv}" direction="in"/>
+</method><property name="Address" type="s" access="read"></property><property name="AddressType" type="s" access="read"></property><property name="Name" type="s" access="read"></property><property name="Alias" type="s" access="readwrite"></property><property name="Class" type="u" access="read"></property><property name="Powered" type="b" access="readwrite"></property><property name="PowerState" type="s" access="read"></property><property name="Discoverable" type="b" access="readwrite"></property><property name="DiscoverableTimeout" type="u" access="readwrite"></property><property name="Pairable" type="b" access="readwrite"></property><property name="PairableTimeout" type="u" access="readwrite"></property><property name="Discovering" type="b" access="read"></property><property name="UUIDs" type="as" access="read"></property><property name="Modalias" type="s" access="read"></property><property name="Roles" type="as" access="read"></property><property name="ExperimentalFeatures" type="as" access="read"></property><property name="Manufacturer" type="q" access="read"></property><property name="Version" type="y" access="read"></property></interface><interface name="org.freedesktop.DBus.Properties"><method name="Get"><arg name="interface" type="s" direction="in"/>
+<arg name="name" type="s" direction="in"/>
+<arg name="value" type="v" direction="out"/>
+</method><method name="Set"><arg name="interface" type="s" direction="in"/>
+<arg name="name" type="s" direction="in"/>
+<arg name="value" type="v" direction="in"/>
+</method><method name="GetAll"><arg name="interface" type="s" direction="in"/>
+<arg name="properties" type="a{sv}" direction="out"/>
+</method><signal name="PropertiesChanged"><arg name="interface" type="s"/>
+<arg name="changed_properties" type="a{sv}"/>
+<arg name="invalidated_properties" type="as"/>
+</signal>
+</interface><interface name="org.bluez.BatteryProviderManager1"><method name="RegisterBatteryProvider"><arg name="provider" type="o" direction="in"/>
+</method><method name="UnregisterBatteryProvider"><arg name="provider" type="o" direction="in"/>
+</method></interface><interface name="org.bluez.GattManager1"><method name="RegisterApplication"><arg name="application" type="o" direction="in"/>
+<arg name="options" type="a{sv}" direction="in"/>
+</method><method name="UnregisterApplication"><arg name="application" type="o" direction="in"/>
+</method></interface><interface name="org.bluez.AdvertisementMonitorManager1"><method name="RegisterMonitor"><arg name="application" type="o" direction="in"/>
+</method><method name="UnregisterMonitor"><arg name="application" type="o" direction="in"/>
+</method><property name="SupportedMonitorTypes" type="as" access="read"></property><property name="SupportedFeatures" type="as" access="read"></property></interface><interface name="org.bluez.Media1"><method name="RegisterEndpoint"><arg name="endpoint" type="o" direction="in"/>
+<arg name="properties" type="a{sv}" direction="in"/>
+</method><method name="UnregisterEndpoint"><arg name="endpoint" type="o" direction="in"/>
+</method><method name="RegisterPlayer"><arg name="player" type="o" direction="in"/>
+<arg name="properties" type="a{sv}" direction="in"/>
+</method><method name="UnregisterPlayer"><arg name="player" type="o" direction="in"/>
+</method><method name="RegisterApplication"><arg name="application" type="o" direction="in"/>
+<arg name="options" type="a{sv}" direction="in"/>
+</method><method name="UnregisterApplication"><arg name="application" type="o" direction="in"/>
+</method><property name="SupportedUUIDs" type="as" access="read"></property></interface><interface name="org.bluez.NetworkServer1"><method name="Register"><arg name="uuid" type="s" direction="in"/>
+<arg name="bridge" type="s" direction="in"/>
+</method><method name="Unregister"><arg name="uuid" type="s" direction="in"/>
+</method></interface><interface name="org.bluez.SimAccess1"><method name="Disconnect"></method><property name="Connected" type="b" access="read"></property></interface><interface name="org.bluez.LEAdvertisingManager1"><method name="RegisterAdvertisement"><arg name="advertisement" type="o" direction="in"/>
+<arg name="options" type="a{sv}" direction="in"/>
+</method><method name="UnregisterAdvertisement"><arg name="service" type="o" direction="in"/>
+</method><property name="ActiveInstances" type="y" access="read"></property><property name="SupportedInstances" type="y" access="read"></property><property name="SupportedIncludes" type="as" access="read"></property><property name="SupportedSecondaryChannels" type="as" access="read"></property><property name="SupportedFeatures" type="as" access="read"></property><property name="SupportedCapabilities" type="a{sv}" access="read"></property></interface></node>"
+method call time=1770164061.569043 sender=:1.310 -> destination=org.freedesktop.DBus serial=5 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesAdded'"
+method return time=1770164061.569078 sender=org.freedesktop.DBus -> destination=:1.310 serial=5 reply_serial=5
+method call time=1770164061.569149 sender=:1.310 -> destination=org.freedesktop.DBus serial=6 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.freedesktop.hostname1"
+error time=1770164061.569183 sender=org.freedesktop.DBus -> destination=:1.310 error_name=org.freedesktop.DBus.Error.NameHasNoOwner reply_serial=6
+   string "Could not get owner of name 'org.freedesktop.hostname1': no such name"
+signal time=1770164061.569216 sender=org.freedesktop.DBus -> destination=org.freedesktop.systemd1 serial=372 path=/org/freedesktop/DBus; interface=org.freedesktop.systemd1.Activator; member=ActivationRequest
+   string "dbus-org.freedesktop.hostname1.service"
+method call time=1770164061.569248 sender=:1.310 -> destination=org.freedesktop.DBus serial=7 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=StartServiceByName
+   string "org.freedesktop.hostname1"
+   uint32 0
+method call time=1770164061.570728 sender=:1.172 -> destination=org.freedesktop.DBus serial=558 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string ":1.310"
+method return time=1770164061.570790 sender=org.freedesktop.DBus -> destination=:1.172 serial=682 reply_serial=558
+   uint32 35318
+method call time=1770164061.570870 sender=:1.4 -> destination=org.freedesktop.DBus serial=35972 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender='org.freedesktop.DBus',path='/org/freedesktop/DBus',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0='org.freedesktop.hostname1'"
+method return time=1770164061.570910 sender=org.freedesktop.DBus -> destination=:1.4 serial=373 reply_serial=35972
+method call time=1770164061.570955 sender=:1.4 -> destination=org.freedesktop.DBus serial=35973 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.freedesktop.hostname1"
+error time=1770164061.570990 sender=org.freedesktop.DBus -> destination=:1.4 error_name=org.freedesktop.DBus.Error.NameHasNoOwner reply_serial=35973
+   string "Could not get owner of name 'org.freedesktop.hostname1': no such name"
+signal time=1770164061.571996 sender=:1.4 -> destination=(null destination) serial=35974 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=UnitNew
+   string "var-tmp.mount"
+   object path "/org/freedesktop/systemd1/unit/var_2dtmp_2emount"
+signal time=1770164061.572073 sender=:1.4 -> destination=(null destination) serial=35975 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=UnitNew
+   string "var.mount"
+   object path "/org/freedesktop/systemd1/unit/var_2emount"
+signal time=1770164061.572212 sender=:1.4 -> destination=(null destination) serial=35976 path=/org/freedesktop/systemd1/unit/_2d_2emount; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Mount"
+   array [
+      dict entry(
+         string "What"
+         variant             string "/dev/nvme0n1p2"
+      )
+      dict entry(
+         string "Options"
+         variant             string "rw,relatime,stripe=64"
+      )
+      dict entry(
+         string "Type"
+         variant             string "ext4"
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+   ]
+   array [
+      string "ExecMount"
+      string "ExecUnmount"
+      string "ExecRemount"
+   ]
+signal time=1770164061.572862 sender=:1.4 -> destination=(null destination) serial=35977 path=/org/freedesktop/systemd1/unit/_2d_2emount; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "mounted"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072913568962
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 1610178
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072913508927
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 1550143
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072913508927
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 1550143
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array [
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.574431 sender=:1.4 -> destination=(null destination) serial=35978 path=/org/freedesktop/systemd1/unit/dbus_2esocket; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Socket"
+   array [
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+   ]
+   array [
+      string "ExecStartPre"
+      string "ExecStartPost"
+      string "ExecStopPre"
+      string "ExecStopPost"
+   ]
+signal time=1770164061.574824 sender=:1.4 -> destination=(null destination) serial=35979 path=/org/freedesktop/systemd1/unit/dbus_2esocket; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "running"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916176343
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4217559
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916084212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4125428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916084212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4125428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072916084133
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 4125350
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072916084135
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 4125351
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               21 10 56 61 4c e9 44 4c ba cc 13 ef 4d 81 2e f8
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.576587 sender=:1.4 -> destination=(null destination) serial=35980 path=/org/freedesktop/systemd1/unit/shutdown_2etarget; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "inactive"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "dead"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916662462
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4703678
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array [
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.578239 sender=:1.4 -> destination=(null destination) serial=35981 path=/org/freedesktop/systemd1/unit/basic_2etarget; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "active"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916099222
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4140438
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916099222
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4140438
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916099222
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4140438
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072916099219
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 4140435
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072916099220
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 4140436
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               ba b2 ce c0 c4 06 45 bf 88 e1 1c 9e fe 2b ea 7d
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.580010 sender=:1.4 -> destination=(null destination) serial=35982 path=/org/freedesktop/systemd1/unit/sysinit_2etarget; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "active"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916081775
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4122991
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916081775
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4122991
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916081775
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4122991
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072916081750
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 4122969
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072916081759
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 4122975
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               02 18 31 2e 7d e5 49 e5 9d 10 42 1d 2b 6e 0f e4
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.581754 sender=:1.4 -> destination=(null destination) serial=35983 path=/org/freedesktop/systemd1/unit/system_2eslice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "active"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072913508903
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 1550119
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072913508903
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 1550119
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072913508903
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 1550119
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array [
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.583382 sender=:1.4 -> destination=(null destination) serial=35984 path=/org/freedesktop/systemd1/unit/systemd_2djournald_2esocket; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Socket"
+   array [
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+   ]
+   array [
+      string "ExecStartPre"
+      string "ExecStartPost"
+      string "ExecStopPre"
+      string "ExecStopPost"
+   ]
+signal time=1770164061.583792 sender=:1.4 -> destination=(null destination) serial=35985 path=/org/freedesktop/systemd1/unit/systemd_2djournald_2esocket; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "running"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072913606513
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 1647729
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072913537521
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 1578737
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072913537521
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 1578737
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072913537450
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 1578666
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072913537451
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 1578666
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               fc 24 5d 9a ba f1 4e 4c b6 e4 85 c7 e3 9f 71 c8
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.585424 sender=:1.4 -> destination=(null destination) serial=35986 path=/org/freedesktop/systemd1/unit/systemd_2dtmpfiles_2dsetup_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "none"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770072915838076
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 3879292
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 1770072915879885
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 3921100
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 721
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 1
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164061.586902 sender=:1.4 -> destination=(null destination) serial=35987 path=/org/freedesktop/systemd1/unit/systemd_2dtmpfiles_2dsetup_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "exited"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072915880040
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 3921256
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072915838112
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 3879327
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072915880040
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 3921256
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072915837489
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 3878707
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072915837492
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 3878708
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               92 3d 0a 2b 43 87 43 c6 8a bf fd e4 fe 13 8b b8
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.588604 sender=:1.4 -> destination=(null destination) serial=35988 path=/org/freedesktop/systemd1/unit/tmp_2emount; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Mount"
+   array [
+      dict entry(
+         string "What"
+         variant             string ""
+      )
+      dict entry(
+         string "Options"
+         variant             string ""
+      )
+      dict entry(
+         string "Type"
+         variant             string ""
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+   ]
+   array [
+      string "ExecMount"
+      string "ExecUnmount"
+      string "ExecRemount"
+   ]
+signal time=1770164061.589199 sender=:1.4 -> destination=(null destination) serial=35989 path=/org/freedesktop/systemd1/unit/tmp_2emount; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "inactive"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "dead"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916650488
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4691704
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array [
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.590808 sender=:1.4 -> destination=(null destination) serial=35990 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=UnitNew
+   string "systemd-hostnamed.service"
+   object path "/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice"
+signal time=1770164061.590865 sender=:1.4 -> destination=(null destination) serial=35991 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobNew
+   uint32 17703
+   object path "/org/freedesktop/systemd1/job/17703"
+   string "systemd-hostnamed.service"
+signal time=1770164061.590933 sender=:1.4 -> destination=(null destination) serial=35992 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=UnitRemoved
+   string "var-tmp.mount"
+   object path "/org/freedesktop/systemd1/unit/var_2dtmp_2emount"
+signal time=1770164061.590982 sender=:1.4 -> destination=(null destination) serial=35993 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=UnitRemoved
+   string "var.mount"
+   object path "/org/freedesktop/systemd1/unit/var_2emount"
+signal time=1770164061.594228 sender=:1.4 -> destination=(null destination) serial=35994 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "main"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770164061593232
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 26124086383
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 0
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164061.595818 sender=:1.4 -> destination=(null destination) serial=35995 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "inactive"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "dead"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 17703
+               object path "/org/freedesktop/systemd1/job/17703"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770164061572922
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 26124066073
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770164061572927
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 26124066078
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               22 b0 21 cc e8 29 4e c4 86 81 24 68 ef 79 78 19
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.597471 sender=:1.4 -> destination=(null destination) serial=35996 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "main"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770164061593232
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 26124086383
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 0
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164061.598896 sender=:1.4 -> destination=(null destination) serial=35997 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "activating"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "start"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770164061593614
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 26124086765
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770164061593614
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 26124086765
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 17703
+               object path "/org/freedesktop/systemd1/job/17703"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770164061572922
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 26124066073
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770164061572927
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 26124066078
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               22 b0 21 cc e8 29 4e c4 86 81 24 68 ef 79 78 19
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.600461 sender=:1.4 -> destination=(null destination) serial=35998 path=/org/freedesktop/systemd1/job/17703; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Job"
+   array [
+      dict entry(
+         string "State"
+         variant             string "running"
+      )
+   ]
+   array [
+   ]
+method call time=1770164061.714814 sender=:1.311 -> destination=org.freedesktop.DBus serial=1 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=Hello
+method return time=1770164061.714912 sender=org.freedesktop.DBus -> destination=:1.311 serial=1 reply_serial=1
+   string ":1.311"
+signal time=1770164061.714963 sender=org.freedesktop.DBus -> destination=(null destination) serial=159 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string ":1.311"
+   string ""
+   string ":1.311"
+signal time=1770164061.715046 sender=org.freedesktop.DBus -> destination=:1.311 serial=2 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string ":1.311"
+method call time=1770164061.715739 sender=:1.311 -> destination=org.freedesktop.DBus serial=2 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RequestName
+   string "org.freedesktop.hostname1"
+   uint32 4
+signal time=1770164061.715832 sender=org.freedesktop.DBus -> destination=(null destination) serial=375 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string "org.freedesktop.hostname1"
+   string ""
+   string ":1.311"
+method return time=1770164061.715947 sender=org.freedesktop.DBus -> destination=:1.310 serial=7 reply_serial=7
+   uint32 1
+signal time=1770164061.715989 sender=org.freedesktop.DBus -> destination=:1.311 serial=3 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string "org.freedesktop.hostname1"
+method return time=1770164061.716035 sender=org.freedesktop.DBus -> destination=:1.311 serial=4 reply_serial=2
+   uint32 1
+method call time=1770164061.716117 sender=:1.310 -> destination=org.freedesktop.DBus serial=8 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.freedesktop.hostname1"
+method return time=1770164061.716162 sender=org.freedesktop.DBus -> destination=:1.310 serial=8 reply_serial=8
+   string ":1.311"
+signal time=1770164061.716249 sender=:1.4 -> destination=(null destination) serial=35999 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "main"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770164061593232
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 26124086383
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 0
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164061.718184 sender=:1.4 -> destination=(null destination) serial=36000 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "running"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770164061715214
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 26124208365
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770164061593614
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 26124086765
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770164061715214
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 26124208365
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 17703
+               object path "/org/freedesktop/systemd1/job/17703"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770164061572922
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 26124066073
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770164061572927
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 26124066078
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               22 b0 21 cc e8 29 4e c4 86 81 24 68 ef 79 78 19
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164061.720071 sender=:1.4 -> destination=(null destination) serial=36001 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobRemoved
+   uint32 17703
+   object path "/org/freedesktop/systemd1/job/17703"
+   string "systemd-hostnamed.service"
+   string "done"
+signal time=1770164061.720173 sender=:1.4 -> destination=(null destination) serial=36002 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "main"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770164061593232
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 26124086383
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 35319
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 0
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+method call time=1770164061.721689 sender=:1.225 -> destination=:1.311 serial=17 path=/org/freedesktop/hostname1; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.freedesktop.hostname1"
+method call time=1770164061.721724 sender=:1.310 -> destination=:1.311 serial=9 path=/org/freedesktop/hostname1; interface=org.freedesktop.DBus.Introspectable; member=Introspect
+signal time=1770164061.721742 sender=:1.4 -> destination=(null destination) serial=36003 path=/org/freedesktop/systemd1/unit/systemd_2dhostnamed_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "running"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770164061715214
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 26124208365
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770164061593614
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 26124086765
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770164061715214
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 26124208365
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770164061572922
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 26124066073
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770164061572927
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 26124066078
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               22 b0 21 cc e8 29 4e c4 86 81 24 68 ef 79 78 19
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+method call time=1770164061.723504 sender=:1.103 -> destination=:1.311 serial=62 path=/org/freedesktop/hostname1; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.freedesktop.hostname1"
+method call time=1770164061.723539 sender=:1.103 -> destination=:1.311 serial=63 path=/org/freedesktop/hostname1; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.freedesktop.hostname1"
+method call time=1770164061.723573 sender=:1.13 -> destination=:1.311 serial=70375 path=/org/freedesktop/hostname1; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.freedesktop.hostname1"
+method call time=1770164061.723606 sender=:1.172 -> destination=org.freedesktop.DBus serial=559 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string ":1.311"
+method return time=1770164061.723640 sender=org.freedesktop.DBus -> destination=:1.172 serial=683 reply_serial=559
+   uint32 35319
+method call time=1770164061.723674 sender=:1.172 -> destination=org.freedesktop.DBus serial=560 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string "org.freedesktop.hostname1"
+method return time=1770164061.723707 sender=org.freedesktop.DBus -> destination=:1.172 serial=684 reply_serial=560
+   uint32 35319
+method return time=1770164061.723741 sender=:1.311 -> destination=:1.225 serial=3 reply_serial=17
+   array [
+      dict entry(
+         string "Hostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "StaticHostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "PrettyHostname"
+         variant             string ""
+      )
+      dict entry(
+         string "DefaultHostname"
+         variant             string "localhost"
+      )
+      dict entry(
+         string "HostnameSource"
+         variant             string "static"
+      )
+      dict entry(
+         string "IconName"
+         variant             string "computer-laptop"
+      )
+      dict entry(
+         string "Chassis"
+         variant             string "laptop"
+      )
+      dict entry(
+         string "Deployment"
+         variant             string ""
+      )
+      dict entry(
+         string "Location"
+         variant             string ""
+      )
+      dict entry(
+         string "KernelName"
+         variant             string "Linux"
+      )
+      dict entry(
+         string "KernelRelease"
+         variant             string "6.14.0-37-generic"
+      )
+      dict entry(
+         string "KernelVersion"
+         variant             string "#37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2"
+      )
+      dict entry(
+         string "OperatingSystemPrettyName"
+         variant             string "Ubuntu 24.04.3 LTS"
+      )
+      dict entry(
+         string "OperatingSystemCPEName"
+         variant             string ""
+      )
+      dict entry(
+         string "OperatingSystemSupportEnd"
+         variant             uint64 18446744073709551615
+      )
+      dict entry(
+         string "HomeURL"
+         variant             string "https://www.ubuntu.com/"
+      )
+      dict entry(
+         string "HardwareVendor"
+         variant             string "Framework"
+      )
+      dict entry(
+         string "HardwareModel"
+         variant             string "Laptop 13 _AMD Ryzen 7040Series_"
+      )
+      dict entry(
+         string "FirmwareVersion"
+         variant             string "03.16"
+      )
+      dict entry(
+         string "FirmwareVendor"
+         variant             string "INSYDE Corp."
+      )
+      dict entry(
+         string "FirmwareDate"
+         variant             uint64 1753401600000000
+      )
+      dict entry(
+         string "MachineID"
+         variant             array of bytes [
+               bb a8 97 35 a7 d7 4f 06 9f ad f5 4d 00 f2 27 00
+            ]
+      )
+      dict entry(
+         string "BootID"
+         variant             array of bytes [
+               6c 68 65 c4 08 92 45 bf 82 cd 70 7e 0c a8 18 37
+            ]
+      )
+   ]
+method return time=1770164061.725412 sender=:1.311 -> destination=:1.310 serial=4 reply_serial=9
+   string "<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"https://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+ <interface name="org.freedesktop.DBus.Peer">
+  <method name="Ping"/>
+  <method name="GetMachineId">
+   <arg type="s" name="machine_uuid" direction="out"/>
+  </method>
+ </interface>
+ <interface name="org.freedesktop.DBus.Introspectable">
+  <method name="Introspect">
+   <arg name="xml_data" type="s" direction="out"/>
+  </method>
+ </interface>
+ <interface name="org.freedesktop.DBus.Properties">
+  <method name="Get">
+   <arg name="interface_name" direction="in" type="s"/>
+   <arg name="property_name" direction="in" type="s"/>
+   <arg name="value" direction="out" type="v"/>
+  </method>
+  <method name="GetAll">
+   <arg name="interface_name" direction="in" type="s"/>
+   <arg name="props" direction="out" type="a{sv}"/>
+  </method>
+  <method name="Set">
+   <arg name="interface_name" direction="in" type="s"/>
+   <arg name="property_name" direction="in" type="s"/>
+   <arg name="value" direction="in" type="v"/>
+  </method>
+  <signal name="PropertiesChanged">
+   <arg type="s" name="interface_name"/>
+   <arg type="a{sv}" name="changed_properties"/>
+   <arg type="as" name="invalidated_properties"/>
+  </signal>
+ </interface>
+ <interface name="org.freedesktop.hostname1">
+  <property name="Hostname" type="s" access="read">
+  </property>
+  <property name="StaticHostname" type="s" access="read">
+  </property>
+  <property name="PrettyHostname" type="s" access="read">
+  </property>
+  <property name="DefaultHostname" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="HostnameSource" type="s" access="read">
+  </property>
+  <property name="IconName" type="s" access="read">
+  </property>
+  <property name="Chassis" type="s" access="read">
+  </property>
+  <property name="Deployment" type="s" access="read">
+  </property>
+  <property name="Location" type="s" access="read">
+  </property>
+  <property name="KernelName" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="KernelRelease" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="KernelVersion" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="OperatingSystemPrettyName" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="OperatingSystemCPEName" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="OperatingSystemSupportEnd" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="HomeURL" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="HardwareVendor" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="HardwareModel" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FirmwareVersion" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FirmwareVendor" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FirmwareDate" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="MachineID" type="ay" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="BootID" type="ay" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <method name="SetHostname">
+   <arg type="s" name="hostname" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="SetStaticHostname">
+   <arg type="s" name="hostname" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="SetPrettyHostname">
+   <arg type="s" name="hostname" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="SetIconName">
+   <arg type="s" name="icon" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="SetChassis">
+   <arg type="s" name="chassis" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="SetDeployment">
+   <arg type="s" name="deployment" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="SetLocation">
+   <arg type="s" name="location" direction="in"/>
+   <arg type="b" name="interactive" direction="in"/>
+  </method>
+  <method name="GetProductUUID">
+   <arg type="b" name="interactive" direction="in"/>
+   <arg type="ay" name="uuid" direction="out"/>
+  </method>
+  <method name="GetHardwareSerial">
+   <arg type="s" name="serial" direction="out"/>
+  </method>
+  <method name="Describe">
+   <arg type="s" name="json" direction="out"/>
+  </method>
+ </interface>
+</node>
+"
+method call time=1770164061.726154 sender=:1.310 -> destination=:1.311 serial=10 path=/org/freedesktop/hostname1; interface=org.freedesktop.DBus.Properties; member=Get
+   string "org.freedesktop.hostname1"
+   string "Hostname"
+method return time=1770164061.726235 sender=:1.311 -> destination=:1.103 serial=5 reply_serial=62
+   array [
+      dict entry(
+         string "Hostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "StaticHostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "PrettyHostname"
+         variant             string ""
+      )
+      dict entry(
+         string "DefaultHostname"
+         variant             string "localhost"
+      )
+      dict entry(
+         string "HostnameSource"
+         variant             string "static"
+      )
+      dict entry(
+         string "IconName"
+         variant             string "computer-laptop"
+      )
+      dict entry(
+         string "Chassis"
+         variant             string "laptop"
+      )
+      dict entry(
+         string "Deployment"
+         variant             string ""
+      )
+      dict entry(
+         string "Location"
+         variant             string ""
+      )
+      dict entry(
+         string "KernelName"
+         variant             string "Linux"
+      )
+      dict entry(
+         string "KernelRelease"
+         variant             string "6.14.0-37-generic"
+      )
+      dict entry(
+         string "KernelVersion"
+         variant             string "#37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2"
+      )
+      dict entry(
+         string "OperatingSystemPrettyName"
+         variant             string "Ubuntu 24.04.3 LTS"
+      )
+      dict entry(
+         string "OperatingSystemCPEName"
+         variant             string ""
+      )
+      dict entry(
+         string "OperatingSystemSupportEnd"
+         variant             uint64 18446744073709551615
+      )
+      dict entry(
+         string "HomeURL"
+         variant             string "https://www.ubuntu.com/"
+      )
+      dict entry(
+         string "HardwareVendor"
+         variant             string "Framework"
+      )
+      dict entry(
+         string "HardwareModel"
+         variant             string "Laptop 13 _AMD Ryzen 7040Series_"
+      )
+      dict entry(
+         string "FirmwareVersion"
+         variant             string "03.16"
+      )
+      dict entry(
+         string "FirmwareVendor"
+         variant             string "INSYDE Corp."
+      )
+      dict entry(
+         string "FirmwareDate"
+         variant             uint64 1753401600000000
+      )
+      dict entry(
+         string "MachineID"
+         variant             array of bytes [
+               bb a8 97 35 a7 d7 4f 06 9f ad f5 4d 00 f2 27 00
+            ]
+      )
+      dict entry(
+         string "BootID"
+         variant             array of bytes [
+               6c 68 65 c4 08 92 45 bf 82 cd 70 7e 0c a8 18 37
+            ]
+      )
+   ]
+method return time=1770164061.727844 sender=:1.311 -> destination=:1.103 serial=6 reply_serial=63
+   array [
+      dict entry(
+         string "Hostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "StaticHostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "PrettyHostname"
+         variant             string ""
+      )
+      dict entry(
+         string "DefaultHostname"
+         variant             string "localhost"
+      )
+      dict entry(
+         string "HostnameSource"
+         variant             string "static"
+      )
+      dict entry(
+         string "IconName"
+         variant             string "computer-laptop"
+      )
+      dict entry(
+         string "Chassis"
+         variant             string "laptop"
+      )
+      dict entry(
+         string "Deployment"
+         variant             string ""
+      )
+      dict entry(
+         string "Location"
+         variant             string ""
+      )
+      dict entry(
+         string "KernelName"
+         variant             string "Linux"
+      )
+      dict entry(
+         string "KernelRelease"
+         variant             string "6.14.0-37-generic"
+      )
+      dict entry(
+         string "KernelVersion"
+         variant             string "#37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2"
+      )
+      dict entry(
+         string "OperatingSystemPrettyName"
+         variant             string "Ubuntu 24.04.3 LTS"
+      )
+      dict entry(
+         string "OperatingSystemCPEName"
+         variant             string ""
+      )
+      dict entry(
+         string "OperatingSystemSupportEnd"
+         variant             uint64 18446744073709551615
+      )
+      dict entry(
+         string "HomeURL"
+         variant             string "https://www.ubuntu.com/"
+      )
+      dict entry(
+         string "HardwareVendor"
+         variant             string "Framework"
+      )
+      dict entry(
+         string "HardwareModel"
+         variant             string "Laptop 13 _AMD Ryzen 7040Series_"
+      )
+      dict entry(
+         string "FirmwareVersion"
+         variant             string "03.16"
+      )
+      dict entry(
+         string "FirmwareVendor"
+         variant             string "INSYDE Corp."
+      )
+      dict entry(
+         string "FirmwareDate"
+         variant             uint64 1753401600000000
+      )
+      dict entry(
+         string "MachineID"
+         variant             array of bytes [
+               bb a8 97 35 a7 d7 4f 06 9f ad f5 4d 00 f2 27 00
+            ]
+      )
+      dict entry(
+         string "BootID"
+         variant             array of bytes [
+               6c 68 65 c4 08 92 45 bf 82 cd 70 7e 0c a8 18 37
+            ]
+      )
+   ]
+method return time=1770164061.729465 sender=:1.311 -> destination=:1.13 serial=7 reply_serial=70375
+   array [
+      dict entry(
+         string "Hostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "StaticHostname"
+         variant             string "framework-sergey"
+      )
+      dict entry(
+         string "PrettyHostname"
+         variant             string ""
+      )
+      dict entry(
+         string "DefaultHostname"
+         variant             string "localhost"
+      )
+      dict entry(
+         string "HostnameSource"
+         variant             string "static"
+      )
+      dict entry(
+         string "IconName"
+         variant             string "computer-laptop"
+      )
+      dict entry(
+         string "Chassis"
+         variant             string "laptop"
+      )
+      dict entry(
+         string "Deployment"
+         variant             string ""
+      )
+      dict entry(
+         string "Location"
+         variant             string ""
+      )
+      dict entry(
+         string "KernelName"
+         variant             string "Linux"
+      )
+      dict entry(
+         string "KernelRelease"
+         variant             string "6.14.0-37-generic"
+      )
+      dict entry(
+         string "KernelVersion"
+         variant             string "#37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2"
+      )
+      dict entry(
+         string "OperatingSystemPrettyName"
+         variant             string "Ubuntu 24.04.3 LTS"
+      )
+      dict entry(
+         string "OperatingSystemCPEName"
+         variant             string ""
+      )
+      dict entry(
+         string "OperatingSystemSupportEnd"
+         variant             uint64 18446744073709551615
+      )
+      dict entry(
+         string "HomeURL"
+         variant             string "https://www.ubuntu.com/"
+      )
+      dict entry(
+         string "HardwareVendor"
+         variant             string "Framework"
+      )
+      dict entry(
+         string "HardwareModel"
+         variant             string "Laptop 13 _AMD Ryzen 7040Series_"
+      )
+      dict entry(
+         string "FirmwareVersion"
+         variant             string "03.16"
+      )
+      dict entry(
+         string "FirmwareVendor"
+         variant             string "INSYDE Corp."
+      )
+      dict entry(
+         string "FirmwareDate"
+         variant             uint64 1753401600000000
+      )
+      dict entry(
+         string "MachineID"
+         variant             array of bytes [
+               bb a8 97 35 a7 d7 4f 06 9f ad f5 4d 00 f2 27 00
+            ]
+      )
+      dict entry(
+         string "BootID"
+         variant             array of bytes [
+               6c 68 65 c4 08 92 45 bf 82 cd 70 7e 0c a8 18 37
+            ]
+      )
+   ]
+method return time=1770164061.731044 sender=:1.311 -> destination=:1.310 serial=8 reply_serial=10
+   variant       string "framework-sergey"
+method call time=1770164061.731145 sender=:1.310 -> destination=org.freedesktop.DBus serial=11 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string "org.bluez"
+method return time=1770164061.731178 sender=org.freedesktop.DBus -> destination=:1.310 serial=9 reply_serial=11
+   string ":1.7"
+method call time=1770164061.731212 sender=:1.310 -> destination=:1.7 serial=12 path=/org/bluez/hci0; interface=org.freedesktop.DBus.Introspectable; member=Introspect
+method return time=1770164061.731259 sender=:1.7 -> destination=:1.310 serial=1250 reply_serial=12
+   string "<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="org.freedesktop.DBus.Introspectable"><method name="Introspect"><arg name="xml" type="s" direction="out"/>
+</method></interface><interface name="org.bluez.Adapter1"><method name="StartDiscovery"></method><method name="SetDiscoveryFilter"><arg name="properties" type="a{sv}" direction="in"/>
+</method><method name="StopDiscovery"></method><method name="RemoveDevice"><arg name="device" type="o" direction="in"/>
+</method><method name="GetDiscoveryFilters"><arg name="filters" type="as" direction="out"/>
+</method><method name="ConnectDevice"><arg name="properties" type="a{sv}" direction="in"/>
+</method><property name="Address" type="s" access="read"></property><property name="AddressType" type="s" access="read"></property><property name="Name" type="s" access="read"></property><property name="Alias" type="s" access="readwrite"></property><property name="Class" type="u" access="read"></property><property name="Powered" type="b" access="readwrite"></property><property name="PowerState" type="s" access="read"></property><property name="Discoverable" type="b" access="readwrite"></property><property name="DiscoverableTimeout" type="u" access="readwrite"></property><property name="Pairable" type="b" access="readwrite"></property><property name="PairableTimeout" type="u" access="readwrite"></property><property name="Discovering" type="b" access="read"></property><property name="UUIDs" type="as" access="read"></property><property name="Modalias" type="s" access="read"></property><property name="Roles" type="as" access="read"></property><property name="ExperimentalFeatures" type="as" access="read"></property><property name="Manufacturer" type="q" access="read"></property><property name="Version" type="y" access="read"></property></interface><interface name="org.freedesktop.DBus.Properties"><method name="Get"><arg name="interface" type="s" direction="in"/>
+<arg name="name" type="s" direction="in"/>
+<arg name="value" type="v" direction="out"/>
+</method><method name="Set"><arg name="interface" type="s" direction="in"/>
+<arg name="name" type="s" direction="in"/>
+<arg name="value" type="v" direction="in"/>
+</method><method name="GetAll"><arg name="interface" type="s" direction="in"/>
+<arg name="properties" type="a{sv}" direction="out"/>
+</method><signal name="PropertiesChanged"><arg name="interface" type="s"/>
+<arg name="changed_properties" type="a{sv}"/>
+<arg name="invalidated_properties" type="as"/>
+</signal>
+</interface><interface name="org.bluez.BatteryProviderManager1"><method name="RegisterBatteryProvider"><arg name="provider" type="o" direction="in"/>
+</method><method name="UnregisterBatteryProvider"><arg name="provider" type="o" direction="in"/>
+</method></interface><interface name="org.bluez.GattManager1"><method name="RegisterApplication"><arg name="application" type="o" direction="in"/>
+<arg name="options" type="a{sv}" direction="in"/>
+</method><method name="UnregisterApplication"><arg name="application" type="o" direction="in"/>
+</method></interface><interface name="org.bluez.AdvertisementMonitorManager1"><method name="RegisterMonitor"><arg name="application" type="o" direction="in"/>
+</method><method name="UnregisterMonitor"><arg name="application" type="o" direction="in"/>
+</method><property name="SupportedMonitorTypes" type="as" access="read"></property><property name="SupportedFeatures" type="as" access="read"></property></interface><interface name="org.bluez.Media1"><method name="RegisterEndpoint"><arg name="endpoint" type="o" direction="in"/>
+<arg name="properties" type="a{sv}" direction="in"/>
+</method><method name="UnregisterEndpoint"><arg name="endpoint" type="o" direction="in"/>
+</method><method name="RegisterPlayer"><arg name="player" type="o" direction="in"/>
+<arg name="properties" type="a{sv}" direction="in"/>
+</method><method name="UnregisterPlayer"><arg name="player" type="o" direction="in"/>
+</method><method name="RegisterApplication"><arg name="application" type="o" direction="in"/>
+<arg name="options" type="a{sv}" direction="in"/>
+</method><method name="UnregisterApplication"><arg name="application" type="o" direction="in"/>
+</method><property name="SupportedUUIDs" type="as" access="read"></property></interface><interface name="org.bluez.NetworkServer1"><method name="Register"><arg name="uuid" type="s" direction="in"/>
+<arg name="bridge" type="s" direction="in"/>
+</method><method name="Unregister"><arg name="uuid" type="s" direction="in"/>
+</method></interface><interface name="org.bluez.SimAccess1"><method name="Disconnect"></method><property name="Connected" type="b" access="read"></property></interface><interface name="org.bluez.LEAdvertisingManager1"><method name="RegisterAdvertisement"><arg name="advertisement" type="o" direction="in"/>
+<arg name="options" type="a{sv}" direction="in"/>
+</method><method name="UnregisterAdvertisement"><arg name="service" type="o" direction="in"/>
+</method><property name="ActiveInstances" type="y" access="read"></property><property name="SupportedInstances" type="y" access="read"></property><property name="SupportedIncludes" type="as" access="read"></property><property name="SupportedSecondaryChannels" type="as" access="read"></property><property name="SupportedFeatures" type="as" access="read"></property><property name="SupportedCapabilities" type="a{sv}" access="read"></property></interface></node>"
+method call time=1770164061.731906 sender=:1.310 -> destination=:1.7 serial=13 path=/org/bluez/hci0; interface=org.bluez.LEAdvertisingManager1; member=RegisterAdvertisement
+   object path "/org/bluez/ldsg/advertisement0"
+   array [
+   ]
+method call time=1770164061.732275 sender=:1.7 -> destination=org.freedesktop.DBus serial=1251 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender='org.freedesktop.DBus',path='/org/freedesktop/DBus',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0=':1.310'"
+method return time=1770164061.732309 sender=org.freedesktop.DBus -> destination=:1.7 serial=556 reply_serial=1251
+method call time=1770164061.732699 sender=:1.7 -> destination=org.freedesktop.DBus serial=1252 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string ":1.310"
+method return time=1770164061.732764 sender=org.freedesktop.DBus -> destination=:1.7 serial=557 reply_serial=1252
+   string ":1.310"
+method call time=1770164061.732799 sender=:1.7 -> destination=org.freedesktop.DBus serial=1253 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path='/org/bluez/ldsg/advertisement0',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesAdded'"
+method return time=1770164061.732834 sender=org.freedesktop.DBus -> destination=:1.7 serial=558 reply_serial=1253
+method call time=1770164061.732919 sender=:1.7 -> destination=org.freedesktop.DBus serial=1254 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path='/org/bluez/ldsg/advertisement0',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesRemoved'"
+method return time=1770164061.732970 sender=org.freedesktop.DBus -> destination=:1.7 serial=559 reply_serial=1254
+method call time=1770164061.733333 sender=:1.7 -> destination=org.freedesktop.DBus serial=1255 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path_namespace='/org/bluez/ldsg/advertisement0'"
+method return time=1770164061.733407 sender=org.freedesktop.DBus -> destination=:1.7 serial=560 reply_serial=1255
+method call time=1770164061.733426 sender=:1.7 -> destination=org.freedesktop.DBus serial=1256 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path='/org/bluez/ldsg/advertisement0',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',arg0='org.bluez.LEAdvertisement1'"
+method return time=1770164061.733461 sender=org.freedesktop.DBus -> destination=:1.7 serial=561 reply_serial=1256
+method call time=1770164061.733958 sender=:1.7 -> destination=org.freedesktop.DBus serial=1257 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=StartServiceByName
+   string ":1.310"
+   uint32 0
+error time=1770164061.734036 sender=org.freedesktop.DBus -> destination=:1.7 error_name=org.freedesktop.DBus.Error.ServiceUnknown reply_serial=1257
+   string "The name :1.310 was not provided by any .service files"
+method call time=1770164061.734094 sender=:1.7 -> destination=:1.310 serial=1258 path=/org/bluez/ldsg/advertisement0; interface=org.freedesktop.DBus.ObjectManager; member=GetManagedObjects
+method call time=1770164061.734316 sender=:1.310 -> destination=:1.7 serial=14 path=/org/bluez/hci0; interface=org.bluez.GattManager1; member=RegisterApplication
+   object path "/"
+   array [
+   ]
+method call time=1770164061.734691 sender=:1.7 -> destination=org.freedesktop.DBus serial=1259 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string ":1.310"
+method return time=1770164061.734768 sender=org.freedesktop.DBus -> destination=:1.7 serial=563 reply_serial=1259
+   string ":1.310"
+method call time=1770164061.734840 sender=:1.7 -> destination=org.freedesktop.DBus serial=1260 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesAdded'"
+method return time=1770164061.734905 sender=org.freedesktop.DBus -> destination=:1.7 serial=564 reply_serial=1260
+method call time=1770164061.735077 sender=:1.7 -> destination=org.freedesktop.DBus serial=1261 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesRemoved'"
+method return time=1770164061.735139 sender=org.freedesktop.DBus -> destination=:1.7 serial=565 reply_serial=1261
+method call time=1770164061.735429 sender=:1.7 -> destination=org.freedesktop.DBus serial=1262 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender=':1.310',path_namespace='/'"
+method return time=1770164061.735483 sender=org.freedesktop.DBus -> destination=:1.7 serial=566 reply_serial=1262
+method call time=1770164061.735556 sender=:1.7 -> destination=:1.310 serial=1263 path=/; interface=org.freedesktop.DBus.ObjectManager; member=GetManagedObjects
+error time=1770164061.735586 sender=:1.310 -> destination=:1.7 error_name=org.freedesktop.DBus.Error.UnknownMethod reply_serial=1258
+   string "Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/dbus/service.py", line 659, in _message_cb
+    (candidate_method, parent_method) = _method_lookup(self, method_name, interface_name)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/dbus/service.py", line 249, in _method_lookup
+    raise UnknownMethodException('%s is not a valid method of interface %s' % (method_name, dbus_interface))
+dbus.exceptions.UnknownMethodException: org.freedesktop.DBus.Error.UnknownMethod: Unknown method: GetManagedObjects is not a valid method of interface org.freedesktop.DBus.ObjectManager
+"
+method call time=1770164061.735893 sender=:1.7 -> destination=:1.310 serial=1264 path=/org/bluez/ldsg/advertisement0; interface=org.freedesktop.DBus.Properties; member=GetAll
+   string "org.bluez.LEAdvertisement1"
+error time=1770164061.736180 sender=:1.310 -> destination=:1.7 error_name=org.freedesktop.DBus.Python.ValueError reply_serial=1263
+   string "Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/dbus/service.py", line 666, in _message_cb
+    signature = Signature(parent_method._dbus_out_signature)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Corrupt type signature
+"
+method return time=1770164061.736306 sender=:1.310 -> destination=:1.7 serial=17 reply_serial=1264
+   array [
+      dict entry(
+         string "Type"
+         variant             string "peripheral"
+      )
+      dict entry(
+         string "LocalName"
+         variant             string "OSIFS_framework-sergey"
+      )
+      dict entry(
+         string "Discoverable"
+         variant             boolean true
+      )
+   ]
+error time=1770164061.736627 sender=:1.7 -> destination=:1.310 error_name=org.bluez.Error.Failed reply_serial=14
+   string "No object received"
+method call time=1770164061.736741 sender=:1.7 -> destination=org.freedesktop.DBus serial=1266 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RemoveMatch
+   string "type='signal',sender=':1.310',path_namespace='/'"
+method return time=1770164061.736791 sender=org.freedesktop.DBus -> destination=:1.7 serial=567 reply_serial=1266
+method call time=1770164061.736929 sender=:1.7 -> destination=org.freedesktop.DBus serial=1267 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RemoveMatch
+   string "type='signal',sender=':1.310',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesAdded'"
+method return time=1770164061.736991 sender=org.freedesktop.DBus -> destination=:1.7 serial=568 reply_serial=1267
+method call time=1770164061.737238 sender=:1.7 -> destination=org.freedesktop.DBus serial=1268 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RemoveMatch
+   string "type='signal',sender=':1.310',path='/',interface='org.freedesktop.DBus.ObjectManager',member='InterfacesRemoved'"
+method return time=1770164061.737295 sender=org.freedesktop.DBus -> destination=:1.7 serial=569 reply_serial=1268
+signal time=1770164061.765345 sender=org.freedesktop.DBus -> destination=:1.310 serial=10 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameLost
+   string ":1.310"
+signal time=1770164061.765455 sender=org.freedesktop.DBus -> destination=(null destination) serial=570 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string ":1.310"
+   string ":1.310"
+   string ""
+method call time=1770164061.765723 sender=:1.7 -> destination=org.freedesktop.DBus serial=1269 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RemoveMatch
+   string "type='signal',sender=':1.310',path='/org/bluez/ldsg/advertisement0',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',arg0='org.bluez.LEAdvertisement1'"
+error time=1770164061.765789 sender=org.freedesktop.DBus -> destination=:1.7 error_name=org.freedesktop.DBus.Error.MatchRuleNotFound reply_serial=1269
+   string "The given match rule wasn't found and can't be removed"
+signal time=1770164061.850698 sender=:1.7 -> destination=(null destination) serial=1270 path=/org/bluez/hci0; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.bluez.LEAdvertisingManager1"
+   array [
+      dict entry(
+         string "SupportedInstances"
+         variant             byte 13
+      )
+      dict entry(
+         string "ActiveInstances"
+         variant             byte 7
+      )
+   ]
+   array [
+   ]
+method return time=1770164061.851307 sender=:1.7 -> destination=:1.310 serial=1271 reply_serial=13
+error time=1770164061.851345 sender=org.freedesktop.DBus -> destination=:1.7 error_name=org.freedesktop.DBus.Error.ServiceUnknown reply_serial=1271
+   string "The name :1.310 was not provided by any .service files"
+signal time=1770164062.727810 sender=:1.3 -> destination=:1.82 serial=7351 path=/net/hadess/SensorProxy/Compass; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "net.hadess.SensorProxy.Compass"
+   array [
+   ]
+   array [
+   ]
+signal time=1770164062.728094 sender=:1.3 -> destination=:1.100 serial=7352 path=/net/hadess/SensorProxy; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "net.hadess.SensorProxy"
+   array [
+      dict entry(
+         string "LightLevelUnit"
+         variant             string "lux"
+      )
+      dict entry(
+         string "LightLevel"
+         variant             double 27
+      )
+   ]
+   array [
+   ]
+method call time=1770164062.728647 sender=:1.100 -> destination=:1.11 serial=4016 path=/org/freedesktop/login1/session/auto; interface=org.freedesktop.login1.Session; member=SetBrightness
+   string "backlight"
+   string "amdgpu_bl1"
+   uint32 242
+method call time=1770164062.729115 sender=:1.11 -> destination=org.freedesktop.DBus serial=8107 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixProcessID
+   string ":1.100"
+method return time=1770164062.729181 sender=org.freedesktop.DBus -> destination=:1.11 serial=7608 reply_serial=8107
+   uint32 3131
+method call time=1770164062.729583 sender=:1.11 -> destination=org.freedesktop.DBus serial=8108 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetConnectionUnixUser
+   string ":1.100"
+method return time=1770164062.729639 sender=org.freedesktop.DBus -> destination=:1.11 serial=7609 reply_serial=8108
+   uint32 1000
+signal time=1770164062.735268 sender=:1.4 -> destination=(null destination) serial=36004 path=/org/freedesktop/systemd1/unit/systemd_2dbacklight_40backlight_3aamdgpu_5fbl1_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Service"
+   array [
+      dict entry(
+         string "NotifyAccess"
+         variant             string "none"
+      )
+      dict entry(
+         string "MainPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ControlPID"
+         variant             uint32 0
+      )
+      dict entry(
+         string "StatusText"
+         variant             string ""
+      )
+      dict entry(
+         string "StatusErrno"
+         variant             int32 0
+      )
+      dict entry(
+         string "Result"
+         variant             string "success"
+      )
+      dict entry(
+         string "ReloadResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "CleanResult"
+         variant             string "success"
+      )
+      dict entry(
+         string "UID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "GID"
+         variant             uint32 4294967295
+      )
+      dict entry(
+         string "NRestarts"
+         variant             uint32 0
+      )
+      dict entry(
+         string "ExecMainStartTimestamp"
+         variant             uint64 1770072916841918
+      )
+      dict entry(
+         string "ExecMainStartTimestampMonotonic"
+         variant             uint64 4883134
+      )
+      dict entry(
+         string "ExecMainExitTimestamp"
+         variant             uint64 1770072917732765
+      )
+      dict entry(
+         string "ExecMainExitTimestampMonotonic"
+         variant             uint64 5773981
+      )
+      dict entry(
+         string "ExecMainPID"
+         variant             uint32 1309
+      )
+      dict entry(
+         string "ExecMainCode"
+         variant             int32 1
+      )
+      dict entry(
+         string "ExecMainStatus"
+         variant             int32 0
+      )
+   ]
+   array [
+      string "ExecCondition"
+      string "ExecConditionEx"
+      string "ExecStartPre"
+      string "ExecStartPreEx"
+      string "ExecStart"
+      string "ExecStartEx"
+      string "ExecStartPost"
+      string "ExecStartPostEx"
+      string "ExecReload"
+      string "ExecReloadEx"
+      string "ExecStop"
+      string "ExecStopEx"
+      string "ExecStopPost"
+      string "ExecStopPostEx"
+   ]
+signal time=1770164062.737078 sender=:1.4 -> destination=(null destination) serial=36005 path=/org/freedesktop/systemd1/unit/systemd_2dbacklight_40backlight_3aamdgpu_5fbl1_2eservice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "exited"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072917733301
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 5774517
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916842235
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4883451
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072917733301
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 5774517
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean true
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 1770072916829677
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 4870893
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 1770072916829684
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 4870899
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               63 cc 67 50 91 ce 42 f4 9c 92 28 f9 ba 4c 4c c5
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164062.738727 sender=:1.4 -> destination=(null destination) serial=36006 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Device"
+   array [
+      dict entry(
+         string "SysFSPath"
+         variant             string "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/drm/card1/card1-eDP-1/amdgpu_bl1"
+      )
+   ]
+   array [
+   ]
+signal time=1770164062.738950 sender=:1.4 -> destination=(null destination) serial=36007 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "plugged"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               f6 56 eb 0f 2c b8 45 58 9b 43 13 88 92 a6 36 66
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+signal time=1770164062.740640 sender=:1.4 -> destination=(null destination) serial=36008 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobNew
+   uint32 17795
+   object path "/org/freedesktop/systemd1/job/17795"
+   string "sys-devices-pci0000:00-0000:00:08.1-0000:c1:00.0-drm-card1-card1\x2deDP\x2d1-amdgpu_bl1.device"
+signal time=1770164062.740707 sender=:1.4 -> destination=(null destination) serial=36009 path=/org/freedesktop/systemd1; interface=org.freedesktop.systemd1.Manager; member=JobRemoved
+   uint32 17795
+   object path "/org/freedesktop/systemd1/job/17795"
+   string "sys-devices-pci0000:00-0000:00:08.1-0000:c1:00.0-drm-card1-card1\x2deDP\x2d1-amdgpu_bl1.device"
+   string "done"
+signal time=1770164062.740789 sender=:1.4 -> destination=(null destination) serial=36010 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Device"
+   array [
+      dict entry(
+         string "SysFSPath"
+         variant             string "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/drm/card1/card1-eDP-1/amdgpu_bl1"
+      )
+   ]
+   array [
+   ]
+signal time=1770164062.741016 sender=:1.4 -> destination=(null destination) serial=36011 path=/org/freedesktop/systemd1/unit/sys_2ddevices_2dpci0000_3a00_2d0000_3a00_3a08_2e1_2d0000_3ac1_3a00_2e0_2ddrm_2dcard1_2dcard1_5cx2deDP_5cx2d1_2damdgpu_5fbl1_2edevice; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.systemd1.Unit"
+   array [
+      dict entry(
+         string "ActiveState"
+         variant             string "active"
+      )
+      dict entry(
+         string "FreezerState"
+         variant             string "running"
+      )
+      dict entry(
+         string "SubState"
+         variant             string "plugged"
+      )
+      dict entry(
+         string "StateChangeTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "StateChangeTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "InactiveExitTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "InactiveExitTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveEnterTimestamp"
+         variant             uint64 1770072916829212
+      )
+      dict entry(
+         string "ActiveEnterTimestampMonotonic"
+         variant             uint64 4870428
+      )
+      dict entry(
+         string "ActiveExitTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ActiveExitTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InactiveEnterTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "Job"
+         variant             struct {
+               uint32 0
+               object path "/"
+            }
+      )
+      dict entry(
+         string "ConditionResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "AssertResult"
+         variant             boolean false
+      )
+      dict entry(
+         string "ConditionTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "ConditionTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestamp"
+         variant             uint64 0
+      )
+      dict entry(
+         string "AssertTimestampMonotonic"
+         variant             uint64 0
+      )
+      dict entry(
+         string "InvocationID"
+         variant             array of bytes [
+               f6 56 eb 0f 2c b8 45 58 9b 43 13 88 92 a6 36 66
+            ]
+      )
+      dict entry(
+         string "ActivationDetails"
+         variant             array [
+            ]
+      )
+   ]
+   array [
+      string "Conditions"
+      string "Asserts"
+   ]
+method call time=1770164062.773717 sender=:1.283 -> destination=org.freedesktop.DBus serial=112 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=ListNames
+method return time=1770164062.773796 sender=org.freedesktop.DBus -> destination=:1.283 serial=160 reply_serial=112
+   array [
+      string "org.freedesktop.DBus"
+      string ":1.7"
+      string ":1.107"
+      string "org.freedesktop.timesync1"
+      string ":1.8"
+      string ":1.108"
+      string ":1.9"
+      string "org.freedesktop.systemd1"
+      string "org.freedesktop.ModemManager1"
+      string "org.freedesktop.NetworkManager"
+      string "org.freedesktop.oom1"
+      string "net.hadess.PowerProfiles"
+      string "org.freedesktop.resolve1"
+      string "org.freedesktop.RealtimeKit1"
+      string "org.freedesktop.Accounts"
+      string ":1.80"
+      string ":1.81"
+      string ":1.82"
+      string ":1.60"
+      string "net.hadess.SensorProxy"
+      string ":1.61"
+      string ":1.62"
+      string ":1.40"
+      string ":1.85"
+      string ":1.172"
+      string ":1.86"
+      string ":1.64"
+      string "org.freedesktop.PolicyKit1"
+      string "org.freedesktop.hostname1"
+      string ":1.87"
+      string "org.bluez"
+      string ":1.89"
+      string ":1.23"
+      string ":1.68"
+      string "net.hadess.SwitcherooControl"
+      string ":1.24"
+      string ":1.133"
+      string ":1.25"
+      string ":1.26"
+      string ":1.311"
+      string "com.redhat.NewPrinterNotification"
+      string ":1.136"
+      string "org.freedesktop.bolt"
+      string "org.gnome.RemoteDesktop"
+      string "com.redhat.PrinterDriversInstaller"
+      string ":1.139"
+      string "org.gnome.DisplayManager"
+      string "org.freedesktop.Avahi"
+      string "org.freedesktop.UDisks2"
+      string ":1.90"
+      string "fi.w1.wpa_supplicant1"
+      string "org.freedesktop.fwupd"
+      string ":1.92"
+      string "org.freedesktop.login1"
+      string ":1.93"
+      string ":1.94"
+      string ":1.50"
+      string "org.freedesktop.ColorManager"
+      string ":1.95"
+      string ":1.73"
+      string ":1.96"
+      string ":1.74"
+      string ":1.97"
+      string ":1.75"
+      string ":1.283"
+      string ":1.140"
+      string ":1.98"
+      string ":1.76"
+      string ":1.10"
+      string ":1.141"
+      string ":1.77"
+      string ":1.11"
+      string ":1.142"
+      string ":1.78"
+      string "org.freedesktop.UPower"
+      string ":1.12"
+      string ":1.143"
+      string ":1.79"
+      string ":1.0"
+      string ":1.13"
+      string "org.freedesktop.UPower.PowerProfiles"
+      string ":1.166"
+      string ":1.100"
+      string ":1.36"
+      string ":1.1"
+      string ":1.14"
+      string ":1.101"
+      string ":1.2"
+      string ":1.15"
+      string ":1.102"
+      string ":1.3"
+      string ":1.103"
+      string ":1.4"
+      string ":1.17"
+      string ":1.225"
+      string ":1.104"
+      string ":1.5"
+      string ":1.18"
+      string ":1.6"
+      string ":1.19"
+   ]
+method call time=1770164062.775611 sender=:1.283 -> destination=org.freedesktop.DBus serial=113 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=ListActivatableNames
+method return time=1770164062.775648 sender=org.freedesktop.DBus -> destination=:1.283 serial=161 reply_serial=113
+   array [
+      string "org.freedesktop.DBus"
+      string "org.freedesktop.GeoClue2"
+      string "org.freedesktop.fwupd"
+      string "org.freedesktop.login1"
+      string "org.freedesktop.timesync1"
+      string "com.ubuntu.LanguageSelector"
+      string "com.hp.hplip"
+      string "org.freedesktop.ColorManager"
+      string "com.ubuntu.SoftwareProperties"
+      string "org.freedesktop.systemd1"
+      string "org.freedesktop.Avahi"
+      string "org.freedesktop.PolicyKit1"
+      string "org.freedesktop.thermald"
+      string "org.freedesktop.hostname1"
+      string "org.freedesktop.ModemManager1"
+      string "org.bluez"
+      string "io.netplan.Netplan"
+      string "org.freedesktop.nm_priv_helper"
+      string "org.debian.apt"
+      string "net.reactivated.Fprint"
+      string "org.freedesktop.PackageKit"
+      string "org.freedesktop.UPower"
+      string "org.freedesktop.UDisks2"
+      string "org.freedesktop.UPower.PowerProfiles"
+      string "org.freedesktop.network1"
+      string "org.freedesktop.oom1"
+      string "net.hadess.PowerProfiles"
+      string "com.canonical.UbuntuAdvantage"
+      string "org.freedesktop.bolt"
+      string "org.freedesktop.resolve1"
+      string "org.freedesktop.RealtimeKit1"
+      string "org.gnome.RemoteDesktop"
+      string "org.freedesktop.Accounts"
+      string "org.freedesktop.timedate1"
+      string "com.ubuntu.WhoopsiePreferences"
+      string "fi.w1.wpa_supplicant1"
+      string "org.opensuse.CupsPkHelper.Mechanism"
+      string "org.freedesktop.locale1"
+      string "org.freedesktop.nm_dispatcher"
+   ]
+method call time=1770164063.301613 sender=:1.13 -> destination=org.freedesktop.resolve1 serial=70376 path=/org/freedesktop/resolve1; interface=org.freedesktop.resolve1.Manager; member=ResolveHostname
+   int32 0
+   string "connectivity-check.ubuntu.com."
+   int32 10
+   uint64 1
+method call time=1770164063.302297 sender=:1.0 -> destination=org.freedesktop.DBus serial=951 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string "type='signal',sender='org.freedesktop.DBus',path='/org/freedesktop/DBus',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0=':1.13'"
+method return time=1770164063.302392 sender=org.freedesktop.DBus -> destination=:1.0 serial=476 reply_serial=951
+method call time=1770164063.302411 sender=:1.0 -> destination=org.freedesktop.DBus serial=952 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string ":1.13"
+method return time=1770164063.302475 sender=org.freedesktop.DBus -> destination=:1.0 serial=477 reply_serial=952
+   string ":1.13"
+method return time=1770164063.305937 sender=:1.0 -> destination=:1.13 serial=953 reply_serial=70376
+   array [
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 2b
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            20 01 06 7c 15 62 00 00 00 00 00 00 00 00 00 23
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 96
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            20 01 06 7c 15 62 00 00 00 00 00 00 00 00 00 24
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 22
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 2a
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 23
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 97
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 00 00 01 00 00 00 00 00 00 00 98
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 02 00 01 00 00 00 00 00 00 01 98
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 02 00 01 00 00 00 00 00 00 01 97
+         ]
+      }
+      struct {
+         int32 2
+         int32 10
+         array of bytes [
+            26 20 00 2d 40 02 00 01 00 00 00 00 00 00 01 96
+         ]
+      }
+   ]
+   string "connectivity-check.ubuntu.com"
+   uint64 8388609
+method call time=1770164063.307784 sender=:1.0 -> destination=org.freedesktop.DBus serial=954 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RemoveMatch
+   string "type='signal',sender='org.freedesktop.DBus',path='/org/freedesktop/DBus',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0=':1.13'"
+signal time=1770164063.532417 sender=:1.9 -> destination=(null destination) serial=102480 path=/fi/w1/wpa_supplicant1/Interfaces/3; interface=fi.w1.wpa_supplicant1.Interface; member=BSSRemoved
+   object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/252"
+signal time=1770164063.533477 sender=:1.13 -> destination=(null destination) serial=70377 path=/org/freedesktop/NetworkManager/Devices/2; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "org.freedesktop.NetworkManager.Device.Wireless"
+   array [
+      dict entry(
+         string "AccessPoints"
+         variant             array [
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3321"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3322"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3323"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3324"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3326"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3327"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3331"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3332"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3333"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3334"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3335"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3336"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3337"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3344"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3346"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3349"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3353"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3354"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3359"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3360"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3362"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3364"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3366"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3367"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3368"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3383"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3390"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3397"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3437"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3438"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3450"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3500"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3510"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3528"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3532"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3539"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3562"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3571"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3572"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3576"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3577"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3578"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3579"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3580"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3582"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3583"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3584"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3585"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3588"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3589"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3591"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3592"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3593"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3594"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3596"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3597"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3598"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3599"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3601"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3603"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3604"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3605"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3606"
+               object path "/org/freedesktop/NetworkManager/AccessPoint/3607"
+            ]
+      )
+   ]
+   array [
+   ]
+signal time=1770164063.534869 sender=:1.13 -> destination=(null destination) serial=70378 path=/org/freedesktop/NetworkManager/Devices/2; interface=org.freedesktop.NetworkManager.Device.Wireless; member=AccessPointRemoved
+   object path "/org/freedesktop/NetworkManager/AccessPoint/3573"
+signal time=1770164063.534942 sender=:1.13 -> destination=(null destination) serial=70379 path=/org/freedesktop; interface=org.freedesktop.DBus.ObjectManager; member=InterfacesRemoved
+   object path "/org/freedesktop/NetworkManager/AccessPoint/3573"
+   array [
+      string "org.freedesktop.NetworkManager.AccessPoint"
+   ]
+signal time=1770164063.538012 sender=:1.9 -> destination=(null destination) serial=102481 path=/fi/w1/wpa_supplicant1/Interfaces/3; interface=org.freedesktop.DBus.Properties; member=PropertiesChanged
+   string "fi.w1.wpa_supplicant1.Interface"
+   array [
+      dict entry(
+         string "BSSs"
+         variant             array [
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/0"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/1"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/2"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/3"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/5"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/6"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/10"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/11"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/12"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/13"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/14"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/15"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/16"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/23"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/25"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/28"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/32"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/33"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/38"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/39"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/41"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/43"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/45"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/46"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/47"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/62"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/69"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/76"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/116"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/117"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/129"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/179"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/189"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/207"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/211"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/218"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/241"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/250"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/251"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/255"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/256"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/257"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/258"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/259"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/261"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/262"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/263"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/264"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/267"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/268"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/270"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/271"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/272"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/273"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/275"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/276"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/277"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/278"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/280"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/282"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/283"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/284"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/285"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/286"
+            ]
+      )
+   ]
+   array [
+   ]
+signal time=1770164063.539297 sender=:1.9 -> destination=(null destination) serial=102482 path=/fi/w1/wpa_supplicant1/Interfaces/3; interface=fi.w1.wpa_supplicant1.Interface; member=PropertiesChanged
+   array [
+      dict entry(
+         string "BSSs"
+         variant             array [
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/0"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/1"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/2"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/3"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/5"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/6"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/10"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/11"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/12"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/13"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/14"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/15"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/16"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/23"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/25"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/28"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/32"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/33"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/38"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/39"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/41"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/43"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/45"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/46"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/47"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/62"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/69"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/76"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/116"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/117"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/129"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/179"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/189"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/207"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/211"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/218"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/241"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/250"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/251"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/255"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/256"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/257"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/258"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/259"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/261"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/262"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/263"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/264"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/267"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/268"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/270"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/271"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/272"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/273"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/275"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/276"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/277"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/278"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/280"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/282"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/283"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/284"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/285"
+               object path "/fi/w1/wpa_supplicant1/Interfaces/3/BSSs/286"
+            ]
+      )
+   ]
