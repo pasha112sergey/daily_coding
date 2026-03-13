@@ -1,0 +1,25 @@
+$border: ascii #a59dcf 
+
+Screen {
+    background: #272142;
+}
+
+ItemPreview {
+    width: 100%;
+    height: 2;
+}
+
+Screen {
+    layout: grid;
+    grid-size: 2;
+}
+
+.right-side {
+    border: $border;
+    row-span: 1;
+}
+
+#all-items {
+    border: $border;
+    row-span: 2;
+}
