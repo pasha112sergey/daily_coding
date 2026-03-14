@@ -1,0 +1,6 @@
+/todo_app/__pycache__
+/todo_app/.venv
+/todo_app/bin
+/todo_app/include
+/todo_app/lib*
+/todo_app/pyvenv.cfg

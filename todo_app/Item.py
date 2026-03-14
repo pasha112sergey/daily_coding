@@ -49,8 +49,8 @@ class ItemManager():
     def __init__(self, path: str):
         self.path = path
         try :
-            self.items = pd.read_csv(path)
-            print("read exisiting")
+            self.items = pd.read_csv(path, index_col = 0)
+            print("read existing")
         except pd.errors.EmptyDataError: 
             print("creating...")
             self.items = pd.DataFrame(columns=["priority", "title", "description", "deadline", "posted"])
@@ -63,7 +63,7 @@ class ItemManager():
     def saveToCsv(self, path = None) -> None:    
         if path == None:
             print("path == none")
-            self.items.to_csv(self.path, header = False)
+            self.items.to_csv(self.path)
         else:
-            self.items.to_csv(path, header = False)
+            self.items.to_csv(path)
         
