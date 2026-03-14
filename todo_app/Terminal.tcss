@@ -1,10 +1,12 @@
-$border: ascii #a59dcf 
+$border:  green 
 
 Screen {
-    background: #272142;
+    background: black;
 }
 
 ItemPreview {
+    background: black;
+    border: green;
     width: 100%;
     height: 2;
 }

@@ -1,8 +1,12 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header, Button, Placeholder
 from textual.containers import VerticalScroll, VerticalScroll
+from Item import Item, ItemManager
+
+DB_PATH = "~/.todo.csv"
 
 class ItemPreview(Placeholder):
+    BASE_CSS = ""
     pass
 
 # Urgent
@@ -66,6 +70,10 @@ class TodoApp(App):
         )
     
 
+
 if __name__ == "__main__":
     app = TodoApp()
+    itemManager = ItemManager(DB_PATH)
     app.run()
+    itemManager.saveToCsv()
+    print("Done!")
