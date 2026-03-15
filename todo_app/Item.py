@@ -10,12 +10,13 @@ class Priority(Enum):
 
 
 class Item() :
-    def __init__(self, prio: Priority, tit: str, d: str, deadline: datetime) -> None:
+    def __init__(self, id: int, prio: Priority, tit: str, d: str, deadline: datetime, posted = datetime.now()) -> None:
         self.priority = prio
         self.title = tit
         self.desc = d
-        self.posted = datetime.now()
+        self.posted = posted
         self.deadline = deadline
+        self.id = id
 
 
     @property
@@ -53,17 +54,18 @@ class ItemManager():
             print("read existing")
         except pd.errors.EmptyDataError: 
             print("creating...")
-            self.items = pd.DataFrame(columns=["priority", "title", "description", "deadline", "posted"])
+            self.items = pd.DataFrame(columns=["id", "priority", "title", "description", "deadline", "posted"])
 
-        print(self.items)
+        
 
     def addItem(self, item : Item) -> None:
-        self.items.loc[len(self.items)] = [item.priority, item.title, item.desc, item.deadline, item.posted]
+        self.items.loc[len(self.items)] = [item.id, item.priority, item.title, item.desc, item.deadline, item.posted]
     
     def saveToCsv(self, path = None) -> None:    
         if path == None:
-            print("path == none")
             self.items.to_csv(self.path)
         else:
             self.items.to_csv(path)
-        
+    
+    def removeItem(self, item : Item) -> None:
+        self.items.drop(self.items['id'] == item.id)

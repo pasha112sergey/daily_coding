@@ -8,7 +8,9 @@ ItemPreview {
     background: black;
     border: green;
     width: 100%;
-    height: 2;
+    height: 5;
+    align: left middle;
+    padding: 0;
 }
 
 Screen {
@@ -24,4 +26,23 @@ Screen {
 #all-items {
     border: $border;
     row-span: 2;
+    margin-bottom: 0;
+}
+
+SortButtons, TimeSelection {
+    layout: horizontal;
+    align: center bottom;
+    width: 100%;
+}
+
+Button {
+    height: 3;
+    width: 33%;
+    box-sizing: border-box;
+    padding: 0;
+    align: center bottom;
+}
+
+Collapsible {
+    background: red;
 }
