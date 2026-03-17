@@ -50,22 +50,19 @@ class ItemManager():
     def __init__(self, path: str):
         self.path = path
         try :
-            self.items = pd.read_csv(path, index_col = 0)
-            print("read existing")
+            self.itemsDf = pd.read_csv(path, index_col = 0, parse_dates=['deadline', 'posted'])
+            print(self.itemsDf)
+
         except pd.errors.EmptyDataError: 
             print("creating...")
-            self.items = pd.DataFrame(columns=["id", "priority", "title", "description", "deadline", "posted"])
-
-        
+            self.itemsDf = pd.DataFrame(columns=["id", "priority", "title", "description", "deadline", "posted"])
 
     def addItem(self, item : Item) -> None:
-        self.items.loc[len(self.items)] = [item.id, item.priority, item.title, item.desc, item.deadline, item.posted]
+        self.itemsDf.loc[len(self.itemsDf)] = [item.id, item.priority, item.title, item.desc, item.deadline, item.posted]
     
     def saveToCsv(self, path = None) -> None:    
-        if path == None:
-            self.items.to_csv(self.path)
-        else:
-            self.items.to_csv(path)
+        self.itemsDf[['deadline', 'posted']] = self.itemsDf[['deadline', 'posted']].map(lambda x: x.to_isostring())
+        self.itemsDf.to_csv(self.path) if path == None else self.itemsDf.to_csv(path)
     
     def removeItem(self, item : Item) -> None:
-        self.items.drop(self.items['id'] == item.id)
+        self.itemsDf.drop(self.itemsDf['id'] == item.id)
