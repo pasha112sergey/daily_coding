@@ -46,3 +46,27 @@ Button {
 Collapsible {
     background: red;
 }
+
+Placeholder {
+    height: 1;
+}
+Horizontal > * {
+    width: 33%;
+}
+Horizontal {
+    width: 100%;
+}
+Vertical {
+    background: blue;
+    height: 100%;
+    width: 100%;
+}
+
+AddItemScreen {
+    height: 100%;
+    width: 200%;
+}
+
+.red {
+    background: red;
+}

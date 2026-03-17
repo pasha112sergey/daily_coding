@@ -7,10 +7,10 @@ class Priority(Enum):
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
 
-
+datetime.now()
 
 class Item() :
-    def __init__(self, id: int, prio: Priority, tit: str, d: str, deadline: datetime, posted = datetime.now()) -> None:
+    def __init__(self, id: int, prio: Priority, tit: str, d: str, deadline= datetime.now(), posted = datetime.now()) -> None:
         self.priority = prio
         self.title = tit
         self.desc = d
