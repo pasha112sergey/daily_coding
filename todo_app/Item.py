@@ -10,13 +10,12 @@ class Priority(Enum):
 datetime.now()
 
 class Item() :
-    def __init__(self, id: int, prio: Priority, tit: str, d: str, deadline= datetime.now(), posted = datetime.now()) -> None:
+    def __init__(self, prio: Priority, title: str, desc: str, deadline= datetime.now(), posted = datetime.now()) -> None:
         self.priority = prio
-        self.title = tit
-        self.desc = d
+        self.title = title
+        self.desc = desc
         self.posted = posted
         self.deadline = deadline
-        self.id = id
 
 
     @property
@@ -55,14 +54,14 @@ class ItemManager():
 
         except pd.errors.EmptyDataError: 
             print("creating...")
-            self.itemsDf = pd.DataFrame(columns=["id", "priority", "title", "description", "deadline", "posted"])
+            self.itemsDf = pd.DataFrame(columns=["priority", "title", "description", "deadline", "posted"])
 
     def addItem(self, item : Item) -> None:
-        self.itemsDf.loc[len(self.itemsDf)] = [item.id, item.priority, item.title, item.desc, item.deadline, item.posted]
+        self.itemsDf.loc[len(self.itemsDf)] = [item.priority, item.title, item.desc, item.deadline, item.posted]
     
     def saveToCsv(self, path = None) -> None:    
         self.itemsDf[['deadline', 'posted']] = self.itemsDf[['deadline', 'posted']].map(lambda x: x.to_isostring())
         self.itemsDf.to_csv(self.path) if path == None else self.itemsDf.to_csv(path)
     
     def removeItem(self, item : Item) -> None:
-        self.itemsDf.drop(self.itemsDf['id'] == item.id)
+        self.itemsDf.drop(self.itemsDf['title'] == item.title)

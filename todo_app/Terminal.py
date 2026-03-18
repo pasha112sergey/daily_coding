@@ -97,5 +97,5 @@ if __name__ == "__main__":
     config.app = TodoApp()
     itemManager = ItemManager(DB_PATH)
     config.app.run()
-    itemManager.saveToCsv()
+    config.itemManager.saveToCsv()
     print("Done!")
