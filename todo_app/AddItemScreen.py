@@ -20,66 +20,6 @@ def checkDate(date: str, optional = True) -> bool:
         return True
     except (pd.errors.ParserError, ValueError):
         return False
-
-class FormInput(Input):
-    BINDINGS: ClassVar[list[BindingType]] = [
-        Binding("left", "cursor_left", "Move cursor left", show=False),
-        Binding(
-            "shift+left",
-            "cursor_left(True)",
-            "Move cursor left and select",
-            show=False,
-        ),
-        Binding("ctrl+left", "cursor_left_word", "Move cursor left a word", show=False),
-        Binding(
-            "ctrl+shift+left",
-            "cursor_left_word(True)",
-            "Move cursor left a word and select",
-            show=False,
-        ),
-        Binding(
-            "right",
-            "cursor_right",
-            "Move cursor right or accept the completion suggestion",
-            show=False,
-        ),
-        Binding(
-            "shift+right",
-            "cursor_right(True)",
-            "Move cursor right and select",
-            show=False,
-        ),
-        Binding(
-            "ctrl+right",
-            "cursor_right_word",
-            "Move cursor right a word",
-            show=False,
-        ),
-        Binding(
-            "ctrl+shift+right",
-            "cursor_right_word(True)",
-            "Move cursor right a word and select",
-            show=False,
-        ),
-        Binding("backspace", "delete_left", "Delete character left", show=False),
-        Binding("ctrl+shift+a", "select_all", "Select all", show=False),
-        Binding("home,ctrl+a", "home", "Go to start", show=False),
-        Binding("end,ctrl+e", "end", "Go to end", show=False),
-        Binding("shift+home", "home(True)", "Select line start", show=False),
-        Binding("shift+end", "end(True)", "Select line end", show=False),
-        Binding("delete,ctrl+d", "delete_right", "Delete character right", show=False),
-        Binding(
-            "ctrl+w", "delete_left_word", "Delete left to start of word", show=False
-        ),
-        Binding("ctrl+u", "delete_left_all", "Delete all to the left", show=False),
-        Binding(
-            "ctrl+f", "delete_right_word", "Delete right to start of word", show=False
-        ),
-        Binding("ctrl+k", "delete_right_all", "Delete all to the right", show=False),
-        Binding("ctrl+x", "cut", "Cut selected text", show=False),
-        Binding("ctrl+c,super+c", "copy", "Copy selected text", show=False),
-        Binding("ctrl+v", "paste", "Paste text from the clipboard", show=False),
-    ]
         
         
 

@@ -1,6 +1,7 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header, Button, Static, Label
 from textual.containers import VerticalScroll, VerticalScroll
+
 from Item import Item, ItemManager, Priority
 from datetime import datetime
 from AddItemScreen import AddItemScreen
