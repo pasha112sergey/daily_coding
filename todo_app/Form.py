@@ -5,6 +5,7 @@ from textual.app import ComposeResult
 from textual.containers import Vertical
 from textual.validation import ValidationResult
 from textual.message import Message
+from Item import Item, ItemManager
 
 class InputDescriptor():
     def __init__(self, name: str | None = None, **kwargs):
@@ -13,13 +14,14 @@ class InputDescriptor():
 
 
 class Form(Widget):
-    def __init__(self, inputArgs: dict[str, InputDescriptor] = {}) -> None:
+    def __init__(self, itemManager : ItemManager, inputArgs: dict[str, InputDescriptor] = {}) -> None:
         super().__init__()
+        self.itemManager = itemManager
         self.inputs = inputArgs
         print(self.inputs)
         self.inputElements: list[Input] = []
         self.inputResult = {}
-        self.title = Label("Title!")
+        self.title = Label("Create a new todo item!")
 
         for inputName in self.inputs:
             inp = Input(name=inputName, **(self.inputs[inputName].args))
@@ -57,7 +59,8 @@ class Form(Widget):
                 submission[ele.name] = ele.value
                 self.query_one(f"#{ele.name}-label").content = f"{ele.name} = {submission[ele.name]}"
         
-        if submitting:
-            self.post_message(self.Resulting(submission))
-        
+        if not submitting:
+            return
 
+        item = Item(submission["prio"], submission["title"], submission["desc"], submission["deadline"])
+        self.itemManager.addItem(item)

@@ -4,19 +4,18 @@ from textual.widgets import Input, Placeholder, Label
 from textual.containers import Vertical, Horizontal
 from textual.screen import Screen
 from textual.validation import Function, ValidationResult
-from Item import Item, ItemManager
-import config
+from Item import Item, Priority, ItemManager
 import pandas as pd
-import config
-from textual.binding import Binding, BindingType
-from typing import TYPE_CHECKING, ClassVar, Iterable, NamedTuple
 from Form import Form, InputDescriptor
-from Item import Priority, ItemManager
-        
 
+    
 class AddItemScreen(Screen):
-
     BINDINGS = [("escape", "cancelSubmission", "Cancel")]
+    def __init__(self, itemManager : ItemManager, app : App, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self.itemManager = itemManager
+        self.appParent = app
+
     def prioValidator(self, x):
         try: 
             Priority(x)
@@ -41,7 +40,7 @@ class AddItemScreen(Screen):
         }
 
         with Vertical():
-            yield Form(formArgs)
+            yield Form(self.itemManager, formArgs)
     
     def checkDate(self, date: str, optional = True) -> bool:
         if optional == True and len(date) == 0:
@@ -52,11 +51,8 @@ class AddItemScreen(Screen):
         except (pd.errors.ParserError, ValueError):
             return False
         
-
-
     def action_cancelSubmission(self) -> None:
-        config.app.pop_screen()
+        self.appParent.pop_screen()
     
     def on_form_resulting(self, message: Form.Resulting):
-        config.itemManager.addItem(Item(**message.result))
-        
+        self.itemManager.addItem(Item(**message.result))

@@ -1,13 +1,10 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header, Button, Static, Label
 from textual.containers import VerticalScroll, VerticalScroll
-
 from Item import Item, ItemManager, Priority
 from datetime import datetime
 from AddItemScreen import AddItemScreen
-import config
 
-DB_PATH = "~/.todo.csv"
 class ItemPreview(Label):
     def __init__(self, item: Item | None = None, **kwargs):
         super().__init__(**kwargs)
@@ -78,6 +75,10 @@ class TodoApp(App):
     CSS_PATH = "Terminal.tcss"
     BINDINGS = [("a", "addItem", "Add Item")]
 
+    def __init__(self, itemManager, **kwargs):
+        super().__init__(**kwargs)
+        self.itemManager = itemManager
+
     def compose(self) -> ComposeResult:
         yield Header()
         yield AllItems(classes="static", id="all-items")
@@ -89,13 +90,15 @@ class TodoApp(App):
     Pulls up add Item screen
     """
     def action_addItem(self) -> None:
-        config.app.push_screen(AddItemScreen())
+        self.push_screen(AddItemScreen(self.itemManager, self))
     
 
-
 if __name__ == "__main__":
-    config.app = TodoApp()
+    DB_PATH = "~/.todo.csv"
     itemManager = ItemManager(DB_PATH)
-    config.app.run()
-    config.itemManager.saveToCsv()
+    app = TodoApp(itemManager)
+    app.run()
+    itemManager.saveToCsv()
     print("Done!")
+
+

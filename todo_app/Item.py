@@ -60,7 +60,7 @@ class ItemManager():
         self.itemsDf.loc[len(self.itemsDf)] = [item.priority, item.title, item.desc, item.deadline, item.posted]
     
     def saveToCsv(self, path = None) -> None:    
-        self.itemsDf[['deadline', 'posted']] = self.itemsDf[['deadline', 'posted']].map(lambda x: x.to_isostring())
+        # self.itemsDf[['deadline', 'posted']] = self.itemsDf[['deadline', 'posted']]
         self.itemsDf.to_csv(self.path) if path == None else self.itemsDf.to_csv(path)
     
     def removeItem(self, item : Item) -> None:
