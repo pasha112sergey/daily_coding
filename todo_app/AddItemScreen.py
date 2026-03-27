@@ -40,7 +40,7 @@ class AddItemScreen(Screen):
         }
 
         with Vertical():
-            yield Form(self.itemManager, formArgs)
+            yield Form(self.appParent, self.itemManager, formArgs)
     
     def checkDate(self, date: str, optional = True) -> bool:
         if optional == True and len(date) == 0:

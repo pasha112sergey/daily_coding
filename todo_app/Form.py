@@ -1,5 +1,6 @@
 from textual import on
 from textual.widget import Widget
+from textual.app import App
 from textual.widgets import Input, Button, Label
 from textual.app import ComposeResult
 from textual.containers import Vertical
@@ -14,9 +15,11 @@ class InputDescriptor():
 
 
 class Form(Widget):
-    def __init__(self, itemManager : ItemManager, inputArgs: dict[str, InputDescriptor] = {}) -> None:
+    def __init__(self, app: App, itemManager : ItemManager, inputArgs: dict[str, InputDescriptor] = {}) -> None:
         super().__init__()
         self.itemManager = itemManager
+        self.appParent = app
+
         self.inputs = inputArgs
         print(self.inputs)
         self.inputElements: list[Input] = []
@@ -64,3 +67,5 @@ class Form(Widget):
 
         item = Item(submission["prio"], submission["title"], submission["desc"], submission["deadline"])
         self.itemManager.addItem(item)
+        self.appParent.pop_screen()
+
