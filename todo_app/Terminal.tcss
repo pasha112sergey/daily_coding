@@ -101,3 +101,12 @@ Form {
     padding-left: 2;
     align: left middle;
 }
+
+Screen {
+    align: center middle;
+    border: white;
+}
+
+ItemScreen {
+    layout: vertical;
+}

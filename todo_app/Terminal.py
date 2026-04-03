@@ -10,34 +10,7 @@ import pandas as pd
 from textual.screen import Screen
 from datetime import timedelta
 from ItemScreen import ItemScreen
-
-# class ItemPanel():
-#     def __init__(self, screen : Screen | None) -> None:
-#         self.screen = screen
-
-def formatTimestamp(time : datetime, option: str) -> str:
-    def convertWeekday(s):
-        if s == 0:
-            return "Monday"
-        if s == 1:
-            return "Tuesday"
-        if s == 2:
-            return "Wednesday"
-        if s == 3:
-            return "Thursday"
-        if s == 4:
-            return "Friday"
-        if s == 5:
-            return "Saturday"
-        if s == 6:
-            return "Sunday"
-    
-    if pd.isna(time):
-        return ""
-    if option == "deadline":
-        return f"Due: [{convertWeekday(time.weekday())} - {time.month}/{time.day} @ {time.hour}:{time.minute}]"
-    else:
-        return f"[{time.weekday()} - {time.day} @ {time.hour}:{time.minute}]"
+from config import formatTimestamp
 
 class ItemPreview(Label):
     def __init__(self, item: Item | None = None, **kwargs):
