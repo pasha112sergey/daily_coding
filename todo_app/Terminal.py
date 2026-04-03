@@ -4,6 +4,42 @@ from textual.containers import VerticalScroll, VerticalScroll
 from Item import Item, ItemManager, Priority
 from datetime import datetime
 from AddItemScreen import AddItemScreen
+from textual import on
+import pandas as pd
+from datetime import timedelta
+
+def formatTimestamp(time : datetime, option: str) -> str:
+    def convertWeekday(s):
+        if s == 0:
+            return "Monday"
+        if s == 1:
+            return "Tuesday"
+        if s == 2:
+            return "Wednesday"
+        if s == 3:
+            return "Thursday"
+        if s == 4:
+            return "Friday"
+        if s == 5:
+            return "Saturday"
+        if s == 6:
+            return "Sunday"
+    
+    if pd.isna(time):
+        return ""
+    if option == "deadline":
+        return f"Due: [{convertWeekday(time.weekday())} - {time.month}/{time.day} @ {time.hour}:{time.minute}]"
+    else:
+        return f"[{time.weekday()} - {time.day} @ {time.hour}:{time.minute}]"
+
+def prioToColor(prio : Priority) -> None | str:
+    if prio == "LOW":
+        return "#dec800"
+    if prio == "MEDIUM":
+        return "#de3f00"
+    if prio == "HIGH":
+        return "#de0000"
+    return None
 
 class ItemPreview(Label):
     def __init__(self, item: Item | None = None, **kwargs):
@@ -13,19 +49,26 @@ class ItemPreview(Label):
 
     def compose(self) -> ComposeResult:
         if self.item:
-            yield Static(self.item.title)
+            s = f"{self.item.title} {formatTimestamp(self.item.deadline, "deadline")}" 
+            self.styles.background = prioToColor(self.item.priority)
+            yield Static(s)
         else:
-            yield Static("Placeholder")
+            yield Static("placeholder")
     
-
-
 # Urgent
 class Urgent(VerticalScroll):
     BORDER_TITLE = "Due Today"
+    def urgentFilter(self, items):
+        func = lambda x : x.deadline is not None and datetime.now() < x.deadline < datetime.now() + timedelta(days = 7)
+        return list(filter(func, items))
+    
     def compose(self) -> ComposeResult:
-        yield TimeSelection("")
+        items = [Item(**row) for row in itemManager.itemsDf.to_dict(orient="records")]
+        items = self.urgentFilter(items)
+
         with VerticalScroll(): 
-            yield ItemPreview()
+            for item in items:
+                yield ItemPreview(item)
 
 # Reminders
 class Reminders(VerticalScroll):
@@ -46,29 +89,21 @@ class Reminders(VerticalScroll):
 class AllItems(VerticalScroll):
     BORDER_TITLE = "All Items"
     def compose(self) -> ComposeResult:
+        global itemManager
+        items = [Item(**row) for row in itemManager.itemsDf.to_dict(orient="records")]
+
         yield SortButtons("")
         with VerticalScroll(): 
-            yield ItemPreview()
-            yield ItemPreview()
-            yield ItemPreview()
-            yield ItemPreview()
-            yield ItemPreview()
-            yield ItemPreview()
-            yield ItemPreview()
-            yield ItemPreview()
+            for item in items:
+                yield ItemPreview(item)
         
-        
+
 class SortButtons(Static):
     def compose(self) -> ComposeResult:
         yield Button("Oldest", flat = True)
         yield Button("Newest", flat = True)
         yield Button("Priority", flat = True)
 
-class TimeSelection(Static):
-    def compose(self) -> ComposeResult:
-        yield Button("Today", flat = True)
-        yield Button("Week", flat = True)
-        yield Button("Month", flat = True)
 
 # App is the base class for all textual apps
 class TodoApp(App):
@@ -95,6 +130,8 @@ class TodoApp(App):
 
 if __name__ == "__main__":
     DB_PATH = "~/.todo.csv"
+    global itemManager 
+
     itemManager = ItemManager(DB_PATH)
     app = TodoApp(itemManager)
     app.run()

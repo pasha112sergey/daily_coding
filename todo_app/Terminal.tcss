@@ -6,7 +6,7 @@ Screen {
 
 ItemPreview {
     background: black;
-    border: green;
+    border: black;
     width: 100%;
     height: 5;
     align: left middle;
@@ -71,7 +71,6 @@ Form {
     width: 100%;
     height: 100%;
 }
-
 
 #red {
     background: red;

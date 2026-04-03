@@ -3,9 +3,9 @@ import pandas as pd
 from enum import Enum
 
 class Priority(Enum):
-    LOW = "LOW"
-    MEDIUM = "MEDIUM"
-    HIGH = "HIGH"
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
 
 datetime.now()
 
@@ -16,7 +16,6 @@ class Item() :
         self.desc = desc
         self.posted = posted
         self.deadline = deadline
-
 
     @property
     def title(self) -> str:
@@ -46,22 +45,43 @@ class Item() :
         return f"Title: {self.title}\nDescription: {self._desc}\nDeadline: {self.deadline}\nPosted: {self.posted}"
 
 class ItemManager():
+
+    def matchPrio(self, prio):
+        if prio == "LOW":
+            return Priority.LOW
+        if prio == "MED":
+            return Priority.MEDIUM
+        if prio == "HIGH":
+            return Priority.HIGH
+        else:
+            return None
+        
+
     def __init__(self, path: str):
         self.path = path
         try :
             self.itemsDf = pd.read_csv(path, index_col = 0, parse_dates=['deadline', 'posted'])
-            print(self.itemsDf)
+            self.itemsDf["prio"] = self.itemsDf["prio"].map({"LOW": 0, 'MEDIUM': 1, 'HIGH' : 2})
+            self.itemsDf.sort_values(by=["prio"], inplace=True, ascending=False)
+            self.itemsDf["prio"] = self.itemsDf["prio"].map({2 : "HIGH", 1: "MEDIUM", 0: "LOW"})
+            print(self.itemsDf.head())
 
         except pd.errors.EmptyDataError: 
             print("creating...")
-            self.itemsDf = pd.DataFrame(columns=["priority", "title", "description", "deadline", "posted"])
+            self.itemsDf = pd.DataFrame(columns=["prio", "title", "desc", "deadline", "posted"])
 
     def addItem(self, item : Item) -> None:
         self.itemsDf.loc[len(self.itemsDf)] = [item.priority, item.title, item.desc, item.deadline, item.posted]
     
     def saveToCsv(self, path = None) -> None:    
         # self.itemsDf[['deadline', 'posted']] = self.itemsDf[['deadline', 'posted']]
+        
+        print("output: ")
+        print(self.itemsDf.head())
         self.itemsDf.to_csv(self.path) if path == None else self.itemsDf.to_csv(path)
+
     
     def removeItem(self, item : Item) -> None:
         self.itemsDf.drop(self.itemsDf['title'] == item.title)
+    
+

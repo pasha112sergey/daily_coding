@@ -26,7 +26,7 @@ class AddItemScreen(Screen):
     def compose(self) -> ComposeResult:
         textValidator = lambda x: 0 < len(x)
         titleDescriptor = InputDescriptor("Title", placeholder='Title (up to 20 chars)', type="text", max_length=20, validators=Function(textValidator, "Title of invalid length"))
-        prioDescriptor = InputDescriptor("Priority", placeholder='Priority (LOW, MED, HIGH)', type="text", max_length=5, validators=Function(self.prioValidator, "Must be one of LOW, MED, HIGH"))
+        prioDescriptor = InputDescriptor("Priority", placeholder='Priority (LOW, MED, HIGH)', type="text", max_length=10, validators=Function(self.prioValidator, "Must be one of LOW, MED, HIGH"))
         descDescriptor = InputDescriptor("Description", placeholder='Description (up to 100 chars)', type="text", max_length=100, validators=Function(textValidator, "Description of invalid length"))
         deadlineDescriptor = InputDescriptor("Deadline", placeholder="Deadline (format: DD-MM-[YYYY] [00:00])", type="text", max_length=20, validators=Function(lambda x: self.checkDate(x), "Invalid deadline"))
         postedDescriptor = InputDescriptor("Posted", placeholder="Posted date (format: DD-MM-[YYYY] [00:00])", type="text", max_length=20, validators=Function(lambda x: self.checkDate(x), "Invalid Posted Date"))

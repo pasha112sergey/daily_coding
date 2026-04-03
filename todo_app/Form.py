@@ -6,7 +6,7 @@ from textual.app import ComposeResult
 from textual.containers import Vertical
 from textual.validation import ValidationResult
 from textual.message import Message
-from Item import Item, ItemManager
+from Item import Item, ItemManager, Priority
 
 class InputDescriptor():
     def __init__(self, name: str | None = None, **kwargs):
@@ -15,6 +15,16 @@ class InputDescriptor():
 
 
 class Form(Widget):
+    def matchPrio(self, prio):
+        if prio == "LOW":
+            return Priority.LOW
+        if prio == "MED":
+            return Priority.MEDIUM
+        if prio == "HIGH":
+            return Priority.HIGH
+        else:
+            return None
+
     def __init__(self, app: App, itemManager : ItemManager, inputArgs: dict[str, InputDescriptor] = {}) -> None:
         super().__init__()
         self.itemManager = itemManager
@@ -64,7 +74,8 @@ class Form(Widget):
         
         if not submitting:
             return
-
+        
+        prio = self.matchPrio(submission["prio"])
         item = Item(submission["prio"], submission["title"], submission["desc"], submission["deadline"])
         self.itemManager.addItem(item)
         self.appParent.pop_screen()
