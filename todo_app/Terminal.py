@@ -32,15 +32,6 @@ def formatTimestamp(time : datetime, option: str) -> str:
     else:
         return f"[{time.weekday()} - {time.day} @ {time.hour}:{time.minute}]"
 
-def prioToColor(prio : Priority) -> None | str:
-    if prio == "LOW":
-        return "#dec800"
-    if prio == "MEDIUM":
-        return "#de3f00"
-    if prio == "HIGH":
-        return "#de0000"
-    return None
-
 class ItemPreview(Label):
     def __init__(self, item: Item | None = None, **kwargs):
         super().__init__(**kwargs)
@@ -49,9 +40,9 @@ class ItemPreview(Label):
 
     def compose(self) -> ComposeResult:
         if self.item:
-            s = f"{self.item.title} {formatTimestamp(self.item.deadline, "deadline")}" 
-            self.styles.background = prioToColor(self.item.priority)
-            yield Static(s)
+            title = f"{self.item.title} {formatTimestamp(self.item.deadline, "deadline")}" 
+            yield Static(classes=f"prio-color-{self.item.priority.lower()} prio")
+            yield Static(f"{title}", classes="item-text")
         else:
             yield Static("placeholder")
     

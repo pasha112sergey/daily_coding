@@ -6,12 +6,14 @@ Screen {
 
 ItemPreview {
     background: black;
-    border: black;
+    border: white;
     width: 100%;
     height: 5;
-    align: left middle;
     padding: 0;
+    content-align: left middle;
+    layout: horizontal;
 }
+
 
 Screen {
     layout: grid;
@@ -74,4 +76,28 @@ Form {
 
 #red {
     background: red;
+}
+
+.prio {
+    width: 3.5%;
+    align: left middle;
+    padding: 3;
+}
+
+.prio-color-low {
+    background: yellow;
+}
+
+.prio-color-medium {
+    background: orange;
+}
+
+.prio-color-high {
+    background: red;
+}
+
+.item-text {
+    padding-top: 1;
+    padding-left: 2;
+    align: left middle;
 }
