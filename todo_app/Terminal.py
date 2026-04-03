@@ -1,12 +1,19 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header, Button, Static, Label
-from textual.containers import VerticalScroll, VerticalScroll
+from textual.widget import Widget
+from textual.containers import VerticalScroll
 from Item import Item, ItemManager, Priority
 from datetime import datetime
 from AddItemScreen import AddItemScreen
 from textual import on
 import pandas as pd
+from textual.screen import Screen
 from datetime import timedelta
+from ItemScreen import ItemScreen
+
+# class ItemPanel():
+#     def __init__(self, screen : Screen | None) -> None:
+#         self.screen = screen
 
 def formatTimestamp(time : datetime, option: str) -> str:
     def convertWeekday(s):
@@ -46,9 +53,17 @@ class ItemPreview(Label):
         else:
             yield Static("placeholder")
     
+    def on_click(self) :
+        self.app.push_screen(ItemScreen(item = self.item))
+
+    
 # Urgent
 class Urgent(VerticalScroll):
     BORDER_TITLE = "Due Today"
+    def __init__(self, scr : Screen | None = None, **kwargs) -> None:
+        VerticalScroll.__init__(self, **kwargs)
+        # ItemPanel.__init__(self, screen=scr)
+
     def urgentFilter(self, items):
         func = lambda x : x.deadline is not None and datetime.now() < x.deadline < datetime.now() + timedelta(days = 7)
         return list(filter(func, items))
@@ -59,16 +74,20 @@ class Urgent(VerticalScroll):
 
         with VerticalScroll(): 
             for item in items:
-                yield ItemPreview(item)
+                yield ItemPreview(item = item)
 
 # Reminders
 class Reminders(VerticalScroll):
+
     BORDER_TITLE = "Reminders"
+
+    def __init__(self, scr : Screen | None = None, **kwargs):
+        VerticalScroll.__init__(self, **kwargs)
+        # ItemPanel.__init__(self, screen=super())
+
     def compose(self) -> ComposeResult:
         yield SortButtons("")
         with VerticalScroll(): 
-            yield ItemPreview()
-            yield ItemPreview()
             yield ItemPreview()
             yield ItemPreview()
             yield ItemPreview()
@@ -79,6 +98,10 @@ class Reminders(VerticalScroll):
 # all items (left view)
 class AllItems(VerticalScroll):
     BORDER_TITLE = "All Items"
+    def __init__(self, scr : Screen | None = None, **kwargs):
+        VerticalScroll.__init__(self, **kwargs)
+        # ItemPanel.__init__(self, screen=scr)
+
     def compose(self) -> ComposeResult:
         global itemManager
         items = [Item(**row) for row in itemManager.itemsDf.to_dict(orient="records")]
