@@ -1,7 +1,7 @@
 #include "gbm.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "function.cpp"
+#include "function.hpp"
 #include "point.cpp"
 #include "config.hpp"
 using namespace std;
@@ -36,6 +36,10 @@ int main() {
 	cin >> funcStr;
 	cout << funcStr;
 	Function func(funcStr);
+	double sig = 0.2;
+	double dt = 0.001;
+
+	GBM_Function stoc(func, sig, dt);
 
 	SDL_Window *w;
 	SDL_Renderer *r;
@@ -61,18 +65,18 @@ int main() {
 		}
 
 		SDL_RenderClear(r);
-		SDL_SetRenderDrawColor(r, 0x00, 0xff, 0xff, 0xff);
+		SDL_SetRenderDrawColor(r, 0xff, 0xff, 0xff, 0xff);
 
 		drawAxes(r);
-	
+		
+		double prevY = func.evalAt(DOMAIN_MIN);
 		for (double x = DOMAIN_MIN; x < DOMAIN_MAX; x+=STEP) {
-			double y = func.evalAt(x);
-			cout << "y(" << x << ") = " << y << endl;
+			double dy = stoc.dy(x);
+			double y = prevY + dy;
 			Point p{x, y};
 			p.plot(w, r);	
+			prevY = y;
 		}
-		cout << "--------------------------" << endl;
-		cout << "Plotted!!!" << endl;	
 		SDL_RenderPresent(r);
 	}
 

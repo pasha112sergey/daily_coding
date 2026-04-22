@@ -37,16 +37,11 @@ class Point {
 
 			SDL_SetRenderDrawColor(r, 0xff, 0x00, 0x00, 0xff);
 
-//			SDL_Rect rect = {(int)x, (int)y, 5, 5}; 
-			cout << "x on real screen: " << (int) x << endl;
-			cout << "y on real screen: " << (int) y << endl;
-//			if (SDL_RenderDrawRect(r, &rect) != 0) {
 			if (SDL_RenderDrawPoint(r, x, y) != 0) {
 				cout << "error drawing point!" << endl;
 				return;
 			}
 			SDL_SetRenderDrawColor(r, _r, _g, _b, _a);
-			cout << "Plotted!" << endl;
 		}
 };
 

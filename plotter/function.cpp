@@ -3,28 +3,28 @@
 #include "muParser.h"
 #include <regex>
 #include <format>
-using namespace std;
-class Function {
-	private: 
-		string _name;
-		mu::Parser p;
-	public:
-		Function(const string& name) : _name{ name }, p{} {}
+#include "function.hpp"
 
-		double evalAt(double T) {
-			string t = format("({})", T);
-			string exp = regex_replace(_name, regex("x"), t);
+using namespace std;
+Function::Function(const string& name) : _name{ name }, _p{} {}
+
+double Function::evalAt(double T) {
+	string t = format("({})", T);
+	string exp = regex_replace(_name, regex("x"), t);
 			
-			try {
-				p.SetExpr(exp);	
-				double val = p.Eval();
-				return val;
-			}
-			catch( mu::Parser::exception_type &e) {
-				cout << "error: " << e.GetMsg() << endl;
-			}
-			cout << "BUG!" << endl;
-			// BUG
-			return 0;
-		}
-};
+	try {
+		_p.SetExpr(exp);	
+		double val = _p.Eval();
+		return val;
+	}
+	catch( mu::Parser::exception_type &e) {
+		cout << "error: " << e.GetMsg() << endl;
+	}
+	cout << "BUG!" << endl;
+	// BUG
+	return 0;
+}
+
+Function::Function(const Function & f) { 
+	_name = f._name;
+}	
