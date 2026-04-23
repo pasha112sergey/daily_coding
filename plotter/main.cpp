@@ -5,6 +5,8 @@
 #include "point.cpp"
 #include "config.hpp"
 #include <vector>
+#include <random>
+#include <cmath>
 
 using namespace std;
 
@@ -38,7 +40,11 @@ int main() {
 	cin >> funcStr;
 	cout << funcStr;
 	Function func(funcStr);
-	
+	string gStr;
+	cout << "Please input noise modulation function: ";
+	cin >> gStr;
+	Function g(gStr);
+
 	double sig;
 	double dt;
 	cout << "Please input the sigma: ";
@@ -72,8 +78,7 @@ int main() {
 	double prevY = func.evalAt(DOMAIN_MIN);
 	for (double x = DOMAIN_MIN+dt; x < DOMAIN_MAX; x+=dt) {
 		double dy = stoc.dy(x);
-//		double y = prevY + dy;
-		double y = dy/dt;
+		double y = prevY + dy;
 		Point *p = new Point{x,y};
 		points.push_back(p);
 		prevY = y;
