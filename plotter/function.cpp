@@ -25,6 +25,12 @@ double Function::evalAt(double T) {
 	return 0;
 }
 
+double Function::evalDerivativeAt(double t, double dt) {
+	double f_top = evalAt(t + dt);
+	double f_bot = evalAt(t - dt);
+	return (f_top - f_bot) / (2*dt);
+}
+
 Function::Function(const Function & f) { 
 	_name = f._name;
 }	

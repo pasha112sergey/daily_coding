@@ -11,6 +11,7 @@ class Function {
 		Function(const string &name);
 		Function(const Function &f);
 		double evalAt(double T);
+		double evalDerivativeAt(double t, double dt);
 };
 
 #endif
