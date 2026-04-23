@@ -2,7 +2,7 @@
 #define _CONFIG
 
 
-#define STEP 0.01
+//#define STEP 0.01
 #define WINDOW_WIDTH 750
 #define WINDOW_HEIGHT 750
 #define HALF_HEIGHT (WINDOW_HEIGHT / 2)

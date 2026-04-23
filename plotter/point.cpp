@@ -19,7 +19,8 @@ class Point {
 
 	public: 
 		Point(double x, double y) : _x{x}, _y{y} {}
-		
+		~Point() {}
+	
 		void plot(SDL_Window *w, SDL_Renderer *r) const {
 			double x = getScreenX();
 			double y = getScreenY();
@@ -42,6 +43,10 @@ class Point {
 				return;
 			}
 			SDL_SetRenderDrawColor(r, _r, _g, _b, _a);
+			cout << "drawn!" << endl;
 		}
+		
+		double x() const { return _x; }
+		double y() const { return _y; } 
 };
 

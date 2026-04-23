@@ -4,6 +4,8 @@
 #include "function.hpp"
 #include "point.cpp"
 #include "config.hpp"
+#include <vector>
+
 using namespace std;
 
 void drawAxes(SDL_Renderer *renderer) {
@@ -36,8 +38,14 @@ int main() {
 	cin >> funcStr;
 	cout << funcStr;
 	Function func(funcStr);
-	double sig = 0.2;
-	double dt = 0.001;
+	
+	double sig;
+	double dt;
+	cout << "Please input the sigma: ";
+	cin >> sig;
+	cout << "Please input the timestep dt: ";
+	cin >> dt;	
+
 
 	GBM_Function stoc(func, sig, dt);
 
@@ -58,6 +66,19 @@ int main() {
 	bool quit = false;
 	SDL_RenderClear(r);
 	SDL_Event e;
+	
+	vector<Point *> points;
+	
+	double prevY = func.evalAt(DOMAIN_MIN);
+	for (double x = DOMAIN_MIN+dt; x < DOMAIN_MAX; x+=dt) {
+		double dy = stoc.dy(x);
+//		double y = prevY + dy;
+		double y = dy/dt;
+		Point *p = new Point{x,y};
+		points.push_back(p);
+		prevY = y;
+	}
+	
 	while (!quit) {
 		SDL_PollEvent(&e);
 		if (e.type == SDL_QUIT) {
@@ -69,17 +90,17 @@ int main() {
 
 		drawAxes(r);
 		
-		double prevY = func.evalAt(DOMAIN_MIN);
-		for (double x = DOMAIN_MIN; x < DOMAIN_MAX; x+=STEP) {
-			double dy = stoc.dy(x);
-			double y = prevY + dy;
-			Point p{x, y};
-			p.plot(w, r);	
-			prevY = y;
+		for (int i = 0; i < points.size(); i++) {
+			points[i]->plot(w, r);
+			cout << "Points[" << i << "] = " << points[i]->x() << ", " << points[i]->y() << ", plotted!" << endl;
 		}
+
 		SDL_RenderPresent(r);
 	}
-
+	
+	for (int i = 0; i < points.size(); i ++ ) {
+		delete points[i];
+	}
 	SDL_DestroyRenderer(r);
 	SDL_DestroyWindow(w);
 	SDL_Quit();
