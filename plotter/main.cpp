@@ -53,7 +53,7 @@ int main() {
 	cin >> dt;	
 
 
-	GBM_Function stoc(func, sig, dt);
+	GBM_Function stoc(func, g, dt);
 
 	SDL_Window *w;
 	SDL_Renderer *r;
@@ -70,7 +70,6 @@ int main() {
 	}	
 	
 	bool quit = false;
-	SDL_RenderClear(r);
 	SDL_Event e;
 	vector <Point *> points;	
 	while (!quit) {
@@ -97,14 +96,15 @@ int main() {
 		for (double i = 0; i < points.size() - 2; i++) {
 			points[i]->lineTo(w, r, *points[i+1]);
 		}
-		
+		for (int i = points.size() - 1; i >= 0; i-- ) {
+			delete points[i];
+			points.pop_back();
+		}	
 
 		SDL_RenderPresent(r);
 	}
 	
-	for (int i = 0; i < points.size(); i ++ ) {
-		delete points[i];
-	}
+
 	SDL_DestroyRenderer(r);
 	SDL_DestroyWindow(w);
 	SDL_Quit();
