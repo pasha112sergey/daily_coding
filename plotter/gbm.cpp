@@ -17,7 +17,9 @@ double GBM_Function::dB() const {
 }
 
 double GBM_Function::dy(double t) {
-	double dy = _u.evalDerivativeAt(t, _dt) * _dt + _o.evalAt(t) * dB();
+	double diff = _o.evalDerivativeAt(t, _dt);
+	if (diff < 0) diff *= -1;
+	double dy = _u.evalDerivativeAt(t, _dt) * _dt + diff * dB();
 	return dy;
 }
 

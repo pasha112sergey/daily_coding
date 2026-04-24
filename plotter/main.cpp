@@ -47,8 +47,6 @@ int main() {
 
 	double sig;
 	double dt;
-	cout << "Please input the sigma: ";
-	cin >> sig;
 	cout << "Please input the timestep dt: ";
 	cin >> dt;	
 
@@ -96,10 +94,10 @@ int main() {
 		for (double i = 0; i < points.size() - 2; i++) {
 			points[i]->lineTo(w, r, *points[i+1]);
 		}
-		for (int i = points.size() - 1; i >= 0; i-- ) {
-			delete points[i];
-			points.pop_back();
-		}	
+	//	for (int i = points.size() - 1; i >= 0; i-- ) {
+	//		delete points[i];
+	//		points.pop_back();
+	//	}	
 
 		SDL_RenderPresent(r);
 	}
