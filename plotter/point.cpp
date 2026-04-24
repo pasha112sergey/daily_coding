@@ -46,6 +46,36 @@ class Point {
 			cout << "drawn!" << endl;
 		}
 		
+		void lineTo(SDL_Window *w, SDL_Renderer *r, const Point &other) const {
+			double x = getScreenX();
+			double y = getScreenY();
+			
+			double other_x = other.getScreenX();
+			double other_y = other.getScreenY();
+
+			if (x > WINDOW_WIDTH || x < 0) {
+				return;
+			}
+			if (y > WINDOW_HEIGHT || y < 0) {
+				return;
+			}
+			Uint8 _r,_g,_b,_a;
+			if (SDL_GetRenderDrawColor(r, &_r, &_g, &_b, &_a) != 0) {	
+				cout << "Error!" << endl;
+				return;
+			}
+
+			SDL_SetRenderDrawColor(r, 0xff, 0x00, 0x00, 0xff);
+
+			if (SDL_RenderDrawLine(r, x, y, other_x, other_y) != 0) {
+				cout << "error drawing point!" << endl;
+				return;
+			}
+			SDL_SetRenderDrawColor(r, _r, _g, _b, _a);
+			cout << "drawn!" << endl;
+
+		}	
+			
 		double x() const { return _x; }
 		double y() const { return _y; } 
 };

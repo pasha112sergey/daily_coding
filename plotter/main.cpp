@@ -72,18 +72,7 @@ int main() {
 	bool quit = false;
 	SDL_RenderClear(r);
 	SDL_Event e;
-	
-	vector<Point *> points;
-	
-	double prevY = func.evalAt(DOMAIN_MIN);
-	for (double x = DOMAIN_MIN+dt; x < DOMAIN_MAX; x+=dt) {
-		double dy = stoc.dy(x);
-		double y = prevY + dy;
-		Point *p = new Point{x,y};
-		points.push_back(p);
-		prevY = y;
-	}
-	
+	vector <Point *> points;	
 	while (!quit) {
 		SDL_PollEvent(&e);
 		if (e.type == SDL_QUIT) {
@@ -94,21 +83,22 @@ int main() {
 		SDL_SetRenderDrawColor(r, 0xff, 0xff, 0xff, 0xff);
 
 		drawAxes(r);
+			
+		// generate points
 		double prevY = func.evalAt(DOMAIN_MIN);
 		for (double x = DOMAIN_MIN+dt; x < DOMAIN_MAX; x+=dt) {
 			double dy = stoc.dy(x);
 			double y = prevY + dy;
-			Point p{x,y};
-			p.plot(w,r);
-//			Point *p = new Point{x,y};
-//			points.push_back(p);
+			Point *p = new Point{x,y};
+			points.push_back(p);
 			prevY = y;
-		}/*
-		for (int i = 0; i < points.size(); i++) {
-			points[i]->plot(w, r);
-			cout << "Points[" << i << "] = " << points[i]->x() << ", " << points[i]->y() << ", plotted!" << endl;
 		}
-	*/
+
+		for (double i = 0; i < points.size() - 2; i++) {
+			points[i]->lineTo(w, r, *points[i+1]);
+		}
+		
+
 		SDL_RenderPresent(r);
 	}
 	
